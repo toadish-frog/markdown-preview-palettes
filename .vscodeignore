@@ -1,0 +1,17 @@
+# Files left out of the .vsix package (used by scripts/build.py and by vsce)
+.github/**
+.vscode/**
+.gitignore
+.vscodeignore
+.editorconfig
+.markdownlint.json
+ruff.toml
+Makefile
+docs/**
+palettes/**
+scripts/**
+test/**
+private/**
+dist/**
+**/__pycache__/**
+**/.DS_Store
