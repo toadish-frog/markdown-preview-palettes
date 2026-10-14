@@ -1,0 +1,54 @@
+{
+  "name": "markdown-preview-palettes",
+  "displayName": "Markdown Preview Palettes",
+  "description": "Colour presets for the built-in Markdown preview: headings, bold text, inline code, quotes and links. Preview only; Markdown files are never changed.",
+  "version": "0.1.0",
+  "publisher": "local",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "preview",
+    "colours",
+    "colors",
+    "palette"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "markdown.previewStyles": [
+      "./media/preview.css"
+    ],
+    "markdown.markdownItPlugins": true,
+    "configuration": {
+      "title": "Markdown Preview Palettes",
+      "properties": {
+        "markdownPreviewPalettes.preset": {
+          "type": "string",
+          "default": "teal",
+          "enum": [
+            "teal",
+            "plum",
+            "crimson",
+            "golden",
+            "mono",
+            "default"
+          ],
+          "enumDescriptions": [
+            "Green-teal headings, amber bold, orange inline code.",
+            "Plum and lavender headings with blue, yellow, red and green accents.",
+            "Red headings on near-black, white bold, cyan links.",
+            "Gold, amber and orange headings on near-black, white bold.",
+            "Greyscale headings and text; links are the only colour.",
+            "Built-in VS Code preview look (turns all colouring off)."
+          ],
+          "markdownDescription": "Colour preset for the Markdown preview. `default` restores the built-in VS Code look. High-contrast themes always keep the built-in look."
+        }
+      }
+    }
+  }
+}
