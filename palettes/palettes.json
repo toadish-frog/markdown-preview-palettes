@@ -1,0 +1,103 @@
+{
+  "_readme": [
+    "Single source of every preset colour. Edit here, then run: python3 scripts/build.py css",
+    "Each preset has a dark and a light set. Optional keys: background, link, linkHover, codeTint.",
+    "background: replaces the preview background. link / linkHover: replace the VS Code link colours.",
+    "codeTint: colour of the inline-code box (defaults to the code colour). Tints and borders are derived automatically."
+  ],
+  "teal": {
+    "description": "Green-teal headings, amber bold, orange inline code.",
+    "dark": {
+      "h1": "#69db7c", "h2": "#63e6be", "h3": "#96f2d7", "h4": "#b2f2bb", "h5": "#8fb8a8", "h6": "#8a9a96",
+      "bold": "#ffd43b",
+      "code": "#e8a87c",
+      "quote": "#d0bfff", "quoteBar": "#9775fa",
+      "quote2": "#fcc2d7", "quote2Bar": "#f06595"
+    },
+    "light": {
+      "h1": "#2b8a3e", "h2": "#087f5b", "h3": "#08734f", "h4": "#2f7a3a", "h5": "#4f6f5a", "h6": "#5f6f6b",
+      "bold": "#9a6700",
+      "code": "#bc4c00",
+      "quote": "#5f3dc4", "quoteBar": "#7950f2",
+      "quote2": "#a61e4d", "quote2Bar": "#f06595"
+    }
+  },
+  "plum": {
+    "description": "Plum and lavender headings with blue, yellow, red and green accents.",
+    "dark": {
+      "background": "#1a1d21",
+      "link": "#36c5f0", "linkHover": "#7fdcf7",
+      "h1": "#e8b4f8", "h2": "#d69ae6", "h3": "#c9a3d9", "h4": "#e3c6ef", "h5": "#b59cc0", "h6": "#a395aa",
+      "bold": "#ecb22e",
+      "code": "#f0688f", "codeTint": "#e01e5a",
+      "quote": "#9ee6c6", "quoteBar": "#2eb67d",
+      "quote2": "#dcc3e6", "quote2Bar": "#9b4fb0"
+    },
+    "light": {
+      "link": "#1264a3", "linkHover": "#0b4c80",
+      "h1": "#4a154b", "h2": "#611f69", "h3": "#73287c", "h4": "#7a3a85", "h5": "#665069", "h6": "#5e5763",
+      "bold": "#7d5400",
+      "code": "#b8164a", "codeTint": "#e01e5a",
+      "quote": "#00694d", "quoteBar": "#2eb67d",
+      "quote2": "#611f69", "quote2Bar": "#9b4fb0"
+    }
+  },
+  "crimson": {
+    "description": "Red headings on near-black, white bold, cyan links.",
+    "dark": {
+      "background": "#0a0a0c",
+      "link": "#00e5ff", "linkHover": "#7ff2ff",
+      "h1": "#ff003c", "h2": "#ff3355", "h3": "#ff6b81", "h4": "#e8a0ab", "h5": "#b98c93", "h6": "#8f8285",
+      "bold": "#f2f2f2",
+      "code": "#c9ced6", "codeTint": "#ff003c",
+      "quote": "#c4c4c8", "quoteBar": "#c5003c",
+      "quote2": "#a9adb4", "quote2Bar": "#5c5f66"
+    },
+    "light": {
+      "link": "#007c89", "linkHover": "#005a63",
+      "h1": "#c5003c", "h2": "#a3002f", "h3": "#b0284a", "h4": "#8a2c40", "h5": "#6e4a52", "h6": "#5f5558",
+      "bold": "#111111",
+      "code": "#3d4450", "codeTint": "#c5003c",
+      "quote": "#4a4a50", "quoteBar": "#c5003c",
+      "quote2": "#5c5c62", "quote2Bar": "#8e8e94"
+    }
+  },
+  "golden": {
+    "description": "Gold, amber and orange headings on near-black, white bold.",
+    "dark": {
+      "background": "#0b0b0b",
+      "link": "#4fd1c5", "linkHover": "#8ee6dd",
+      "h1": "#ffd166", "h2": "#f5b942", "h3": "#ffa94d", "h4": "#f08c3a", "h5": "#c9a86a", "h6": "#a08f6e",
+      "bold": "#ffffff",
+      "code": "#efe6d2", "codeTint": "#ffd166",
+      "quote": "#d9c7a3", "quoteBar": "#b08d57",
+      "quote2": "#bfb5a3", "quote2Bar": "#6e5a3a"
+    },
+    "light": {
+      "background": "#fdf8ec",
+      "link": "#0f766e", "linkHover": "#0b5952",
+      "h1": "#9c6b00", "h2": "#a85d00", "h3": "#a3420a", "h4": "#8f4a12", "h5": "#6e5a38", "h6": "#625846",
+      "bold": "#1a1a1a",
+      "code": "#5c4a1f", "codeTint": "#9c6b00",
+      "quote": "#5e4b2b", "quoteBar": "#b08d57",
+      "quote2": "#625a4e", "quote2Bar": "#8c7a5b"
+    }
+  },
+  "mono": {
+    "description": "Greyscale headings and text; links are the only colour.",
+    "dark": {
+      "h1": "#f8f9fa", "h2": "#e9ecef", "h3": "#dee2e6", "h4": "#ced4da", "h5": "#adb5bd", "h6": "#98a0a8",
+      "bold": "#ffffff",
+      "code": "#d0d4d9",
+      "quote": "#b4bac1", "quoteBar": "#6c757d",
+      "quote2": "#a3a9b0", "quote2Bar": "#495057"
+    },
+    "light": {
+      "h1": "#111418", "h2": "#212529", "h3": "#343a40", "h4": "#495057", "h5": "#555c63", "h6": "#5f666d",
+      "bold": "#000000",
+      "code": "#343a40",
+      "quote": "#495057", "quoteBar": "#adb5bd",
+      "quote2": "#555c63", "quote2Bar": "#ced4da"
+    }
+  }
+}
