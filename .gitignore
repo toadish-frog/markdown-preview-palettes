@@ -1,0 +1,24 @@
+# Private notes and anything sensitive: never committed or uploaded
+private/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*
+secrets.*
+*.token
+
+# Build output
+dist/
+*.vsix
+
+# Tooling and OS files
+node_modules/
+__pycache__/
+*.pyc
+.ruff_cache/
+.venv/
+.DS_Store
