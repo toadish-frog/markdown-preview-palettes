@@ -1,10 +1,15 @@
 {
-  "name": "markdown-preview-palettes",
-  "displayName": "Markdown Preview Palettes",
+  "name": "markdown-preview-colours",
+  "displayName": "Markdown Preview Palettes (Toadish)",
   "description": "Colour presets for the built-in Markdown preview: headings, bold text, inline code, quotes and links. Preview only; Markdown files are never changed.",
   "version": "0.1.0",
-  "publisher": "local",
+  "publisher": "ToadishFrog67",
   "license": "MIT",
+  "icon":"icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toadish-frog/markdown-preview-palettes"
+  },
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -17,6 +22,9 @@
     "colours",
     "colors",
     "palette"
+  ],
+  "activationEvents": [
+    "onLanguage:markdown"
   ],
   "main": "./extension.js",
   "contributes": {
