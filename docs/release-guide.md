@@ -4,8 +4,8 @@
 | --- | --- |
 | Owner | Sean Yang |
 | Status | Active |
-| Version | 1.0.0 |
-| Last Updated | 2026-10-13 |
+| Version | 1.1.0 |
+| Last Updated | 2026-10-19 |
 | Audience | Sean Yang (personal notes) |
 | Source(s) | See [Sources](#9-sources) |
 
@@ -26,6 +26,7 @@
 
 ## 1. Key Points
 
+- **Live:** `ToadishFrog67.markdown-preview-colours`, listed as "Markdown Preview Palettes (Toadish)", published 2026-10-19 [S3](#9-sources).
 - **Cost:** none found. A personal Microsoft account and a publisher ID are enough [S1](#9-sources).
 - **Route:** build the `.vsix`, then upload it on the publisher web page. No access token is stored anywhere [S1](#9-sources).
 - **Credentials:** never written into this repository; `private/` and `.env` files are ignored by Git.
@@ -50,8 +51,9 @@
 
 1. Sign in at <https://marketplace.visualstudio.com/manage> with a personal Microsoft account [S1](#9-sources).
 2. Create a publisher. The publisher ID cannot be changed later [S1](#9-sources).
-3. In `package.json`, replace `"publisher": "local"` with the new ID.
-4. Confirm the extension name (`name`, `displayName`) is still free; names are unique and removed names stay reserved [S1](#9-sources).
+3. In `package.json`, set `publisher` to the ID. Done: `ToadishFrog67` [S3](#9-sources).
+4. Confirm the extension name (`name`, `displayName`) is still free; names are unique [S1](#9-sources).
+5. Never remove a listed extension; unpublish it instead. A removed extension's name is permanently reserved, even for the same publisher [S1](#9-sources). The original name `markdown-preview-palettes` was lost this way [S3](#9-sources).
 
 ## 5. Build and Test
 
@@ -59,14 +61,14 @@
 2. `make test`, then `make lint`.
 3. Build the published package with Microsoft's tool [S1](#9-sources):
    - Check the package on the official registry first: `npm view @vscode/vsce`
-   - `npx @vscode/vsce package --allow-missing-repository`
-   - The flag is needed only while `package.json` has no `repository` field.
-4. Install the `.vsix` locally (`code --install-extension <file>.vsix`), open `test/sample.md`, and switch every preset in dark and light themes.
+   - `npx @vscode/vsce@4.0.0 package` writes `markdown-preview-colours-<version>.vsix` in the project root [S4](#9-sources).
+   - `vsce` requires `activationEvents` when `main` is set; `scripts/build.py` does not check this, so use `vsce` for the published build [S4](#9-sources).
+4. Install the `.vsix` locally (`code --install-extension <file>.vsix`), open `test/sample.md`, and switch every preset in dark and light themes. Uninstall the Marketplace version first, so the colours are not applied twice.
 
 ## 6. Publish
 
 1. On the publisher page, choose **New extension**, then **Visual Studio Code**, and upload the `.vsix` [S1](#9-sources).
-2. Wait for the listing to appear, then search for it in the VS Code Extensions panel.
+2. The status shows **Verifying** for a few minutes. Then search for the ID `ToadishFrog67.markdown-preview-colours` in the VS Code Extensions panel [S3](#9-sources).
 
 ## 7. Release an Update
 
@@ -79,21 +81,23 @@
 
 ### 8.1. Friend
 
-1. Extensions panel: search **Markdown Preview Palettes**, then **Install**.
+1. Extensions panel: search `ToadishFrog67.markdown-preview-colours` or **Markdown Preview Palettes (Toadish)**, then **Install**.
 2. Settings: search **Markdown Preview Palettes** and pick a preset.
 
 ### 8.2. Mac with the Local Build
 
 1. Uninstall the local build: `code --uninstall-extension local.markdown-preview-palettes`
-2. Install the Marketplace version from the Extensions panel.
-3. Both installed at once would apply the colours twice, so remove the local one first.
+2. Install the Marketplace version: `code --install-extension ToadishFrog67.markdown-preview-colours`
+3. The two have different IDs, so both can be installed at once and would apply the colours twice. Remove the local one first.
 
 ## 9. Sources
 
 | ID | Supports | Evidence | Source | Status |
 | --- | --- | --- | --- | --- |
-| S1 | [1. Key Points](#1-key-points), [4. Create the Marketplace Publisher](#4-create-the-marketplace-publisher), [5. Build and Test](#5-build-and-test), [6. Publish](#6-publish) | No publishing fee mentioned; publisher created on the management page; `.vsix` upload on that page; publisher ID cannot change; names unique and permanently reserved | "Publishing Extensions", <https://code.visualstudio.com/api/working-with-extensions/publishing-extension>, read 2026-10-13 | Sourced |
+| S1 | [1. Key Points](#1-key-points), [4. Create the Marketplace Publisher](#4-create-the-marketplace-publisher), [5. Build and Test](#5-build-and-test), [6. Publish](#6-publish) | No publishing fee mentioned; publisher created on the management page; `.vsix` upload on that page; publisher ID cannot change; names and display names unique; a removed extension's name "is permanently reserved and cannot be reused, even by the original publisher"; unpublishing keeps the extension and its statistics | "Publishing Extensions", <https://code.visualstudio.com/api/working-with-extensions/publishing-extension>, read 2026-10-13 and 2026-10-19 | Sourced |
 | S2 | [2. Prerequisites](#2-prerequisites) | Ruff 0.16.8 released 2026-09-16 | PyPI, read 2026-10-13 | Sourced |
+| S3 | [1. Key Points](#1-key-points), [4. Create the Marketplace Publisher](#4-create-the-marketplace-publisher), [6. Publish](#6-publish) | Two publishers created, `ToadishFrog67` and a second one; the first upload, named `markdown-preview-palettes`, removed; republished under `ToadishFrog67` as `markdown-preview-colours`; status showed **Verifying**; installed from the Marketplace on Linux | Sean Yang, 2026-10-19 | Sourced |
+| S4 | [5. Build and Test](#5-build-and-test) | `vsce` 4.0.0 (npm, Microsoft maintainers) refused the manifest without `activationEvents`; packaged after `onLanguage:markdown` was added; `make test` passed | `npx @vscode/vsce@4.0.0 package` and `make test`, run 2026-10-19 | Sourced |
 
 Gaps: the exact button names on the publisher page (**New extension**, **Update**) are not quoted in S1. They are Unconfirmed until the first upload; Sean Yang can confirm.
 
@@ -101,4 +105,5 @@ Gaps: the exact button names on the publisher page (**New extension**, **Update*
 
 | Version | Date | Change | Reason |
 | --- | --- | --- | --- |
+| 1.1.0 | 2026-10-19 | Final publisher and extension ID; warning against removing a listing; `vsce` command pinned, `--allow-missing-repository` dropped, `activationEvents` note; install steps use the new ID; S3 and S4 added | First publish done |
 | 1.0.0 | 2026-10-13 | Created: setup, publisher, build, publish, update and install steps | Sean Yang asked for documented steps for the Linux machine |

@@ -48,7 +48,7 @@ Requirements: Python 3.8+ and Git. Node.js (for the extension tests and Markdown
 | `make css` | Generate `media/preview.css` from `palettes/palettes.json` and run the contrast check |
 | `make test` | Python and extension unit tests |
 | `make lint` | Formatting and lint checks |
-| `make package` | Build `dist/markdown-preview-palettes-<version>.vsix` |
+| `make package` | Build `dist/markdown-preview-colours-<version>.vsix` for local testing (publish with `npx @vscode/vsce package`) |
 
 - **Colours:** edit `palettes/palettes.json`, then run `make css`. Never edit `media/preview.css` by hand.
 - **Try it:** open the folder in VS Code and press `F5`; `test/sample.md` opens in a development window.
