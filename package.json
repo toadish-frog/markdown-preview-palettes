@@ -44,6 +44,11 @@
             "crimson",
             "golden",
             "mono",
+            "phosphor",
+            "parchment",
+            "azure",
+            "ember",
+            "folio",
             "default"
           ],
           "enumDescriptions": [
@@ -52,6 +57,11 @@
             "Red headings on near-black, white bold, cyan links.",
             "Gold, amber and orange headings on near-black, white bold.",
             "Greyscale headings and text; links are the only colour.",
+            "Terminal greens on green-black, lime inline code, cyan links.",
+            "Gold and brown headings on beige paper (light) or warm charcoal (dark), ink-blue links.",
+            "Clean blue headings on the theme background, plain bold, blue inline code.",
+            "Orange headings, warm greys, blue links; black (dark) or beige paper (light).",
+            "Document style: near-white or near-black headings, warm grey text, red inline code, blue links.",
             "Built-in VS Code preview look (turns all colouring off)."
           ],
           "markdownDescription": "Colour preset for the Markdown preview. `default` restores the built-in VS Code look. High-contrast themes always keep the built-in look."

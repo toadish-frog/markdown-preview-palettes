@@ -222,6 +222,246 @@ body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono"]
   --mpp-quote2-bg: rgba(206, 212, 218, 0.06);
 }
 
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor"]) {
+  background-color: #0d110e;
+  --vscode-textLink-foreground: #56d4e0;
+  --vscode-textLink-activeForeground: #9be6ee;
+  --mpp-h1: #39e075;
+  --mpp-h2: #5fe08f;
+  --mpp-h3: #86e4a8;
+  --mpp-h4: #a6e8bd;
+  --mpp-h5: #7fae8e;
+  --mpp-h6: #7f9786;
+  --mpp-h1-border: rgba(57, 224, 117, 0.35);
+  --mpp-h2-border: rgba(95, 224, 143, 0.30);
+  --mpp-bold: #eafff0;
+  --mpp-code: #c3f75f;
+  --mpp-code-bg: rgba(57, 224, 117, 0.12);
+  --mpp-quote: #a9c7b2;
+  --mpp-quote-bar: #2f9e5a;
+  --mpp-quote-bg: rgba(47, 158, 90, 0.08);
+  --mpp-quote2: #93ab9b;
+  --mpp-quote2-bar: #3d5c47;
+  --mpp-quote2-bg: rgba(61, 92, 71, 0.08);
+}
+
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor"]) {
+  background-color: #f3f8f4;
+  --vscode-textLink-foreground: #0e6f7a;
+  --vscode-textLink-activeForeground: #0a535b;
+  --mpp-h1: #146c35;
+  --mpp-h2: #18713c;
+  --mpp-h3: #1e7a45;
+  --mpp-h4: #2f6f45;
+  --mpp-h5: #4b6655;
+  --mpp-h6: #57635b;
+  --mpp-h1-border: rgba(20, 108, 53, 0.30);
+  --mpp-h2-border: rgba(24, 113, 60, 0.25);
+  --mpp-bold: #0f2416;
+  --mpp-code: #3f6212;
+  --mpp-code-bg: rgba(77, 124, 15, 0.08);
+  --mpp-quote: #2c5a3d;
+  --mpp-quote-bar: #2f9e5a;
+  --mpp-quote-bg: rgba(47, 158, 90, 0.06);
+  --mpp-quote2: #46584c;
+  --mpp-quote2-bar: #8fb59c;
+  --mpp-quote2-bg: rgba(143, 181, 156, 0.06);
+}
+
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment"]) {
+  background-color: #1c1a16;
+  --vscode-textLink-foreground: #7cc4dc;
+  --vscode-textLink-activeForeground: #a9d8e8;
+  --mpp-h1: #e6c068;
+  --mpp-h2: #d9ad55;
+  --mpp-h3: #e0b97a;
+  --mpp-h4: #d6c09a;
+  --mpp-h5: #b8a682;
+  --mpp-h6: #9e9480;
+  --mpp-h1-border: rgba(230, 192, 104, 0.35);
+  --mpp-h2-border: rgba(217, 173, 85, 0.30);
+  --mpp-bold: #f6efe1;
+  --mpp-code: #f0a868;
+  --mpp-code-bg: rgba(217, 119, 6, 0.12);
+  --mpp-quote: #d8c9ad;
+  --mpp-quote-bar: #b8893a;
+  --mpp-quote-bg: rgba(184, 137, 58, 0.08);
+  --mpp-quote2: #bdb3a2;
+  --mpp-quote2-bar: #6b5a3e;
+  --mpp-quote2-bg: rgba(107, 90, 62, 0.08);
+}
+
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment"]) {
+  background-color: #faf9f5;
+  --vscode-textLink-foreground: #1f5f7a;
+  --vscode-textLink-activeForeground: #174a5f;
+  --mpp-h1: #8a5a00;
+  --mpp-h2: #7d4f05;
+  --mpp-h3: #7a3e0e;
+  --mpp-h4: #6e4a1c;
+  --mpp-h5: #5f4c32;
+  --mpp-h6: #5a5044;
+  --mpp-h1-border: rgba(138, 90, 0, 0.30);
+  --mpp-h2-border: rgba(125, 79, 5, 0.25);
+  --mpp-bold: #2a1f14;
+  --mpp-code: #8a2e0b;
+  --mpp-code-bg: rgba(180, 83, 9, 0.08);
+  --mpp-quote: #5a4630;
+  --mpp-quote-bar: #b8893a;
+  --mpp-quote-bg: rgba(184, 137, 58, 0.06);
+  --mpp-quote2: #5e554a;
+  --mpp-quote2-bar: #a08a68;
+  --mpp-quote2-bg: rgba(160, 138, 104, 0.06);
+}
+
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure"]) {
+  --mpp-h1: #79b8ff;
+  --mpp-h2: #8cc4ff;
+  --mpp-h3: #a5d2ff;
+  --mpp-h4: #c0deff;
+  --mpp-h5: #9fb3c8;
+  --mpp-h6: #93a1b0;
+  --mpp-h1-border: rgba(121, 184, 255, 0.35);
+  --mpp-h2-border: rgba(140, 196, 255, 0.30);
+  --mpp-bold: #ffffff;
+  --mpp-code: #9ecbff;
+  --mpp-code-bg: rgba(56, 139, 253, 0.12);
+  --mpp-quote: #b8c4d0;
+  --mpp-quote-bar: #4c8dd6;
+  --mpp-quote-bg: rgba(76, 141, 214, 0.08);
+  --mpp-quote2: #a8b2bd;
+  --mpp-quote2-bar: #5b6b7c;
+  --mpp-quote2-bg: rgba(91, 107, 124, 0.08);
+}
+
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure"]) {
+  --mpp-h1: #0550ae;
+  --mpp-h2: #0a5ab8;
+  --mpp-h3: #1660b0;
+  --mpp-h4: #24578f;
+  --mpp-h5: #45607c;
+  --mpp-h6: #57606a;
+  --mpp-h1-border: rgba(5, 80, 174, 0.30);
+  --mpp-h2-border: rgba(10, 90, 184, 0.25);
+  --mpp-bold: #1f2328;
+  --mpp-code: #0550ae;
+  --mpp-code-bg: rgba(9, 105, 218, 0.08);
+  --mpp-quote: #3d4f63;
+  --mpp-quote-bar: #54aeff;
+  --mpp-quote-bg: rgba(84, 174, 255, 0.06);
+  --mpp-quote2: #57606a;
+  --mpp-quote2-bar: #afb8c1;
+  --mpp-quote2-bg: rgba(175, 184, 193, 0.06);
+}
+
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember"]) {
+  background-color: #000000;
+  --vscode-textLink-foreground: #6a9bcc;
+  --vscode-textLink-activeForeground: #faf9f5;
+  --mpp-h1: #d97757;
+  --mpp-h2: #d97757;
+  --mpp-h3: #faf9f5;
+  --mpp-h4: #e8e6dc;
+  --mpp-h5: #b0aea5;
+  --mpp-h6: #b0aea5;
+  --mpp-h1-border: rgba(217, 119, 87, 0.35);
+  --mpp-h2-border: rgba(217, 119, 87, 0.30);
+  --mpp-bold: #faf9f5;
+  --mpp-code: #d97757;
+  --mpp-code-bg: rgba(217, 119, 87, 0.12);
+  --mpp-quote: #e8e6dc;
+  --mpp-quote-bar: #6a9bcc;
+  --mpp-quote-bg: rgba(106, 155, 204, 0.08);
+  --mpp-quote2: #b0aea5;
+  --mpp-quote2-bar: #788c5d;
+  --mpp-quote2-bg: rgba(120, 140, 93, 0.08);
+}
+
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember"]) {
+  background-color: #faf9f5;
+  --vscode-textLink-foreground: #3c76b0;
+  --vscode-textLink-activeForeground: #141413;
+  --mpp-h1: #c6613f;
+  --mpp-h2: #c6613f;
+  --mpp-h3: #141413;
+  --mpp-h4: #141413;
+  --mpp-h5: #767368;
+  --mpp-h6: #767368;
+  --mpp-h1-border: rgba(198, 97, 63, 0.30);
+  --mpp-h2-border: rgba(198, 97, 63, 0.25);
+  --mpp-bold: #141413;
+  --mpp-code: #141413;
+  --mpp-code-bg: rgba(217, 119, 87, 0.08);
+  --mpp-quote: #141413;
+  --mpp-quote-bar: #6a9bcc;
+  --mpp-quote-bg: rgba(106, 155, 204, 0.06);
+  --mpp-quote2: #141413;
+  --mpp-quote2-bar: #788c5d;
+  --mpp-quote2-bg: rgba(120, 140, 93, 0.06);
+}
+
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) {
+  background-color: #151515;
+  color: #c3c2b7;
+  --vscode-textLink-foreground: #6da7ec;
+  --vscode-textLink-activeForeground: #6da7ec;
+  --mpp-h1: #f0efec;
+  --mpp-h2: #f0efec;
+  --mpp-h3: #f0efec;
+  --mpp-h4: #f0efec;
+  --mpp-h5: #f0efec;
+  --mpp-h6: #f0efec;
+  --mpp-h1-border: rgba(240, 239, 236, 0.35);
+  --mpp-h2-border: rgba(240, 239, 236, 0.30);
+  --mpp-bold: #f0efec;
+  --mpp-code: #ec7e7e;
+  --mpp-code-bg: rgba(255, 255, 255, 0.05);
+  --mpp-quote: #c3c2b7;
+  --mpp-quote-bar: #898781;
+  --mpp-quote-bg: rgba(137, 135, 129, 0.08);
+  --mpp-quote2: #c3c2b7;
+  --mpp-quote2-bar: #52514e;
+  --mpp-quote2-bg: rgba(82, 81, 78, 0.08);
+  --mpp-code-border: 0.5px solid rgba(255, 255, 255, 0.10);
+}
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 3px;
+}
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a:hover { text-decoration-color: currentColor; }
+
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) {
+  background-color: #fcfcfb;
+  color: #52514e;
+  --vscode-textLink-foreground: #184f95;
+  --vscode-textLink-activeForeground: #184f95;
+  --mpp-h1: #0b0b0b;
+  --mpp-h2: #0b0b0b;
+  --mpp-h3: #0b0b0b;
+  --mpp-h4: #0b0b0b;
+  --mpp-h5: #0b0b0b;
+  --mpp-h6: #0b0b0b;
+  --mpp-h1-border: rgba(11, 11, 11, 0.30);
+  --mpp-h2-border: rgba(11, 11, 11, 0.25);
+  --mpp-bold: #0b0b0b;
+  --mpp-code: #8e2626;
+  --mpp-code-bg: rgba(11, 11, 11, 0.05);
+  --mpp-quote: #52514e;
+  --mpp-quote-bar: #898781;
+  --mpp-quote-bg: rgba(137, 135, 129, 0.06);
+  --mpp-quote2: #52514e;
+  --mpp-quote2-bar: #c3c2b7;
+  --mpp-quote2-bg: rgba(195, 194, 183, 0.06);
+  --mpp-code-border: 0.5px solid rgba(11, 11, 11, 0.10);
+}
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 3px;
+}
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a:hover { text-decoration-color: currentColor; }
+
 /* ---------- Rules (shared by every preset) ---------- */
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset) h1 { color: var(--mpp-h1); border-bottom-color: var(--mpp-h1-border); }
@@ -237,6 +477,7 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset)
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset) :not(pre) > code {
   color: var(--mpp-code);
   background-color: var(--mpp-code-bg);
+  border: var(--mpp-code-border, 0);
   border-radius: 3px;
   padding: 1px 4px;
 }

@@ -15,7 +15,14 @@ Colour presets for the built-in VS Code Markdown preview. Headings, bold text, i
 | `crimson` | Red | White | Steel grey | Cyan | Near-black |
 | `golden` | Gold, amber, orange | White | Ivory | Teal | Near-black |
 | `mono` | Greyscale | Brightest white | Light grey | VS Code blue | Theme default |
+| `phosphor` | Terminal greens | Pale green | Lime | Cyan | Green-black |
+| `parchment` | Gold and brown | Cream | Orange | Light blue | Warm charcoal (beige paper in light themes) |
+| `azure` | Blue | White | Light blue | VS Code blue | Theme default |
+| `ember` | Orange, then warm greys | Off-white | Orange | Blue | Black (beige paper in light themes) |
+| `folio` | Near-white, one shade for every level | Near-white | Soft red | Light blue | Charcoal (off-white in light themes) |
 | `default` | Built-in VS Code look (all colouring off) | | | | |
+
+`ember` and `parchment` use colours from the Apache 2.0 [brand-guidelines skill](https://github.com/anthropics/skills/tree/main/skills/brand-guidelines) (Light `#faf9f5`, Dark `#141413`, Mid Gray `#b0aea5`, Light Gray `#e8e6dc`, Orange `#d97757`, Blue `#6a9bcc`, Green `#788c5d`). In light themes, some are darkened slightly to meet the contrast minimum.
 
 ## Switch Preset
 
@@ -36,7 +43,7 @@ The setting can also be set per workspace.
 - **Bold text:** bold inside a heading or link keeps the heading or link colour.
 - **Inline code:** coloured, in a tinted box. Inline code inside a link, `` [`text`](url) ``, takes the link colour.
 - **Quotes:** `>` and nested `>>` each have their own colour.
-- **Links:** some presets set their own link colour; the others keep the VS Code link colour.
+- **Links:** some presets set their own link colour; the others keep the VS Code link colour. `folio` also underlines links.
 - **Tables:** GitHub style, with a full grid border and striped rows.
 - **Code blocks:** never changed; they keep the VS Code syntax colours.
 

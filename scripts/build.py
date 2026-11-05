@@ -30,7 +30,10 @@ ALPHA = {
     "light": {"code": 0.08, "quote": 0.06, "h1Border": 0.30, "h2Border": 0.25},
 }
 REQUIRED = ("h1", "h2", "h3", "h4", "h5", "h6", "bold", "code", "quote", "quoteBar", "quote2", "quote2Bar")
-OPTIONAL = ("background", "link", "linkHover", "codeTint")
+OPTIONAL = ("background", "text", "link", "linkHover", "codeTint")
+# Non-colour options: opacities (0 to 1) and on/off switches
+NUMBERS = ("codeTintAlpha", "codeBorderAlpha")
+FLAGS = ("linkUnderline",)
 PRESET_NAME = re.compile(r"^[a-z][a-z0-9-]{0,30}$")
 HEX = re.compile(r"^#[0-9a-fA-F]{6}$")
 # WCAG minimum contrast: 3.0 for large text (H1, H2), 4.5 for everything else
@@ -67,7 +70,13 @@ def validate(presets):
                 if key not in colours:
                     errors.append(f"{name}.{theme}.{key}: missing")
             for key, value in colours.items():
-                if key not in REQUIRED + OPTIONAL:
+                if key in NUMBERS:
+                    if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 < value <= 1:
+                        errors.append(f"{name}.{theme}.{key}: '{value}' is not a number above 0, up to 1")
+                elif key in FLAGS:
+                    if value is not True:
+                        errors.append(f"{name}.{theme}.{key}: must be true (or left out)")
+                elif key not in REQUIRED + OPTIONAL:
                     errors.append(f"{name}.{theme}.{key}: unknown key")
                 elif not isinstance(value, str) or not HEX.match(value):
                     errors.append(f"{name}.{theme}.{key}: '{value}' is not #rrggbb")
@@ -119,10 +128,12 @@ def check(presets, quiet=False):
             pairs = [(f"h{i}", c[f"h{i}"], base, MIN_LARGE if i <= 2 else MIN_TEXT) for i in range(1, 7)]
             pairs += [
                 ("bold", c["bold"], base, MIN_TEXT),
-                ("code", c["code"], blend(c.get("codeTint", c["code"]), a["code"], base), MIN_TEXT),
+                ("code", c["code"], blend(c.get("codeTint", c["code"]), code_alpha(c, theme), base), MIN_TEXT),
                 ("quote", c["quote"], quote_bg, MIN_TEXT),
                 ("quote2", c["quote2"], blend(c["quote2Bar"], a["quote"], quote_bg), MIN_TEXT),
             ]
+            if "text" in c:
+                pairs.append(("text", c["text"], base, MIN_TEXT))
             if "link" in c:
                 pairs.append(("link", c["link"], base, MIN_TEXT))
             bad = [
@@ -141,11 +152,19 @@ def check(presets, quiet=False):
 # ---------- CSS generation ----------
 
 
+def code_alpha(c, theme):
+    return c.get("codeTintAlpha", ALPHA[theme]["code"])
+
+
 def preset_block(name, theme, c):
     a = ALPHA[theme]
-    lines = [f'body.vscode-{theme}:not(.vscode-high-contrast):has(.mpp-preset[data-preset="{name}"]) {{']
+    scope = f'body.vscode-{theme}:not(.vscode-high-contrast):has(.mpp-preset[data-preset="{name}"])'
+    tint = c.get("codeTint", c["code"])
+    lines = [f"{scope} {{"]
     if "background" in c:
         lines.append(f"  background-color: {c['background']};")
+    if "text" in c:
+        lines.append(f"  color: {c['text']};")
     if "link" in c:
         lines.append(f"  --vscode-textLink-foreground: {c['link']};")
         lines.append(f"  --vscode-textLink-activeForeground: {c.get('linkHover', c['link'])};")
@@ -156,15 +175,27 @@ def preset_block(name, theme, c):
         f"  --mpp-h2-border: {rgba(c['h2'], a['h2Border'])};",
         f"  --mpp-bold: {c['bold']};",
         f"  --mpp-code: {c['code']};",
-        f"  --mpp-code-bg: {rgba(c.get('codeTint', c['code']), a['code'])};",
+        f"  --mpp-code-bg: {rgba(tint, code_alpha(c, theme))};",
         f"  --mpp-quote: {c['quote']};",
         f"  --mpp-quote-bar: {c['quoteBar']};",
         f"  --mpp-quote-bg: {rgba(c['quoteBar'], a['quote'])};",
         f"  --mpp-quote2: {c['quote2']};",
         f"  --mpp-quote2-bar: {c['quote2Bar']};",
         f"  --mpp-quote2-bg: {rgba(c['quote2Bar'], a['quote'])};",
-        "}",
     ]
+    if "codeBorderAlpha" in c:
+        lines.append(f"  --mpp-code-border: 0.5px solid {rgba(tint, c['codeBorderAlpha'])};")
+    lines.append("}")
+    if c.get("linkUnderline"):
+        # Underline at 40% of the link colour, full colour on hover
+        lines += [
+            f"{scope} a {{",
+            "  text-decoration: underline;",
+            "  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);",
+            "  text-underline-offset: 3px;",
+            "}",
+            f"{scope} a:hover {{ text-decoration-color: currentColor; }}",
+        ]
     return "\n".join(lines)
 
 
@@ -187,6 +218,7 @@ def render_css(presets):
 {S} :not(pre) > code {{
   color: var(--mpp-code);
   background-color: var(--mpp-code-bg);
+  border: var(--mpp-code-border, 0);
   border-radius: 3px;
   padding: 1px 4px;
 }}
