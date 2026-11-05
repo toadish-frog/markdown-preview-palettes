@@ -415,14 +415,21 @@ body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]
   --mpp-h2-border: rgba(240, 239, 236, 0.30);
   --mpp-bold: #f0efec;
   --mpp-code: #ec7e7e;
-  --mpp-code-bg: rgba(0, 0, 0, 0.12);
+  --mpp-code-bg: rgba(255, 255, 255, 0.05);
   --mpp-quote: #c3c2b7;
   --mpp-quote-bar: #898781;
   --mpp-quote-bg: rgba(137, 135, 129, 0.08);
   --mpp-quote2: #c3c2b7;
   --mpp-quote2-bar: #52514e;
   --mpp-quote2-bg: rgba(82, 81, 78, 0.08);
+  --mpp-code-border: 0.5px solid rgba(255, 255, 255, 0.10);
 }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 3px;
+}
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a:hover { text-decoration-color: currentColor; }
 
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) {
   background-color: #fcfcfb;
@@ -439,14 +446,21 @@ body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"
   --mpp-h2-border: rgba(11, 11, 11, 0.25);
   --mpp-bold: #0b0b0b;
   --mpp-code: #8e2626;
-  --mpp-code-bg: rgba(0, 0, 0, 0.08);
+  --mpp-code-bg: rgba(11, 11, 11, 0.05);
   --mpp-quote: #52514e;
   --mpp-quote-bar: #898781;
   --mpp-quote-bg: rgba(137, 135, 129, 0.06);
   --mpp-quote2: #52514e;
   --mpp-quote2-bar: #c3c2b7;
   --mpp-quote2-bg: rgba(195, 194, 183, 0.06);
+  --mpp-code-border: 0.5px solid rgba(11, 11, 11, 0.10);
 }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 3px;
+}
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a:hover { text-decoration-color: currentColor; }
 
 /* ---------- Rules (shared by every preset) ---------- */
 
@@ -463,6 +477,7 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset)
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset) :not(pre) > code {
   color: var(--mpp-code);
   background-color: var(--mpp-code-bg);
+  border: var(--mpp-code-border, 0);
   border-radius: 3px;
   padding: 1px 4px;
 }

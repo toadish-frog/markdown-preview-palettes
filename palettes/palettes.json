@@ -3,7 +3,7 @@
     "Single source of every preset colour. Edit here, then run: python3 scripts/build.py css",
     "Each preset has a dark and a light set. Optional keys: background, text, link, linkHover, codeTint.",
     "background: replaces the preview background. text: replaces the body text colour. link / linkHover: replace the VS Code link colours.",
-    "codeTint: colour of the inline-code box (defaults to the code colour). Tints and borders are derived automatically."
+    "codeTint: colour of the inline-code box (defaults to the code colour). Tints and borders are derived automatically. codeTintAlpha / codeBorderAlpha (0 to 1): opacity of the inline-code box and of an optional thin border. linkUnderline: true underlines links."
   ],
   "teal": {
     "description": "Green-teal headings, amber bold, orange inline code.",
@@ -184,19 +184,19 @@
     "description": "Document style: near-white or near-black headings, warm grey text, red inline code, blue links.",
     "dark": {
       "background": "#151515", "text": "#c3c2b7",
-      "link": "#6da7ec",
+      "link": "#6da7ec", "linkUnderline": true,
       "h1": "#f0efec", "h2": "#f0efec", "h3": "#f0efec", "h4": "#f0efec", "h5": "#f0efec", "h6": "#f0efec",
       "bold": "#f0efec",
-      "code": "#ec7e7e", "codeTint": "#000000",
+      "code": "#ec7e7e", "codeTint": "#ffffff", "codeTintAlpha": 0.05, "codeBorderAlpha": 0.1,
       "quote": "#c3c2b7", "quoteBar": "#898781",
       "quote2": "#c3c2b7", "quote2Bar": "#52514e"
     },
     "light": {
       "background": "#fcfcfb", "text": "#52514e",
-      "link": "#184f95",
+      "link": "#184f95", "linkUnderline": true,
       "h1": "#0b0b0b", "h2": "#0b0b0b", "h3": "#0b0b0b", "h4": "#0b0b0b", "h5": "#0b0b0b", "h6": "#0b0b0b",
       "bold": "#0b0b0b",
-      "code": "#8e2626", "codeTint": "#000000",
+      "code": "#8e2626", "codeTint": "#0b0b0b", "codeTintAlpha": 0.05, "codeBorderAlpha": 0.1,
       "quote": "#52514e", "quoteBar": "#898781",
       "quote2": "#52514e", "quote2Bar": "#c3c2b7"
     }

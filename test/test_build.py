@@ -77,6 +77,24 @@ class GeneratedCss(unittest.TestCase):
         with self.assertRaises(SystemExit):
             build.check(presets, quiet=True)
 
+    def test_code_box_and_link_underline_options(self):
+        c = dict(build.load_palettes()["mono"]["dark"], codeTint="#ffffff", codeTintAlpha=0.05, codeBorderAlpha=0.1)
+        c["linkUnderline"] = True
+        block = build.preset_block("mono", "dark", c)
+        self.assertIn("--mpp-code-bg: rgba(255, 255, 255, 0.05);", block)
+        self.assertIn("--mpp-code-border: 0.5px solid rgba(255, 255, 255, 0.10);", block)
+        self.assertIn("text-decoration: underline;", block)
+        plain = build.preset_block("mono", "dark", build.load_palettes()["mono"]["dark"])
+        self.assertNotIn("--mpp-code-border", plain)
+        self.assertNotIn("text-decoration", plain)
+
+    def test_option_types_are_validated(self):
+        bad = build.load_palettes()
+        bad["mono"]["dark"].update(codeTintAlpha=0, codeBorderAlpha="0.1", linkUnderline="yes")
+        errors = " | ".join(build.validate(bad))
+        for key in ("codeTintAlpha", "codeBorderAlpha", "linkUnderline"):
+            self.assertIn(f"mono.dark.{key}", errors)
+
     def test_code_blocks_are_not_styled(self):
         css = build.render_css(build.load_palettes())
         self.assertNotRegex(css, r"(^|\s)pre(\s|>|\{)")  # only ':not(pre) > code' may mention pre

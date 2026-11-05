@@ -43,7 +43,7 @@ The setting can also be set per workspace.
 - **Bold text:** bold inside a heading or link keeps the heading or link colour.
 - **Inline code:** coloured, in a tinted box. Inline code inside a link, `` [`text`](url) ``, takes the link colour.
 - **Quotes:** `>` and nested `>>` each have their own colour.
-- **Links:** some presets set their own link colour; the others keep the VS Code link colour.
+- **Links:** some presets set their own link colour; the others keep the VS Code link colour. `folio` also underlines links.
 - **Tables:** GitHub style, with a full grid border and striped rows.
 - **Code blocks:** never changed; they keep the VS Code syntax colours.
 
