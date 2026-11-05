@@ -30,7 +30,7 @@ ALPHA = {
     "light": {"code": 0.08, "quote": 0.06, "h1Border": 0.30, "h2Border": 0.25},
 }
 REQUIRED = ("h1", "h2", "h3", "h4", "h5", "h6", "bold", "code", "quote", "quoteBar", "quote2", "quote2Bar")
-OPTIONAL = ("background", "link", "linkHover", "codeTint")
+OPTIONAL = ("background", "text", "link", "linkHover", "codeTint")
 PRESET_NAME = re.compile(r"^[a-z][a-z0-9-]{0,30}$")
 HEX = re.compile(r"^#[0-9a-fA-F]{6}$")
 # WCAG minimum contrast: 3.0 for large text (H1, H2), 4.5 for everything else
@@ -123,6 +123,8 @@ def check(presets, quiet=False):
                 ("quote", c["quote"], quote_bg, MIN_TEXT),
                 ("quote2", c["quote2"], blend(c["quote2Bar"], a["quote"], quote_bg), MIN_TEXT),
             ]
+            if "text" in c:
+                pairs.append(("text", c["text"], base, MIN_TEXT))
             if "link" in c:
                 pairs.append(("link", c["link"], base, MIN_TEXT))
             bad = [
@@ -146,6 +148,8 @@ def preset_block(name, theme, c):
     lines = [f'body.vscode-{theme}:not(.vscode-high-contrast):has(.mpp-preset[data-preset="{name}"]) {{']
     if "background" in c:
         lines.append(f"  background-color: {c['background']};")
+    if "text" in c:
+        lines.append(f"  color: {c['text']};")
     if "link" in c:
         lines.append(f"  --vscode-textLink-foreground: {c['link']};")
         lines.append(f"  --vscode-textLink-activeForeground: {c.get('linkHover', c['link'])};")

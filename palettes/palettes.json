@@ -1,8 +1,8 @@
 {
   "_readme": [
     "Single source of every preset colour. Edit here, then run: python3 scripts/build.py css",
-    "Each preset has a dark and a light set. Optional keys: background, link, linkHover, codeTint.",
-    "background: replaces the preview background. link / linkHover: replace the VS Code link colours.",
+    "Each preset has a dark and a light set. Optional keys: background, text, link, linkHover, codeTint.",
+    "background: replaces the preview background. text: replaces the body text colour. link / linkHover: replace the VS Code link colours.",
     "codeTint: colour of the inline-code box (defaults to the code colour). Tints and borders are derived automatically."
   ],
   "teal": {
@@ -173,11 +173,32 @@
     "light": {
       "background": "#faf9f5",
       "link": "#3c76b0", "linkHover": "#141413",
-      "h1": "#d87555", "h2": "#d87555", "h3": "#141413", "h4": "#141413", "h5": "#767368", "h6": "#767368",
+      "h1": "#c6613f", "h2": "#c6613f", "h3": "#141413", "h4": "#141413", "h5": "#767368", "h6": "#767368",
       "bold": "#141413",
       "code": "#141413", "codeTint": "#d97757",
       "quote": "#141413", "quoteBar": "#6a9bcc",
       "quote2": "#141413", "quote2Bar": "#788c5d"
+    }
+  },
+  "folio": {
+    "description": "Document style: near-white or near-black headings, warm grey text, red inline code, blue links.",
+    "dark": {
+      "background": "#151515", "text": "#c3c2b7",
+      "link": "#6da7ec",
+      "h1": "#f0efec", "h2": "#f0efec", "h3": "#f0efec", "h4": "#f0efec", "h5": "#f0efec", "h6": "#f0efec",
+      "bold": "#f0efec",
+      "code": "#ec7e7e", "codeTint": "#000000",
+      "quote": "#c3c2b7", "quoteBar": "#898781",
+      "quote2": "#c3c2b7", "quote2Bar": "#52514e"
+    },
+    "light": {
+      "background": "#fcfcfb", "text": "#52514e",
+      "link": "#184f95",
+      "h1": "#0b0b0b", "h2": "#0b0b0b", "h3": "#0b0b0b", "h4": "#0b0b0b", "h5": "#0b0b0b", "h6": "#0b0b0b",
+      "bold": "#0b0b0b",
+      "code": "#8e2626", "codeTint": "#000000",
+      "quote": "#52514e", "quoteBar": "#898781",
+      "quote2": "#52514e", "quote2Bar": "#c3c2b7"
     }
   }
 }

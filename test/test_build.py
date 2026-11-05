@@ -69,6 +69,14 @@ class GeneratedCss(unittest.TestCase):
         self.assertRegex(css, r":is\(th, td\) \{[^}]*border: 1px solid")
         self.assertIn(f"{build.SCOPE} tbody tr:nth-child(2n) {{ background-color:", css)
 
+    def test_text_key_sets_body_colour_and_is_contrast_checked(self):
+        presets = build.load_palettes()
+        presets["mono"]["dark"]["text"] = "#123456"
+        self.assertIn("  color: #123456;", build.preset_block("mono", "dark", presets["mono"]["dark"]))
+        presets["mono"]["dark"]["text"] = "#2a2a2a"
+        with self.assertRaises(SystemExit):
+            build.check(presets, quiet=True)
+
     def test_code_blocks_are_not_styled(self):
         css = build.render_css(build.load_palettes())
         self.assertNotRegex(css, r"(^|\s)pre(\s|>|\{)")  # only ':not(pre) > code' may mention pre

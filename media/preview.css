@@ -381,14 +381,14 @@ body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember"
   background-color: #faf9f5;
   --vscode-textLink-foreground: #3c76b0;
   --vscode-textLink-activeForeground: #141413;
-  --mpp-h1: #d87555;
-  --mpp-h2: #d87555;
+  --mpp-h1: #c6613f;
+  --mpp-h2: #c6613f;
   --mpp-h3: #141413;
   --mpp-h4: #141413;
   --mpp-h5: #767368;
   --mpp-h6: #767368;
-  --mpp-h1-border: rgba(216, 117, 85, 0.30);
-  --mpp-h2-border: rgba(216, 117, 85, 0.25);
+  --mpp-h1-border: rgba(198, 97, 63, 0.30);
+  --mpp-h2-border: rgba(198, 97, 63, 0.25);
   --mpp-bold: #141413;
   --mpp-code: #141413;
   --mpp-code-bg: rgba(217, 119, 87, 0.08);
@@ -398,6 +398,54 @@ body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember"
   --mpp-quote2: #141413;
   --mpp-quote2-bar: #788c5d;
   --mpp-quote2-bg: rgba(120, 140, 93, 0.06);
+}
+
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) {
+  background-color: #151515;
+  color: #c3c2b7;
+  --vscode-textLink-foreground: #6da7ec;
+  --vscode-textLink-activeForeground: #6da7ec;
+  --mpp-h1: #f0efec;
+  --mpp-h2: #f0efec;
+  --mpp-h3: #f0efec;
+  --mpp-h4: #f0efec;
+  --mpp-h5: #f0efec;
+  --mpp-h6: #f0efec;
+  --mpp-h1-border: rgba(240, 239, 236, 0.35);
+  --mpp-h2-border: rgba(240, 239, 236, 0.30);
+  --mpp-bold: #f0efec;
+  --mpp-code: #ec7e7e;
+  --mpp-code-bg: rgba(0, 0, 0, 0.12);
+  --mpp-quote: #c3c2b7;
+  --mpp-quote-bar: #898781;
+  --mpp-quote-bg: rgba(137, 135, 129, 0.08);
+  --mpp-quote2: #c3c2b7;
+  --mpp-quote2-bar: #52514e;
+  --mpp-quote2-bg: rgba(82, 81, 78, 0.08);
+}
+
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) {
+  background-color: #fcfcfb;
+  color: #52514e;
+  --vscode-textLink-foreground: #184f95;
+  --vscode-textLink-activeForeground: #184f95;
+  --mpp-h1: #0b0b0b;
+  --mpp-h2: #0b0b0b;
+  --mpp-h3: #0b0b0b;
+  --mpp-h4: #0b0b0b;
+  --mpp-h5: #0b0b0b;
+  --mpp-h6: #0b0b0b;
+  --mpp-h1-border: rgba(11, 11, 11, 0.30);
+  --mpp-h2-border: rgba(11, 11, 11, 0.25);
+  --mpp-bold: #0b0b0b;
+  --mpp-code: #8e2626;
+  --mpp-code-bg: rgba(0, 0, 0, 0.08);
+  --mpp-quote: #52514e;
+  --mpp-quote-bar: #898781;
+  --mpp-quote-bg: rgba(137, 135, 129, 0.06);
+  --mpp-quote2: #52514e;
+  --mpp-quote2-bar: #c3c2b7;
+  --mpp-quote2-bg: rgba(195, 194, 183, 0.06);
 }
 
 /* ---------- Rules (shared by every preset) ---------- */

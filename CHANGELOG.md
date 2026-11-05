@@ -4,7 +4,8 @@ All notable changes to this extension. Versions follow Semantic Versioning (Majo
 
 ## Unreleased
 
-- New presets: `phosphor` (terminal greens), `parchment` (gold on beige paper), `azure` (clean blue) and `ember` (orange and warm greys on black or beige paper).
+- New presets: `phosphor` (terminal greens), `parchment` (gold on beige paper), `azure` (clean blue) and `ember` (orange and warm greys on black or beige paper) and `folio` (document style, warm grey text).
+- Presets can set the body text colour (optional `text` key).
 - Tables use the GitHub style in every preset: full grid border (outer edge, rows and columns) and striped rows.
 
 ## 0.1.0 (2026-10-13)
