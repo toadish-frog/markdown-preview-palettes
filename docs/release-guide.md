@@ -4,8 +4,8 @@
 | --- | --- |
 | Owner | Sean Yang |
 | Status | Active |
-| Version | 1.1.0 |
-| Last Updated | 2026-10-19 |
+| Version | 1.1.1 |
+| Last Updated | 2026-11-05 |
 | Audience | Sean Yang (personal notes) |
 | Source(s) | See [Sources](#9-sources) |
 
@@ -63,7 +63,11 @@
    - Check the package on the official registry first: `npm view @vscode/vsce`
    - `npx @vscode/vsce@4.0.0 package` writes `markdown-preview-colours-<version>.vsix` in the project root [S4](#9-sources).
    - `vsce` requires `activationEvents` when `main` is set; `scripts/build.py` does not check this, so use `vsce` for the published build [S4](#9-sources).
-4. Install the `.vsix` locally (`code --install-extension <file>.vsix`), open `test/sample.md`, and switch every preset in dark and light themes. Uninstall the Marketplace version first, so the colours are not applied twice.
+4. Test the `.vsix` in a throwaway VS Code profile, then switch every preset in dark and light themes [S5](#9-sources):
+   - `T=$(mktemp -d)`
+   - `code --user-data-dir "$T/data" --extensions-dir "$T/ext" --install-extension markdown-preview-colours-<version>.vsix`
+   - `code --user-data-dir "$T/data" --extensions-dir "$T/ext" test/sample.md`
+   - Do not install the `.vsix` in the normal profile: it has the same ID as the Marketplace copy, replaces it, and that machine then never receives the Marketplace update.
 
 ## 6. Publish
 
@@ -98,6 +102,7 @@
 | S2 | [2. Prerequisites](#2-prerequisites) | Ruff 0.16.8 released 2026-09-16 | PyPI, read 2026-10-13 | Sourced |
 | S3 | [1. Key Points](#1-key-points), [4. Create the Marketplace Publisher](#4-create-the-marketplace-publisher), [6. Publish](#6-publish) | Two publishers created, `ToadishFrog67` and a second one; the first upload, named `markdown-preview-palettes`, removed; republished under `ToadishFrog67` as `markdown-preview-colours`; status showed **Verifying**; installed from the Marketplace on Linux | Sean Yang, 2026-10-19 | Sourced |
 | S4 | [5. Build and Test](#5-build-and-test) | `vsce` 4.0.0 (npm, Microsoft maintainers) refused the manifest without `activationEvents`; packaged after `onLanguage:markdown` was added; `make test` passed | `npx @vscode/vsce@4.0.0 package` and `make test`, run 2026-10-19 | Sourced |
+| S5 | [5. Build and Test](#5-build-and-test): throwaway profile | `code --help` lists `--user-data-dir`, `--extensions-dir` and `--install-extension` | `code --help`, VS Code 1.144.1 on the Mac, run 2026-11-05 | Sourced |
 
 Gaps: the exact button names on the publisher page (**New extension**, **Update**) are not quoted in S1. They are Unconfirmed until the first upload; Sean Yang can confirm.
 
@@ -105,5 +110,6 @@ Gaps: the exact button names on the publisher page (**New extension**, **Update*
 
 | Version | Date | Change | Reason |
 | --- | --- | --- | --- |
+| 1.1.1 | 2026-11-05 | Build and Test step 4: test the `.vsix` in a throwaway profile instead of the normal one; S5 added | The `.vsix` and the Marketplace copy share one ID, so a normal install would block the Marketplace update |
 | 1.1.0 | 2026-10-19 | Final publisher and extension ID; warning against removing a listing; `vsce` command pinned, `--allow-missing-repository` dropped, `activationEvents` note; install steps use the new ID; S3 and S4 added | First publish done |
 | 1.0.0 | 2026-10-13 | Created: setup, publisher, build, publish, update and install steps | Sean Yang asked for documented steps for the Linux machine |

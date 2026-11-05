@@ -2,9 +2,9 @@
 
 All notable changes to this extension. Versions follow Semantic Versioning (Major.Minor.Patch).
 
-## Unreleased
+## 0.2.0 (2026-11-05)
 
-- New presets: `phosphor` (terminal greens), `parchment` (gold on beige paper), `azure` (clean blue) and `ember` (orange and warm greys on black or beige paper) and `folio` (document style, warm grey text).
+- New presets: `phosphor` (terminal greens), `parchment` (gold on beige paper), `azure` (clean blue), `ember` (orange and warm greys on black or beige paper) and `folio` (document style, warm grey text).
 - Presets can set the body text colour (optional `text` key), the inline-code box and border opacity (`codeTintAlpha`, `codeBorderAlpha`) and link underlines (`linkUnderline`).
 - Tables use the GitHub style in every preset: full grid border (outer edge, rows and columns) and striped rows.
 
