@@ -292,7 +292,7 @@ body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchme
 }
 
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment"]) {
-  background-color: #f3ead6;
+  background-color: #faf9f5;
   --vscode-textLink-foreground: #1f5f7a;
   --vscode-textLink-activeForeground: #174a5f;
   --mpp-h1: #8a5a00;
