@@ -2,6 +2,10 @@
 
 All notable changes to this extension. Versions follow Semantic Versioning (Major.Minor.Patch).
 
+## Unreleased
+
+- Tables use the GitHub style in every preset: full grid border (outer edge, rows and columns) and striped rows.
+
 ## 0.1.0 (2026-10-13)
 
 - First version: presets `teal` (default), `plum`, `crimson`, `golden`, `mono` and `default` (built-in look).

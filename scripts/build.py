@@ -202,6 +202,18 @@ def render_css(presets):
   background-color: var(--mpp-quote2-bg);
 }}
 
+/* Tables, GitHub style: full grid border and striped body rows.
+   Tints mix the text colour into the background, so they suit every preset and theme. */
+{S} table {{
+  border-collapse: collapse;
+  border-spacing: 0;
+}}
+{S} :is(th, td) {{
+  padding: 6px 13px;
+  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+}}
+{S} tbody tr:nth-child(2n) {{ background-color: color-mix(in srgb, currentColor 5%, transparent); }}
+
 /* ---------- Exceptions ---------- */
 
 /* Bold inside a heading or link keeps the heading or link colour */
