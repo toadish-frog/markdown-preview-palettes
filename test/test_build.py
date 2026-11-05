@@ -63,6 +63,12 @@ class GeneratedCss(unittest.TestCase):
                     f'body.vscode-{theme}:not(.vscode-high-contrast):has(.mpp-preset[data-preset="{name}"])', css
                 )
 
+    def test_tables_have_grid_and_striped_rows(self):
+        css = build.render_css(build.load_palettes())
+        self.assertIn(f"{build.SCOPE} :is(th, td) {{", css)
+        self.assertRegex(css, r":is\(th, td\) \{[^}]*border: 1px solid")
+        self.assertIn(f"{build.SCOPE} tbody tr:nth-child(2n) {{ background-color:", css)
+
     def test_code_blocks_are_not_styled(self):
         css = build.render_css(build.load_palettes())
         self.assertNotRegex(css, r"(^|\s)pre(\s|>|\{)")  # only ':not(pre) > code' may mention pre

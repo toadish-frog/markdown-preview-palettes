@@ -252,6 +252,18 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset)
   background-color: var(--mpp-quote2-bg);
 }
 
+/* Tables, GitHub style: full grid border and striped body rows.
+   Tints mix the text colour into the background, so they suit every preset and theme. */
+body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset) table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset) :is(th, td) {
+  padding: 6px 13px;
+  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+}
+body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset) tbody tr:nth-child(2n) { background-color: color-mix(in srgb, currentColor 5%, transparent); }
+
 /* ---------- Exceptions ---------- */
 
 /* Bold inside a heading or link keeps the heading or link colour */
