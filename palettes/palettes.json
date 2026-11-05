@@ -99,5 +99,64 @@
       "quote": "#495057", "quoteBar": "#adb5bd",
       "quote2": "#555c63", "quote2Bar": "#ced4da"
     }
+  },
+  "phosphor": {
+    "description": "Terminal greens on green-black, lime inline code, cyan links.",
+    "dark": {
+      "background": "#0d110e",
+      "link": "#56d4e0", "linkHover": "#9be6ee",
+      "h1": "#39e075", "h2": "#5fe08f", "h3": "#86e4a8", "h4": "#a6e8bd", "h5": "#7fae8e", "h6": "#7f9786",
+      "bold": "#eafff0",
+      "code": "#c3f75f", "codeTint": "#39e075",
+      "quote": "#a9c7b2", "quoteBar": "#2f9e5a",
+      "quote2": "#93ab9b", "quote2Bar": "#3d5c47"
+    },
+    "light": {
+      "background": "#f3f8f4",
+      "link": "#0e6f7a", "linkHover": "#0a535b",
+      "h1": "#146c35", "h2": "#18713c", "h3": "#1e7a45", "h4": "#2f6f45", "h5": "#4b6655", "h6": "#57635b",
+      "bold": "#0f2416",
+      "code": "#3f6212", "codeTint": "#4d7c0f",
+      "quote": "#2c5a3d", "quoteBar": "#2f9e5a",
+      "quote2": "#46584c", "quote2Bar": "#8fb59c"
+    }
+  },
+  "parchment": {
+    "description": "Gold and brown headings on beige paper (light) or warm charcoal (dark), ink-blue links.",
+    "dark": {
+      "background": "#1c1a16",
+      "link": "#7cc4dc", "linkHover": "#a9d8e8",
+      "h1": "#e6c068", "h2": "#d9ad55", "h3": "#e0b97a", "h4": "#d6c09a", "h5": "#b8a682", "h6": "#9e9480",
+      "bold": "#f6efe1",
+      "code": "#f0a868", "codeTint": "#d97706",
+      "quote": "#d8c9ad", "quoteBar": "#b8893a",
+      "quote2": "#bdb3a2", "quote2Bar": "#6b5a3e"
+    },
+    "light": {
+      "background": "#f3ead6",
+      "link": "#1f5f7a", "linkHover": "#174a5f",
+      "h1": "#8a5a00", "h2": "#7d4f05", "h3": "#7a3e0e", "h4": "#6e4a1c", "h5": "#5f4c32", "h6": "#5a5044",
+      "bold": "#2a1f14",
+      "code": "#8a2e0b", "codeTint": "#b45309",
+      "quote": "#5a4630", "quoteBar": "#b8893a",
+      "quote2": "#5e554a", "quote2Bar": "#a08a68"
+    }
+  },
+  "azure": {
+    "description": "Clean blue headings on the theme background, plain bold, blue inline code.",
+    "dark": {
+      "h1": "#79b8ff", "h2": "#8cc4ff", "h3": "#a5d2ff", "h4": "#c0deff", "h5": "#9fb3c8", "h6": "#93a1b0",
+      "bold": "#ffffff",
+      "code": "#9ecbff", "codeTint": "#388bfd",
+      "quote": "#b8c4d0", "quoteBar": "#4c8dd6",
+      "quote2": "#a8b2bd", "quote2Bar": "#5b6b7c"
+    },
+    "light": {
+      "h1": "#0550ae", "h2": "#0a5ab8", "h3": "#1660b0", "h4": "#24578f", "h5": "#45607c", "h6": "#57606a",
+      "bold": "#1f2328",
+      "code": "#0550ae", "codeTint": "#0969da",
+      "quote": "#3d4f63", "quoteBar": "#54aeff",
+      "quote2": "#57606a", "quote2Bar": "#afb8c1"
+    }
   }
 }

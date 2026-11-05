@@ -4,6 +4,7 @@ All notable changes to this extension. Versions follow Semantic Versioning (Majo
 
 ## Unreleased
 
+- New presets: `phosphor` (terminal greens), `parchment` (gold on beige paper) and `azure` (clean blue).
 - Tables use the GitHub style in every preset: full grid border (outer edge, rows and columns) and striped rows.
 
 ## 0.1.0 (2026-10-13)

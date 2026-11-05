@@ -15,6 +15,9 @@ Colour presets for the built-in VS Code Markdown preview. Headings, bold text, i
 | `crimson` | Red | White | Steel grey | Cyan | Near-black |
 | `golden` | Gold, amber, orange | White | Ivory | Teal | Near-black |
 | `mono` | Greyscale | Brightest white | Light grey | VS Code blue | Theme default |
+| `phosphor` | Terminal greens | Pale green | Lime | Cyan | Green-black |
+| `parchment` | Gold and brown | Cream | Orange | Light blue | Warm charcoal (beige paper in light themes) |
+| `azure` | Blue | White | Light blue | VS Code blue | Theme default |
 | `default` | Built-in VS Code look (all colouring off) | | | | |
 
 ## Switch Preset
