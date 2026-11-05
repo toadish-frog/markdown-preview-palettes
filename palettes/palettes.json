@@ -158,5 +158,26 @@
       "quote": "#3d4f63", "quoteBar": "#54aeff",
       "quote2": "#57606a", "quote2Bar": "#afb8c1"
     }
+  },
+  "ember": {
+    "description": "Warm orange headings on black (dark) or beige paper (light), blue links.",
+    "dark": {
+      "background": "#000000",
+      "link": "#6a9bcc", "linkHover": "#9dbde0",
+      "h1": "#d97757", "h2": "#e8906f", "h3": "#f0a988", "h4": "#f3c2a8", "h5": "#c9a493", "h6": "#a8958c",
+      "bold": "#faf9f5",
+      "code": "#f2b48f", "codeTint": "#d97757",
+      "quote": "#c9c6bd", "quoteBar": "#d97757",
+      "quote2": "#b0aea5", "quote2Bar": "#6b6964"
+    },
+    "light": {
+      "background": "#faf9f5",
+      "link": "#2f6aa3", "linkHover": "#24527f",
+      "h1": "#c15f3c", "h2": "#b4532f", "h3": "#a34a2a", "h4": "#8f4426", "h5": "#6e5246", "h6": "#5e5650",
+      "bold": "#141413",
+      "code": "#a8431f", "codeTint": "#d97757",
+      "quote": "#4d4a45", "quoteBar": "#d97757",
+      "quote2": "#5e5b55", "quote2Bar": "#b0aea5"
+    }
   }
 }

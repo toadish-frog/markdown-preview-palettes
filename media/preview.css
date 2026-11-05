@@ -354,6 +354,52 @@ body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure"
   --mpp-quote2-bg: rgba(175, 184, 193, 0.06);
 }
 
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember"]) {
+  background-color: #000000;
+  --vscode-textLink-foreground: #6a9bcc;
+  --vscode-textLink-activeForeground: #9dbde0;
+  --mpp-h1: #d97757;
+  --mpp-h2: #e8906f;
+  --mpp-h3: #f0a988;
+  --mpp-h4: #f3c2a8;
+  --mpp-h5: #c9a493;
+  --mpp-h6: #a8958c;
+  --mpp-h1-border: rgba(217, 119, 87, 0.35);
+  --mpp-h2-border: rgba(232, 144, 111, 0.30);
+  --mpp-bold: #faf9f5;
+  --mpp-code: #f2b48f;
+  --mpp-code-bg: rgba(217, 119, 87, 0.12);
+  --mpp-quote: #c9c6bd;
+  --mpp-quote-bar: #d97757;
+  --mpp-quote-bg: rgba(217, 119, 87, 0.08);
+  --mpp-quote2: #b0aea5;
+  --mpp-quote2-bar: #6b6964;
+  --mpp-quote2-bg: rgba(107, 105, 100, 0.08);
+}
+
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember"]) {
+  background-color: #faf9f5;
+  --vscode-textLink-foreground: #2f6aa3;
+  --vscode-textLink-activeForeground: #24527f;
+  --mpp-h1: #c15f3c;
+  --mpp-h2: #b4532f;
+  --mpp-h3: #a34a2a;
+  --mpp-h4: #8f4426;
+  --mpp-h5: #6e5246;
+  --mpp-h6: #5e5650;
+  --mpp-h1-border: rgba(193, 95, 60, 0.30);
+  --mpp-h2-border: rgba(180, 83, 47, 0.25);
+  --mpp-bold: #141413;
+  --mpp-code: #a8431f;
+  --mpp-code-bg: rgba(217, 119, 87, 0.08);
+  --mpp-quote: #4d4a45;
+  --mpp-quote-bar: #d97757;
+  --mpp-quote-bg: rgba(217, 119, 87, 0.06);
+  --mpp-quote2: #5e5b55;
+  --mpp-quote2-bar: #b0aea5;
+  --mpp-quote2-bg: rgba(176, 174, 165, 0.06);
+}
+
 /* ---------- Rules (shared by every preset) ---------- */
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset) h1 { color: var(--mpp-h1); border-bottom-color: var(--mpp-h1-border); }

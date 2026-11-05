@@ -6,7 +6,7 @@
 const vscode = require('vscode');
 
 const SECTION = 'markdownPreviewPalettes';
-const PRESETS = new Set(['teal', 'plum', 'crimson', 'golden', 'mono', 'phosphor', 'parchment', 'azure', 'default']);
+const PRESETS = new Set(['teal', 'plum', 'crimson', 'golden', 'mono', 'phosphor', 'parchment', 'azure', 'ember', 'default']);
 const FALLBACK = 'teal';
 
 function currentPreset() {
