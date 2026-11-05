@@ -1,5 +1,8 @@
 # Markdown Preview Palettes
 
+[![VS Marketplace version](https://vsmarketplacebadges.dev/version-short/ToadishFrog67.markdown-preview-colours.svg)](https://marketplace.visualstudio.com/items?itemName=ToadishFrog67.markdown-preview-colours)
+[![CI](https://github.com/toadish-frog/markdown-preview-palettes/actions/workflows/ci.yml/badge.svg)](https://github.com/toadish-frog/markdown-preview-palettes/actions/workflows/ci.yml)
+
 Colour presets for the built-in VS Code Markdown preview. Headings, bold text, inline code, quotes and links each get their own colour, so long notes are easier to scan.
 
 - **Preview only:** Markdown files are never changed.
