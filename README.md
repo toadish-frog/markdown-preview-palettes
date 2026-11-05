@@ -18,8 +18,10 @@ Colour presets for the built-in VS Code Markdown preview. Headings, bold text, i
 | `phosphor` | Terminal greens | Pale green | Lime | Cyan | Green-black |
 | `parchment` | Gold and brown | Cream | Orange | Light blue | Warm charcoal (beige paper in light themes) |
 | `azure` | Blue | White | Light blue | VS Code blue | Theme default |
-| `ember` | Warm orange | Off-white | Light orange | Blue | Black (beige paper in light themes) |
+| `ember` | Orange, then warm greys | Off-white | Orange | Blue | Black (beige paper in light themes) |
 | `default` | Built-in VS Code look (all colouring off) | | | | |
+
+`ember` and `parchment` use colours from the Apache 2.0 [brand-guidelines skill](https://github.com/anthropics/skills/tree/main/skills/brand-guidelines) (Light `#faf9f5`, Dark `#141413`, Mid Gray `#b0aea5`, Light Gray `#e8e6dc`, Orange `#d97757`, Blue `#6a9bcc`, Green `#788c5d`). In light themes, some are darkened slightly to meet the contrast minimum.
 
 ## Switch Preset
 
