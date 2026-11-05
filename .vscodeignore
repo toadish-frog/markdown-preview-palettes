@@ -15,3 +15,5 @@ private/**
 dist/**
 **/__pycache__/**
 **/.DS_Store
+CLAUDE.md
+*.vsix
