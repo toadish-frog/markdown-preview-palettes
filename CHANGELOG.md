@@ -2,6 +2,12 @@
 
 All notable changes to this extension. Versions follow Semantic Versioning (Major.Minor.Patch).
 
+## Unreleased
+
+- `ember` now follows the Claude Code docs, dark and light: near-black (`#09090b`) or off-white (`#fdfdf7`) background, grey text, white headings, links with an orange (dark) or black (light) bottom-border underline that thickens on hover, inline code and code-block boxes, and tables with striped rows and column lines.
+- `ember`: GitHub alerts `> [!TIP]`, `> [!NOTE]` / `> [!INFO]` and `> [!WARNING]` become green, blue and yellow callouts. Other presets show them as plain quotes, as before.
+- Presets can set table colours (`tableBg`, `tableHead`, `tableBorder`, `tableHeadBorder`, their opacities, `tableRadius`), link borders and weight, inline-code shape, code-block boxes and callout colours.
+
 ## 0.2.0 (2026-11-05)
 
 - New presets: `phosphor` (terminal greens), `parchment` (gold on beige paper), `azure` (clean blue), `ember` (orange and warm greys on black or beige paper) and `folio` (document style, warm grey text).

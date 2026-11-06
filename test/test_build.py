@@ -132,9 +132,62 @@ class GeneratedCss(unittest.TestCase):
         with self.assertRaises(SystemExit):
             build.check(dim, quiet=True)
 
-    def test_code_blocks_are_not_styled(self):
+    def test_code_block_syntax_colours_are_never_changed(self):
         css = build.render_css(build.load_palettes())
-        self.assertNotRegex(css, r"(^|\s)pre(\s|>|\{)")  # only ':not(pre) > code' may mention pre
+        self.assertNotIn("hljs-", css)  # no syntax-token selectors
+        # Only a preset's code-block box may be styled, and never its text colour
+        for rule in re.findall(r"^([^{}\n]*\bpre\b[^{}\n]*)\{([^}]*)\}", css, re.M):
+            selector, body = rule
+            if ":not(pre) > code" in selector:
+                continue
+            self.assertIn("data-preset=", selector)
+            self.assertNotRegex(body, r"(^|[\s;])color:")
+
+    def test_ember_options(self):
+        c = build.load_palettes()["ember"]["dark"]
+        block = build.preset_block("ember", "dark", c)
+        for expected in (
+            "  font-weight: 600;",
+            "  border-bottom: 1px solid #d4a27f;",
+            "a:hover { text-decoration: none; border-bottom-width: 2px; }",
+            "  border-radius: 6px;",
+            "  padding: 2px 8px;",
+            "  background-color: #0b0c0e;",
+            "  border: 1px solid rgba(255, 255, 255, 0.10);",
+            "blockquote.mpp-alert-tip { color: #86efac; background-color: rgba(22, 163, 74, 0.20); border-color: #14532d; }",
+            "blockquote.mpp-alert-warning { color: #fde047;",
+            ".mpp-alert-title-only) { display: none; }",
+        ):
+            self.assertIn(expected, block)
+        for name in ("mono", "folio"):
+            plain = build.preset_block(name, "dark", build.load_palettes()[name]["dark"])
+            for absent in ("mpp-alert", "border-bottom:", " pre {", "font-weight"):
+                self.assertNotIn(absent, plain)
+
+    def test_ember_options_are_validated(self):
+        bad = build.load_palettes()
+        dark = bad["ember"]["dark"]
+        dark.update(linkWeight=950, codePadding="2 8", preRadius=0, preBorder="white")
+        dark["alerts"] = dict(dark["alerts"], tip={"text": "#86efac", "bg": "green"}, danger={})
+        bad["ember"]["light"]["alerts"] = "blue"
+        errors = " | ".join(build.validate(bad))
+        for expected in (
+            "ember.dark.linkWeight",
+            "ember.dark.codePadding",
+            "ember.dark.preRadius",
+            "ember.dark.preBorder",
+            "ember.dark.alerts.tip.bg",
+            "ember.dark.alerts.tip.border: missing",
+            "ember.dark.alerts.danger: unknown alert type",
+            "ember.light.alerts: must be an object",
+        ):
+            self.assertIn(expected, errors)
+
+    def test_alert_text_is_contrast_checked(self):
+        dim = build.load_palettes()
+        dim["ember"]["light"]["alerts"]["tip"]["text"] = "#e0f5e6"
+        with self.assertRaises(SystemExit):
+            build.check(dim, quiet=True)
 
 
 class PresetNamesStayInSync(unittest.TestCase):

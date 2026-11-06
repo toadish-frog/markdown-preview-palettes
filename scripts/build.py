@@ -40,10 +40,25 @@ OPTIONAL = (
     "tableHead",
     "tableBorder",
     "tableHeadBorder",
+    "linkBorder",
+    "preBg",
+    "preBorder",
 )
 # Non-colour options: opacities (0 to 1), sizes in whole pixels and on/off switches
-NUMBERS = ("codeTintAlpha", "codeBorderAlpha", "tableBorderAlpha", "tableHeadBorderAlpha")
-PIXELS = {"tableRadius": (1, 32)}
+NUMBERS = ("codeTintAlpha", "codeBorderAlpha", "tableBorderAlpha", "tableHeadBorderAlpha", "preBorderAlpha")
+PIXELS = {
+    "tableRadius": (1, 32),
+    "codeRadius": (1, 32),
+    "preRadius": (1, 32),
+    "alertRadius": (1, 32),
+    "linkWeight": (100, 900),
+}
+# Padding as CSS lengths in whole pixels, for example "2px 8px"
+PADDINGS = ("codePadding", "prePadding", "alertPadding")
+PADDING = re.compile(r"^\d{1,2}px( \d{1,2}px){0,3}$")
+# Callout boxes for GitHub alerts (> [!NOTE], > [!TIP], > [!WARNING]); [!INFO] uses the note colours
+ALERT_TYPES = ("note", "tip", "warning")
+ALERT_KEYS = {"text": True, "bg": True, "border": True, "bgAlpha": False}
 FLAGS = ("linkUnderline",)
 PRESET_NAME = re.compile(r"^[a-z][a-z0-9-]{0,30}$")
 HEX = re.compile(r"^#[0-9a-fA-F]{6}$")
@@ -94,10 +109,39 @@ def validate(presets):
                 elif key in FLAGS:
                     if value is not True:
                         errors.append(f"{name}.{theme}.{key}: must be true (or left out)")
+                elif key in PADDINGS:
+                    if not isinstance(value, str) or not PADDING.match(value):
+                        errors.append(f"{name}.{theme}.{key}: '{value}' is not 1 to 4 lengths like \"2px 8px\"")
+                elif key == "alerts":
+                    errors += validate_alerts(f"{name}.{theme}.alerts", value)
                 elif key not in REQUIRED + OPTIONAL:
                     errors.append(f"{name}.{theme}.{key}: unknown key")
                 elif not isinstance(value, str) or not HEX.match(value):
                     errors.append(f"{name}.{theme}.{key}: '{value}' is not #rrggbb")
+    return errors
+
+
+def validate_alerts(where, alerts):
+    """Each alert type needs text, bg and border colours; bgAlpha (0 to 1) is optional."""
+    if not isinstance(alerts, dict):
+        return [f"{where}: must be an object"]
+    errors = [f"{where}.{kind}: unknown alert type" for kind in alerts if kind not in ALERT_TYPES]
+    for kind in ALERT_TYPES:
+        box = alerts.get(kind)
+        if not isinstance(box, dict):
+            errors.append(f"{where}.{kind}: missing")
+            continue
+        for key, required in ALERT_KEYS.items():
+            if required and key not in box:
+                errors.append(f"{where}.{kind}.{key}: missing")
+        for key, value in box.items():
+            if key == "bgAlpha":
+                if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 < value <= 1:
+                    errors.append(f"{where}.{kind}.{key}: '{value}' is not a number above 0, up to 1")
+            elif key not in ALERT_KEYS:
+                errors.append(f"{where}.{kind}.{key}: unknown key")
+            elif not isinstance(value, str) or not HEX.match(value):
+                errors.append(f"{where}.{kind}.{key}: '{value}' is not #rrggbb")
     return errors
 
 
@@ -160,6 +204,8 @@ def check(presets, quiet=False):
                 pairs.append(("tableHead", c["tableHead"], table_bg, MIN_TEXT))
             if "tableBg" in c and "text" in c:
                 pairs.append(("table text", c["text"], table_bg, MIN_TEXT))
+            for kind, box in c.get("alerts", {}).items():
+                pairs.append((f"{kind} alert", box["text"], blend(box["bg"], box.get("bgAlpha", 1), base), MIN_TEXT))
             bad = [
                 (k, round(contrast(rgb(fg), bg), 2), need) for k, fg, bg, need in pairs if contrast(rgb(fg), bg) < need
             ]
@@ -218,6 +264,7 @@ def preset_block(name, theme, c):
     if "tableHeadBorder" in c:
         lines.append(f"  --mpp-table-head-border: {rgba(c['tableHeadBorder'], c.get('tableHeadBorderAlpha', 1))};")
     lines.append("}")
+    lines += extra_rules(scope, c)
     if "tableRadius" in c:
         # Rounded corners need separate borders: each cell draws its top and left line, the table draws the outer edge
         lines += [
@@ -243,6 +290,59 @@ def preset_block(name, theme, c):
             f"{scope} a:hover {{ text-decoration-color: currentColor; }}",
         ]
     return "\n".join(lines)
+
+
+def extra_rules(scope, c):
+    """Optional per-preset rules: link border underline, inline-code shape, code-block box, alert callouts."""
+    lines = []
+    link = []
+    if "linkWeight" in c:
+        link.append(f"  font-weight: {c['linkWeight']};")
+    if "linkBorder" in c:
+        # Underline drawn as a bottom border, as on the Claude Code docs; thicker on hover
+        link += ["  text-decoration: none;", f"  border-bottom: 1px solid {c['linkBorder']};"]
+    if link:
+        lines += [f"{scope} a {{", *link, "}"]
+    if "linkBorder" in c:
+        lines.append(f"{scope} a:hover {{ text-decoration: none; border-bottom-width: 2px; }}")
+    code = []
+    if "codeRadius" in c:
+        code.append(f"  border-radius: {c['codeRadius']}px;")
+    if "codePadding" in c:
+        code.append(f"  padding: {c['codePadding']};")
+    if code:
+        lines += [f"{scope} :not(pre) > code {{", *code, "}"]
+    if "preBg" in c:
+        # The box only: syntax colours inside code blocks always stay the VS Code ones
+        box = [f"  --vscode-textCodeBlock-background: {c['preBg']};", f"  background-color: {c['preBg']};"]
+        if "preBorder" in c:
+            box.append(f"  border: 1px solid {rgba(c['preBorder'], c.get('preBorderAlpha', 1))};")
+        if "preRadius" in c:
+            box.append(f"  border-radius: {c['preRadius']}px;")
+        lines += [f"{scope} pre {{", *box, "}", f"{scope} pre.hljs {{ overflow: hidden; }}"]
+        if "prePadding" in c:
+            lines.append(f"{scope} :is(pre:not(.hljs), pre.hljs code > div) {{ padding: {c['prePadding']}; }}")
+    if "alerts" in c:
+        # extension.js marks > [!NOTE], > [!INFO], > [!TIP] and > [!WARNING] quotes; other presets show them as quotes
+        box = ["  margin: 16px 0;", "  border: 1px solid;"]
+        if "alertRadius" in c:
+            box.append(f"  border-radius: {c['alertRadius']}px;")
+        if "alertPadding" in c:
+            box.append(f"  padding: {c['alertPadding']};")
+        lines += [f"{scope} blockquote.mpp-alert {{", *box, "}"]
+        for kind in ALERT_TYPES:
+            a = c["alerts"][kind]
+            lines.append(
+                f"{scope} blockquote.mpp-alert-{kind} {{ color: {a['text']}; "
+                f"background-color: {rgba(a['bg'], a.get('bgAlpha', 1))}; border-color: {a['border']}; }}"
+            )
+        lines += [
+            f"{scope} .mpp-alert :is(strong, code, a) {{ color: inherit; }}",
+            f"{scope} .mpp-alert a {{ border-bottom-color: currentColor; }}",
+            f"{scope} :is(.mpp-alert-marker, .mpp-alert-marker + br, .mpp-alert-title-only) {{ display: none; }}",
+            f"{scope} .mpp-alert > :last-child {{ margin-bottom: 0; }}",
+        ]
+    return lines
 
 
 def render_css(presets):
