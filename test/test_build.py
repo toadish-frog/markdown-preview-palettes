@@ -176,10 +176,31 @@ class GeneratedCss(unittest.TestCase):
             ".mpp-alert-title-only) { display: none; }",
         ):
             self.assertIn(expected, block)
-        for name in ("mono", "folio"):
-            plain = build.preset_block(name, "dark", build.load_palettes()[name]["dark"])
-            for absent in ("mpp-alert", "border-bottom:", " pre {", "font-weight"):
-                self.assertNotIn(absent, plain)
+        plain = build.preset_block("mono", "dark", build.load_palettes()["mono"]["dark"])
+        for absent in ("mpp-alert", "border-bottom:", " pre {", "font-weight"):
+            self.assertNotIn(absent, plain)
+        folio = build.preset_block("folio", "dark", build.load_palettes()["folio"]["dark"])
+        for absent in ("border-bottom:", " pre {", "font-weight"):
+            self.assertNotIn(absent, folio)
+
+    def test_folio_callouts(self):
+        block = build.preset_block("folio", "dark", build.load_palettes()["folio"]["dark"])
+        for expected in (
+            ":is(blockquote.mpp-alert-note, .markdown-alert.markdown-alert-note) { color: #6da7ec; "
+            "background-color: rgba(3, 32, 66, 1.00); border-color: #0d366b; }",
+            "  border-radius: 11px;",
+            "  padding: 10px 14px;",
+            "position: relative; padding-left: 42px;",
+            "> .markdown-alert-title { position: absolute; top: 11px; left: 14px;",
+            "> .markdown-alert-title svg { width: 20px; height: 20px;",
+            "a { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 65%, transparent);",
+        ):
+            self.assertIn(expected, block)
+        bad = build.load_palettes()
+        bad["folio"]["dark"].update(alertIcon=40, alertIconGap=0)
+        errors = " | ".join(build.validate(bad))
+        for key in ("alertIcon", "alertIconGap"):
+            self.assertIn(f"folio.dark.{key}", errors)
 
     def test_ember_options_are_validated(self):
         bad = build.load_palettes()

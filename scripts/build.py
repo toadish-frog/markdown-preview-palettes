@@ -51,6 +51,8 @@ PIXELS = {
     "codeRadius": (1, 32),
     "preRadius": (1, 32),
     "alertRadius": (1, 32),
+    "alertIcon": (8, 32),
+    "alertIconGap": (1, 32),
     "linkWeight": (100, 900),
 }
 # Padding as CSS lengths in whole pixels, for example "2px 8px"
@@ -359,24 +361,36 @@ def extra_rules(scope, c):
             f"{scope} :is(.mpp-alert-marker, .mpp-alert-marker + br, .mpp-alert-title-only) {{ display: none; }}",
             f"{scope} {alert} > :last-child {{ margin-bottom: 0; }}",
         ]
-        lines += alert_icon_rules(scope, theirs, c.get("alertPadding"))
+        if c.get("linkUnderline"):
+            # Links inside a callout are always underlined, at 65% of the callout colour
+            lines.append(
+                f"{scope} {alert} a {{ text-decoration: underline; "
+                "text-decoration-color: color-mix(in srgb, currentColor 65%, transparent); text-underline-offset: 3px; }"
+            )
+        lines += alert_icon_rules(scope, theirs, c)
     return lines
 
 
-ICON_SIZE, ICON_COLUMN, ICON_GAP = 18, 16, 12  # the docs site: 18px icon in a 16px column, 12px gap
+# Default icon layout (the Claude Code docs: 18px icon in a 16px column, 12px gap); alertIcon / alertIconGap override it
+ICON_SIZE, ICON_COLUMN, ICON_GAP = 18, 16, 12
+LINE_HEIGHT = 22  # VS Code preview line height at its 14px default font size
 
 
-def alert_icon_rules(scope, theirs, padding):
-    """Keep the other extension's icon in a left column, like the docs site, and hide its title word."""
+def alert_icon_rules(scope, theirs, c):
+    """Keep the other extension's icon in a left column, like the docs sites, and hide its title word."""
     title = f"{scope} {theirs} > .markdown-alert-title"
+    padding = c.get("alertPadding")
+    size = c.get("alertIcon", ICON_SIZE)
+    column = c.get("alertIcon", ICON_COLUMN)
+    gap = c.get("alertIconGap", ICON_GAP)
     if not padding:
         return [f"{title} {{ display: none; }}"]
     sides = [int(part[:-2]) for part in padding.split()]
     top, left = sides[0], sides[{1: 0, 2: 1, 3: 1, 4: 3}[len(sides)]]
     return [
-        f"{scope} {theirs} {{ position: relative; padding-left: {left + ICON_COLUMN + ICON_GAP}px; }}",
-        f"{title} {{ position: absolute; top: {top + 2}px; left: {left}px; margin: 0; font-size: 0; line-height: 0; color: inherit; }}",
-        f"{title} svg {{ width: {ICON_SIZE}px; height: {ICON_SIZE}px; margin: 0; }}",
+        f"{scope} {theirs} {{ position: relative; padding-left: {left + column + gap}px; }}",
+        f"{title} {{ position: absolute; top: {top + (LINE_HEIGHT - size) // 2}px; left: {left}px; margin: 0; font-size: 0; line-height: 0; color: inherit; }}",
+        f"{title} svg {{ width: {size}px; height: {size}px; margin: 0; }}",
         f"{title} + * {{ margin-top: 0; }}",
     ]
 
