@@ -3,7 +3,8 @@
     "Single source of every preset colour. Edit here, then run: python3 scripts/build.py css",
     "Each preset has a dark and a light set. Optional keys: background, text, link, linkHover, codeTint.",
     "background: replaces the preview background. text: replaces the body text colour. link / linkHover: replace the VS Code link colours.",
-    "codeTint: colour of the inline-code box (defaults to the code colour). Tints and borders are derived automatically. codeTintAlpha / codeBorderAlpha (0 to 1): opacity of the inline-code box and of an optional thin border. linkUnderline: true underlines links."
+    "codeTint: colour of the inline-code box (defaults to the code colour). Tints and borders are derived automatically. codeTintAlpha / codeBorderAlpha (0 to 1): opacity of the inline-code box and of an optional thin border. linkUnderline: true underlines links.",
+    "Tables: tableBg (surface), tableHead (header text), tableBorder / tableHeadBorder (grid lines and the line under the header), tableBorderAlpha / tableHeadBorderAlpha (0 to 1), tableRadius (1 to 32 px, rounded outer edge). Without them, lines mix the text colour into the background."
   ],
   "teal": {
     "description": "Green-teal headings, amber bold, orange inline code.",

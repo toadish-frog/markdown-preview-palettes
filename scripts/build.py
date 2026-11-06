@@ -30,9 +30,20 @@ ALPHA = {
     "light": {"code": 0.08, "quote": 0.06, "h1Border": 0.30, "h2Border": 0.25},
 }
 REQUIRED = ("h1", "h2", "h3", "h4", "h5", "h6", "bold", "code", "quote", "quoteBar", "quote2", "quote2Bar")
-OPTIONAL = ("background", "text", "link", "linkHover", "codeTint")
-# Non-colour options: opacities (0 to 1) and on/off switches
-NUMBERS = ("codeTintAlpha", "codeBorderAlpha")
+OPTIONAL = (
+    "background",
+    "text",
+    "link",
+    "linkHover",
+    "codeTint",
+    "tableBg",
+    "tableHead",
+    "tableBorder",
+    "tableHeadBorder",
+)
+# Non-colour options: opacities (0 to 1), sizes in whole pixels and on/off switches
+NUMBERS = ("codeTintAlpha", "codeBorderAlpha", "tableBorderAlpha", "tableHeadBorderAlpha")
+PIXELS = {"tableRadius": (1, 32)}
 FLAGS = ("linkUnderline",)
 PRESET_NAME = re.compile(r"^[a-z][a-z0-9-]{0,30}$")
 HEX = re.compile(r"^#[0-9a-fA-F]{6}$")
@@ -41,6 +52,9 @@ MIN_LARGE, MIN_TEXT = 3.0, 4.5
 
 # Preset is active (marker present) and the theme is plain dark or light; high-contrast keeps VS Code defaults
 SCOPE = "body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset)"
+# Table lines when a preset sets no table colours: the text colour mixed into the background
+TABLE_BORDER = "color-mix(in srgb, currentColor 20%, transparent)"
+TABLE_HEAD_BORDER = f"var(--mpp-table-head-border, var(--mpp-table-border, {TABLE_BORDER}))"
 
 
 # ---------- Palette loading and validation ----------
@@ -73,6 +87,10 @@ def validate(presets):
                 if key in NUMBERS:
                     if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 < value <= 1:
                         errors.append(f"{name}.{theme}.{key}: '{value}' is not a number above 0, up to 1")
+                elif key in PIXELS:
+                    low, high = PIXELS[key]
+                    if isinstance(value, bool) or not isinstance(value, int) or not low <= value <= high:
+                        errors.append(f"{name}.{theme}.{key}: '{value}' is not a whole number from {low} to {high}")
                 elif key in FLAGS:
                     if value is not True:
                         errors.append(f"{name}.{theme}.{key}: must be true (or left out)")
@@ -136,6 +154,12 @@ def check(presets, quiet=False):
                 pairs.append(("text", c["text"], base, MIN_TEXT))
             if "link" in c:
                 pairs.append(("link", c["link"], base, MIN_TEXT))
+            # Table text sits on the table surface when the preset sets one
+            table_bg = rgb(c["tableBg"]) if "tableBg" in c else base
+            if "tableHead" in c:
+                pairs.append(("tableHead", c["tableHead"], table_bg, MIN_TEXT))
+            if "tableBg" in c and "text" in c:
+                pairs.append(("table text", c["text"], table_bg, MIN_TEXT))
             bad = [
                 (k, round(contrast(rgb(fg), bg), 2), need) for k, fg, bg, need in pairs if contrast(rgb(fg), bg) < need
             ]
@@ -185,7 +209,29 @@ def preset_block(name, theme, c):
     ]
     if "codeBorderAlpha" in c:
         lines.append(f"  --mpp-code-border: 0.5px solid {rgba(tint, c['codeBorderAlpha'])};")
+    if "tableBg" in c:
+        lines.append(f"  --mpp-table-bg: {c['tableBg']};")
+    if "tableHead" in c:
+        lines.append(f"  --mpp-table-head: {c['tableHead']};")
+    if "tableBorder" in c:
+        lines.append(f"  --mpp-table-border: {rgba(c['tableBorder'], c.get('tableBorderAlpha', 1))};")
+    if "tableHeadBorder" in c:
+        lines.append(f"  --mpp-table-head-border: {rgba(c['tableHeadBorder'], c.get('tableHeadBorderAlpha', 1))};")
     lines.append("}")
+    if "tableRadius" in c:
+        # Rounded corners need separate borders: each cell draws its top and left line, the table draws the outer edge
+        lines += [
+            f"{scope} table {{",
+            "  border-collapse: separate;",
+            f"  border: 1px solid var(--mpp-table-border, {TABLE_BORDER});",
+            f"  border-radius: {c['tableRadius']}px;",
+            "  overflow: hidden;",
+            "}",
+            f"{scope} :is(th, td) {{ border-width: 1px 0 0 1px; }}",
+            f"{scope} :is(th, td):first-child {{ border-left-width: 0; }}",
+            f"{scope} thead :is(th, td) {{ border-top-width: 0; }}",
+            f"{scope} tbody tr:first-child > td {{ border-top-color: {TABLE_HEAD_BORDER}; }}",
+        ]
     if c.get("linkUnderline"):
         # Underline at 40% of the link colour, full colour on hover
         lines += [
@@ -235,15 +281,19 @@ def render_css(presets):
 }}
 
 /* Tables, GitHub style: full grid border and striped body rows.
-   Tints mix the text colour into the background, so they suit every preset and theme. */
+   Tints mix the text colour into the background, so they suit every preset and theme.
+   A preset can set its own surface, header text and line colours (--mpp-table-*). */
 {S} table {{
   border-collapse: collapse;
   border-spacing: 0;
+  background-color: var(--mpp-table-bg, transparent);
 }}
 {S} :is(th, td) {{
   padding: 6px 13px;
-  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  border: 1px solid var(--mpp-table-border, {TABLE_BORDER});
 }}
+{S} th {{ color: var(--mpp-table-head, inherit); }}
+{S} thead :is(th, td) {{ border-bottom-color: {TABLE_HEAD_BORDER}; }}
 {S} tbody tr:nth-child(2n) {{ background-color: color-mix(in srgb, currentColor 5%, transparent); }}
 
 /* ---------- Exceptions ---------- */

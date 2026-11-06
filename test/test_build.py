@@ -95,6 +95,43 @@ class GeneratedCss(unittest.TestCase):
         for key in ("codeTintAlpha", "codeBorderAlpha", "linkUnderline"):
             self.assertIn(f"mono.dark.{key}", errors)
 
+    def test_table_options(self):
+        c = dict(
+            build.load_palettes()["mono"]["dark"],
+            tableBg="#1a1a19",
+            tableHead="#ffffff",
+            tableBorder="#ffffff",
+            tableBorderAlpha=0.1,
+            tableHeadBorder="#3e3e3e",
+            tableRadius=11,
+        )
+        block = build.preset_block("mono", "dark", c)
+        for expected in (
+            "--mpp-table-bg: #1a1a19;",
+            "--mpp-table-head: #ffffff;",
+            "--mpp-table-border: rgba(255, 255, 255, 0.10);",
+            "--mpp-table-head-border: rgba(62, 62, 62, 1.00);",
+            "border-collapse: separate;",
+            "border-radius: 11px;",
+        ):
+            self.assertIn(expected, block)
+        plain = build.preset_block("mono", "dark", build.load_palettes()["mono"]["dark"])
+        self.assertNotIn("--mpp-table", plain)
+        self.assertNotIn("border-collapse", plain)
+
+    def test_table_options_are_validated_and_contrast_checked(self):
+        bad = build.load_palettes()
+        bad["mono"]["dark"].update(tableRadius=0, tableBorderAlpha=2, tableBg="grey")
+        bad["mono"]["light"].update(tableRadius=True)
+        errors = " | ".join(build.validate(bad))
+        for key in ("dark.tableRadius", "dark.tableBorderAlpha", "dark.tableBg", "light.tableRadius"):
+            self.assertIn(f"mono.{key}", errors)
+        dim = build.load_palettes()
+        dim["mono"]["dark"].update(tableBg="#d0d0d0")
+        dim["mono"]["dark"]["tableHead"] = "#ffffff"
+        with self.assertRaises(SystemExit):
+            build.check(dim, quiet=True)
+
     def test_code_blocks_are_not_styled(self):
         css = build.render_css(build.load_palettes())
         self.assertNotRegex(css, r"(^|\s)pre(\s|>|\{)")  # only ':not(pre) > code' may mention pre

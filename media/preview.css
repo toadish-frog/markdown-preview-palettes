@@ -494,15 +494,19 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset)
 }
 
 /* Tables, GitHub style: full grid border and striped body rows.
-   Tints mix the text colour into the background, so they suit every preset and theme. */
+   Tints mix the text colour into the background, so they suit every preset and theme.
+   A preset can set its own surface, header text and line colours (--mpp-table-*). */
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset) table {
   border-collapse: collapse;
   border-spacing: 0;
+  background-color: var(--mpp-table-bg, transparent);
 }
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset) :is(th, td) {
   padding: 6px 13px;
-  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  border: 1px solid var(--mpp-table-border, color-mix(in srgb, currentColor 20%, transparent));
 }
+body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset) th { color: var(--mpp-table-head, inherit); }
+body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset) thead :is(th, td) { border-bottom-color: var(--mpp-table-head-border, var(--mpp-table-border, color-mix(in srgb, currentColor 20%, transparent))); }
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset) tbody tr:nth-child(2n) { background-color: color-mix(in srgb, currentColor 5%, transparent); }
 
 /* ---------- Exceptions ---------- */

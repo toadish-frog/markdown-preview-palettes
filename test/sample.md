@@ -8,6 +8,8 @@ Normal text with **bold text**, *italic text* and `inline code`.
 
 A [plain link](https://code.visualstudio.com), a bare URL <https://code.visualstudio.com>, a [**bold link**](https://code.visualstudio.com) and a [`code link`](https://code.visualstudio.com).
 
+Links inside the project: a [link to a heading](#heading-2-quotes) and a [link to another file](../README.md).
+
 ### Heading 3: With `inline code` and **Bold** Inside
 
 #### Heading 4
