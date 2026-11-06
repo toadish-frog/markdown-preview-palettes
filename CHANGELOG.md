@@ -2,7 +2,7 @@
 
 All notable changes to this extension. Versions follow Semantic Versioning (Major.Minor.Patch).
 
-## Unreleased
+## 0.3.0 (2026-11-06)
 
 - `ember` now follows the Claude Code docs, dark and light: near-black (`#09090b`) or off-white (`#fdfdf7`) background, grey text, white headings, links with an orange (dark) or black (light) bottom-border underline that thickens on hover, inline code and code-block boxes, and tables with striped rows and column lines.
 - `ember`: GitHub alerts `> [!TIP]`, `> [!NOTE]` / `> [!INFO]` and `> [!WARNING]` become green, blue and yellow callouts, also when Markdown All in One renders them. Other presets show them as plain quotes, as before.
