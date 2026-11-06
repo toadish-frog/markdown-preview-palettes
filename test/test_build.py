@@ -154,8 +154,12 @@ class GeneratedCss(unittest.TestCase):
             "  padding: 2px 8px;",
             "  background-color: #0b0c0e;",
             "  border: 1px solid rgba(255, 255, 255, 0.10);",
-            "blockquote.mpp-alert-tip { color: #86efac; background-color: rgba(22, 163, 74, 0.20); border-color: #14532d; }",
-            "blockquote.mpp-alert-warning { color: #fde047;",
+            ":is(blockquote.mpp-alert-tip, .markdown-alert.markdown-alert-tip) { color: #86efac; "
+            "background-color: rgba(22, 163, 74, 0.20); border-color: #14532d; }",
+            ".markdown-alert.markdown-alert-warning) { color: #fde047;",
+            "position: relative; padding-left: 48px;",
+            "> .markdown-alert-title { position: absolute; top: 18px; left: 20px;",
+            "> .markdown-alert-title svg { width: 18px; height: 18px;",
             ".mpp-alert-title-only) { display: none; }",
         ):
             self.assertIn(expected, block)

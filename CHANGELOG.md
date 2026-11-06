@@ -5,7 +5,7 @@ All notable changes to this extension. Versions follow Semantic Versioning (Majo
 ## Unreleased
 
 - `ember` now follows the Claude Code docs, dark and light: near-black (`#09090b`) or off-white (`#fdfdf7`) background, grey text, white headings, links with an orange (dark) or black (light) bottom-border underline that thickens on hover, inline code and code-block boxes, and tables with striped rows and column lines.
-- `ember`: GitHub alerts `> [!TIP]`, `> [!NOTE]` / `> [!INFO]` and `> [!WARNING]` become green, blue and yellow callouts. Other presets show them as plain quotes, as before.
+- `ember`: GitHub alerts `> [!TIP]`, `> [!NOTE]` / `> [!INFO]` and `> [!WARNING]` become green, blue and yellow callouts, also when Markdown All in One renders them. Other presets show them as plain quotes, as before.
 - Presets can set table colours (`tableBg`, `tableHead`, `tableBorder`, `tableHeadBorder`, their opacities, `tableRadius`), link borders and weight, inline-code shape, code-block boxes and callout colours.
 
 ## 0.2.0 (2026-11-05)

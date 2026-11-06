@@ -329,20 +329,43 @@ def extra_rules(scope, c):
             box.append(f"  border-radius: {c['alertRadius']}px;")
         if "alertPadding" in c:
             box.append(f"  padding: {c['alertPadding']};")
-        lines += [f"{scope} blockquote.mpp-alert {{", *box, "}"]
+        # Markdown All in One (markdown-it-github-alerts) turns the same quotes into
+        # <div class="markdown-alert markdown-alert-tip"> with an icon title before extension.js sees them
+        theirs = f".markdown-alert:is({', '.join(f'.markdown-alert-{kind}' for kind in ALERT_TYPES)})"
+        alert = f":is(.mpp-alert, {theirs})"
+        lines += [f"{scope} :is(blockquote.mpp-alert, {theirs}) {{", *box, "}"]
         for kind in ALERT_TYPES:
             a = c["alerts"][kind]
             lines.append(
-                f"{scope} blockquote.mpp-alert-{kind} {{ color: {a['text']}; "
+                f"{scope} :is(blockquote.mpp-alert-{kind}, .markdown-alert.markdown-alert-{kind}) {{ color: {a['text']}; "
                 f"background-color: {rgba(a['bg'], a.get('bgAlpha', 1))}; border-color: {a['border']}; }}"
             )
         lines += [
-            f"{scope} .mpp-alert :is(strong, code, a) {{ color: inherit; }}",
-            f"{scope} .mpp-alert a {{ border-bottom-color: currentColor; }}",
+            f"{scope} {alert} :is(strong, code, a) {{ color: inherit; }}",
+            f"{scope} {alert} a {{ border-bottom-color: currentColor; }}",
             f"{scope} :is(.mpp-alert-marker, .mpp-alert-marker + br, .mpp-alert-title-only) {{ display: none; }}",
-            f"{scope} .mpp-alert > :last-child {{ margin-bottom: 0; }}",
+            f"{scope} {alert} > :last-child {{ margin-bottom: 0; }}",
         ]
+        lines += alert_icon_rules(scope, theirs, c.get("alertPadding"))
     return lines
+
+
+ICON_SIZE, ICON_COLUMN, ICON_GAP = 18, 16, 12  # the docs site: 18px icon in a 16px column, 12px gap
+
+
+def alert_icon_rules(scope, theirs, padding):
+    """Keep the other extension's icon in a left column, like the docs site, and hide its title word."""
+    title = f"{scope} {theirs} > .markdown-alert-title"
+    if not padding:
+        return [f"{title} {{ display: none; }}"]
+    sides = [int(part[:-2]) for part in padding.split()]
+    top, left = sides[0], sides[{1: 0, 2: 1, 3: 1, 4: 3}[len(sides)]]
+    return [
+        f"{scope} {theirs} {{ position: relative; padding-left: {left + ICON_COLUMN + ICON_GAP}px; }}",
+        f"{title} {{ position: absolute; top: {top + 2}px; left: {left}px; margin: 0; font-size: 0; line-height: 0; color: inherit; }}",
+        f"{title} svg {{ width: {ICON_SIZE}px; height: {ICON_SIZE}px; margin: 0; }}",
+        f"{title} + * {{ margin-top: 0; }}",
+    ]
 
 
 def render_css(presets):
