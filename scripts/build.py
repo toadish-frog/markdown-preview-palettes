@@ -67,6 +67,8 @@ MIN_LARGE, MIN_TEXT = 3.0, 4.5
 
 # Preset is active (marker present) and the theme is plain dark or light; high-contrast keeps VS Code defaults
 SCOPE = "body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset)"
+# Links that leave the document: web and mail addresses (data-href holds the link target as written)
+EXTERNAL_LINK = '[data-href^="http:" i], [data-href^="https:" i], [data-href^="mailto:" i]'
 # Table lines when a preset sets no table colours: the text colour mixed into the background
 TABLE_BORDER = "color-mix(in srgb, currentColor 20%, transparent)"
 TABLE_HEAD_BORDER = f"var(--mpp-table-head-border, var(--mpp-table-border, {TABLE_BORDER}))"
@@ -106,6 +108,9 @@ def validate(presets):
                     low, high = PIXELS[key]
                     if isinstance(value, bool) or not isinstance(value, int) or not low <= value <= high:
                         errors.append(f"{name}.{theme}.{key}: '{value}' is not a whole number from {low} to {high}")
+                elif key == "linkUnderline":
+                    if value is not True and value != "external":
+                        errors.append(f'{name}.{theme}.{key}: must be true, "external" (or left out)')
                 elif key in FLAGS:
                     if value is not True:
                         errors.append(f"{name}.{theme}.{key}: must be true (or left out)")
@@ -279,15 +284,23 @@ def preset_block(name, theme, c):
             f"{scope} thead :is(th, td) {{ border-top-width: 0; }}",
             f"{scope} tbody tr:first-child > td {{ border-top-color: {TABLE_HEAD_BORDER}; }}",
         ]
-    if c.get("linkUnderline"):
-        # Underline at 40% of the link colour, full colour on hover
+    underline = c.get("linkUnderline")
+    if underline:
+        # Underline at 40% of the link colour, full colour on hover.
+        # "external": only web and mail links are underlined; links inside the document or to other files
+        # show the underline on hover only (VS Code keeps each link's original target in data-href).
+        links = f"{scope} a:is({EXTERNAL_LINK})" if underline == "external" else f"{scope} a"
         lines += [
-            f"{scope} a {{",
+            f"{links} {{",
             "  text-decoration: underline;",
             "  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);",
             "  text-underline-offset: 3px;",
             "}",
-            f"{scope} a:hover {{ text-decoration-color: currentColor; }}",
+            f"{scope} a:hover {{",
+            "  text-decoration: underline;",
+            "  text-decoration-color: currentColor;",
+            "  text-underline-offset: 3px;",
+            "}",
         ]
     return "\n".join(lines)
 

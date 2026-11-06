@@ -49,8 +49,8 @@ The setting can also be set per workspace.
 - **Inline code:** coloured, in a tinted box. Inline code inside a link, `` [`text`](url) ``, takes the link colour.
 - **Quotes:** `>` and nested `>>` each have their own colour.
 - **Callouts:** in `ember`, GitHub alerts `> [!TIP]` (green), `> [!NOTE]` or `> [!INFO]` (blue) and `> [!WARNING]` (yellow) become coloured boxes; inline code and links inside take the callout colour. With [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) installed, its alert boxes get the same colours, keep its icon and hide its title word. Other presets show them as plain quotes.
-- **Links:** some presets set their own link colour; the others keep the VS Code link colour. `folio` also underlines links.
-- **Tables:** GitHub style, with a full grid border and striped rows.
+- **Links:** some presets set their own link colour; the others keep the VS Code link colour. `folio` underlines web and mail links; links within the document or to other files show the underline on hover only.
+- **Tables:** GitHub style, with a full grid border and striped rows. `folio` puts tables on a raised surface with rounded corners and soft lines.
 - **Code blocks:** syntax colours always stay the VS Code ones. `ember` also gives the box its own background, border and rounded corners.
 
 ## Development

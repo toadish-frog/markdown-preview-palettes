@@ -88,6 +88,19 @@ class GeneratedCss(unittest.TestCase):
         self.assertNotIn("--mpp-code-border", plain)
         self.assertNotIn("text-decoration", plain)
 
+    def test_external_only_link_underline(self):
+        c = dict(build.load_palettes()["mono"]["dark"], linkUnderline="external")
+        scope = 'body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono"])'
+        block = build.preset_block("mono", "dark", c)
+        # Web and mail links are underlined; any link is underlined on hover; other links are not otherwise
+        self.assertIn(
+            f'{scope} a:is([data-href^="http:" i], [data-href^="https:" i], [data-href^="mailto:" i]) {{', block
+        )
+        self.assertIn(f"{scope} a:hover {{", block)
+        self.assertNotIn(f"{scope} a {{", block)
+        every = build.preset_block("mono", "dark", dict(c, linkUnderline=True))
+        self.assertIn(f"{scope} a {{", every)
+
     def test_option_types_are_validated(self):
         bad = build.load_palettes()
         bad["mono"]["dark"].update(codeTintAlpha=0, codeBorderAlpha="0.1", linkUnderline="yes")
