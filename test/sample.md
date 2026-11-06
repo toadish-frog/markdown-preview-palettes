@@ -8,6 +8,8 @@ Normal text with **bold text**, *italic text* and `inline code`.
 
 A [plain link](https://code.visualstudio.com), a bare URL <https://code.visualstudio.com>, a [**bold link**](https://code.visualstudio.com) and a [`code link`](https://code.visualstudio.com).
 
+Links inside the project: a [link to a heading](#heading-2-quotes) and a [link to another file](../README.md).
+
 ### Heading 3: With `inline code` and **Bold** Inside
 
 #### Heading 4
@@ -22,7 +24,24 @@ A [plain link](https://code.visualstudio.com), a bare URL <https://code.visualst
 >
 > > A nested quote.
 
-## Heading 2: Code Block (Must Keep the VS Code Default)
+## Heading 2: Callouts
+
+Presets with callout colours (`ember`) turn these GitHub alerts into coloured boxes; the others show plain quotes.
+
+> [!TIP]
+> A tip with `inline code`, **bold** and a [link to a heading](#heading-2-quotes).
+
+Text between callouts.
+
+> [!NOTE]
+> A note. `[!INFO]` uses the same blue.
+
+Text between callouts.
+
+> [!WARNING]
+> A warning with `inline code`.
+
+## Heading 2: Code Block (Syntax Colours Must Keep the VS Code Default)
 
 ```js
 // Syntax colours here come from VS Code, not from the preset

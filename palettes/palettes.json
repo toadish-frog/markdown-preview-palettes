@@ -3,7 +3,11 @@
     "Single source of every preset colour. Edit here, then run: python3 scripts/build.py css",
     "Each preset has a dark and a light set. Optional keys: background, text, link, linkHover, codeTint.",
     "background: replaces the preview background. text: replaces the body text colour. link / linkHover: replace the VS Code link colours.",
-    "codeTint: colour of the inline-code box (defaults to the code colour). Tints and borders are derived automatically. codeTintAlpha / codeBorderAlpha (0 to 1): opacity of the inline-code box and of an optional thin border. linkUnderline: true underlines links."
+    "codeTint: colour of the inline-code box (defaults to the code colour). Tints and borders are derived automatically. codeTintAlpha / codeBorderAlpha (0 to 1): opacity of the inline-code box and of an optional thin border. linkUnderline: true underlines links.",
+    "Tables: tableBg (surface), tableHead (header text), tableBorder / tableHeadBorder (grid lines and the line under the header), tableBorderAlpha / tableHeadBorderAlpha (0 to 1), tableRadius (1 to 32 px, rounded outer edge). Without them, lines mix the text colour into the background.",
+    "Links: linkBorder draws the underline as a bottom border (thicker on hover); linkWeight (100 to 900). Inline code: codeRadius (px), codePadding (for example \"2px 8px\").",
+    "Code blocks (box only; syntax colours stay VS Code): preBg, preBorder, preBorderAlpha, preRadius, prePadding.",
+    "Callouts for > [!NOTE] / [!INFO], > [!TIP] and > [!WARNING] quotes: alerts.note / tip / warning, each with text, bg, border and optional bgAlpha; alertRadius, alertPadding."
   ],
   "teal": {
     "description": "Green-teal headings, amber bold, orange inline code.",
@@ -160,24 +164,40 @@
     }
   },
   "ember": {
-    "description": "Orange headings, warm greys, blue links; black (dark) or beige paper (light).",
+    "description": "Claude Code docs look: white headings, grey text, orange-underlined links, green, blue and yellow callouts.",
     "dark": {
-      "background": "#000000",
-      "link": "#6a9bcc", "linkHover": "#faf9f5",
-      "h1": "#d97757", "h2": "#d97757", "h3": "#faf9f5", "h4": "#e8e6dc", "h5": "#b0aea5", "h6": "#b0aea5",
-      "bold": "#faf9f5",
-      "code": "#d97757", "codeTint": "#d97757",
-      "quote": "#e8e6dc", "quoteBar": "#6a9bcc",
-      "quote2": "#b0aea5", "quote2Bar": "#788c5d"
+      "background": "#09090b", "text": "#9e9e9e",
+      "link": "#f3f3f3", "linkHover": "#f3f3f3", "linkBorder": "#d4a27f", "linkWeight": 600,
+      "h1": "#dedede", "h2": "#ffffff", "h3": "#f3f3f3", "h4": "#ffffff", "h5": "#ffffff", "h6": "#ffffff",
+      "bold": "#f3f3f3",
+      "code": "#dedede", "codeTint": "#ffffff", "codeTintAlpha": 0.05, "codeRadius": 6, "codePadding": "2px 8px",
+      "quote": "#9e9e9e", "quoteBar": "#d4a27f",
+      "quote2": "#9e9e9e", "quote2Bar": "#3e3e3e",
+      "tableHead": "#ffffff", "tableBorder": "#252525", "tableBorderAlpha": 0.5, "tableHeadBorder": "#3e3e3e", "tableHeadBorderAlpha": 0.5,
+      "preBg": "#0b0c0e", "preBorder": "#ffffff", "preBorderAlpha": 0.1, "preRadius": 16, "prePadding": "14px 16px",
+      "alertRadius": 16, "alertPadding": "16px 20px",
+      "alerts": {
+        "note": { "text": "#93c5fd", "bg": "#2563eb", "bgAlpha": 0.2, "border": "#1e3a8a" },
+        "tip": { "text": "#86efac", "bg": "#16a34a", "bgAlpha": 0.2, "border": "#14532d" },
+        "warning": { "text": "#fde047", "bg": "#ca8a04", "bgAlpha": 0.2, "border": "#713f12" }
+      }
     },
     "light": {
-      "background": "#faf9f5",
-      "link": "#3c76b0", "linkHover": "#141413",
-      "h1": "#c6613f", "h2": "#c6613f", "h3": "#141413", "h4": "#141413", "h5": "#767368", "h6": "#767368",
-      "bold": "#141413",
-      "code": "#141413", "codeTint": "#d97757",
-      "quote": "#141413", "quoteBar": "#6a9bcc",
-      "quote2": "#141413", "quote2Bar": "#788c5d"
+      "background": "#fdfdf7", "text": "#3e3e3e",
+      "link": "#101828", "linkHover": "#101828", "linkBorder": "#0e0e0e", "linkWeight": 600,
+      "h1": "#171717", "h2": "#101828", "h3": "#101828", "h4": "#101828", "h5": "#101828", "h6": "#101828",
+      "bold": "#171717",
+      "code": "#101828", "codeTint": "#eeeeee", "codeTintAlpha": 0.5, "codeRadius": 6, "codePadding": "2px 8px",
+      "quote": "#3e3e3e", "quoteBar": "#0e0e0e",
+      "quote2": "#3e3e3e", "quote2Bar": "#dedede",
+      "tableHead": "#101828", "tableBorder": "#eeeeee", "tableHeadBorder": "#dedede",
+      "preBg": "#ffffff", "preBorder": "#0a0a0a", "preBorderAlpha": 0.1, "preRadius": 16, "prePadding": "14px 16px",
+      "alertRadius": 16, "alertPadding": "16px 20px",
+      "alerts": {
+        "note": { "text": "#1e40af", "bg": "#eff6ff", "border": "#bfdbfe" },
+        "tip": { "text": "#166534", "bg": "#f0fdf4", "border": "#bbf7d0" },
+        "warning": { "text": "#854d0e", "bg": "#fefce8", "border": "#fef08a" }
+      }
     }
   },
   "folio": {

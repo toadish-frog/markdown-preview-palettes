@@ -21,11 +21,13 @@ Colour presets for the built-in VS Code Markdown preview. Headings, bold text, i
 | `phosphor` | Terminal greens | Pale green | Lime | Cyan | Green-black |
 | `parchment` | Gold and brown | Cream | Orange | Light blue | Warm charcoal (beige paper in light themes) |
 | `azure` | Blue | White | Light blue | VS Code blue | Theme default |
-| `ember` | Orange, then warm greys | Off-white | Orange | Blue | Black (beige paper in light themes) |
+| `ember` | White and light grey | Off-white | Light grey | Off-white, orange underline | Near-black (off-white paper in light themes) |
 | `folio` | Near-white, one shade for every level | Near-white | Soft red | Light blue | Charcoal (off-white in light themes) |
 | `default` | Built-in VS Code look (all colouring off) | | | | |
 
-`ember` and `parchment` use colours from the Apache 2.0 [brand-guidelines skill](https://github.com/anthropics/skills/tree/main/skills/brand-guidelines) (Light `#faf9f5`, Dark `#141413`, Mid Gray `#b0aea5`, Light Gray `#e8e6dc`, Orange `#d97757`, Blue `#6a9bcc`, Green `#788c5d`). In light themes, some are darkened slightly to meet the contrast minimum.
+`parchment` uses colours from the Apache 2.0 [brand-guidelines skill](https://github.com/anthropics/skills/tree/main/skills/brand-guidelines) (Light `#faf9f5`, Dark `#141413`, Mid Gray `#b0aea5`, Light Gray `#e8e6dc`, Orange `#d97757`, Blue `#6a9bcc`, Green `#788c5d`). In light themes, some are darkened slightly to meet the contrast minimum.
+
+`ember` follows the colours of the [Claude Code docs](https://code.claude.com/docs) in their dark and light modes: text, headings, links with an orange (dark) or black (light) underline, inline code, code-block boxes, tables and the green tip, blue note and yellow warning callouts. Only colour values and box sizes are reused; no fonts, icons or site code.
 
 ## Switch Preset
 
@@ -46,9 +48,10 @@ The setting can also be set per workspace.
 - **Bold text:** bold inside a heading or link keeps the heading or link colour.
 - **Inline code:** coloured, in a tinted box. Inline code inside a link, `` [`text`](url) ``, takes the link colour.
 - **Quotes:** `>` and nested `>>` each have their own colour.
+- **Callouts:** in `ember`, GitHub alerts `> [!TIP]` (green), `> [!NOTE]` or `> [!INFO]` (blue) and `> [!WARNING]` (yellow) become coloured boxes; inline code and links inside take the callout colour. With [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) installed, its alert boxes get the same colours, keep its icon and hide its title word. Other presets show them as plain quotes.
 - **Links:** some presets set their own link colour; the others keep the VS Code link colour. `folio` also underlines links.
 - **Tables:** GitHub style, with a full grid border and striped rows.
-- **Code blocks:** never changed; they keep the VS Code syntax colours.
+- **Code blocks:** syntax colours always stay the VS Code ones. `ember` also gives the box its own background, border and rounded corners.
 
 ## Development
 

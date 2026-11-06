@@ -30,9 +30,35 @@ ALPHA = {
     "light": {"code": 0.08, "quote": 0.06, "h1Border": 0.30, "h2Border": 0.25},
 }
 REQUIRED = ("h1", "h2", "h3", "h4", "h5", "h6", "bold", "code", "quote", "quoteBar", "quote2", "quote2Bar")
-OPTIONAL = ("background", "text", "link", "linkHover", "codeTint")
-# Non-colour options: opacities (0 to 1) and on/off switches
-NUMBERS = ("codeTintAlpha", "codeBorderAlpha")
+OPTIONAL = (
+    "background",
+    "text",
+    "link",
+    "linkHover",
+    "codeTint",
+    "tableBg",
+    "tableHead",
+    "tableBorder",
+    "tableHeadBorder",
+    "linkBorder",
+    "preBg",
+    "preBorder",
+)
+# Non-colour options: opacities (0 to 1), sizes in whole pixels and on/off switches
+NUMBERS = ("codeTintAlpha", "codeBorderAlpha", "tableBorderAlpha", "tableHeadBorderAlpha", "preBorderAlpha")
+PIXELS = {
+    "tableRadius": (1, 32),
+    "codeRadius": (1, 32),
+    "preRadius": (1, 32),
+    "alertRadius": (1, 32),
+    "linkWeight": (100, 900),
+}
+# Padding as CSS lengths in whole pixels, for example "2px 8px"
+PADDINGS = ("codePadding", "prePadding", "alertPadding")
+PADDING = re.compile(r"^\d{1,2}px( \d{1,2}px){0,3}$")
+# Callout boxes for GitHub alerts (> [!NOTE], > [!TIP], > [!WARNING]); [!INFO] uses the note colours
+ALERT_TYPES = ("note", "tip", "warning")
+ALERT_KEYS = {"text": True, "bg": True, "border": True, "bgAlpha": False}
 FLAGS = ("linkUnderline",)
 PRESET_NAME = re.compile(r"^[a-z][a-z0-9-]{0,30}$")
 HEX = re.compile(r"^#[0-9a-fA-F]{6}$")
@@ -41,6 +67,9 @@ MIN_LARGE, MIN_TEXT = 3.0, 4.5
 
 # Preset is active (marker present) and the theme is plain dark or light; high-contrast keeps VS Code defaults
 SCOPE = "body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset)"
+# Table lines when a preset sets no table colours: the text colour mixed into the background
+TABLE_BORDER = "color-mix(in srgb, currentColor 20%, transparent)"
+TABLE_HEAD_BORDER = f"var(--mpp-table-head-border, var(--mpp-table-border, {TABLE_BORDER}))"
 
 
 # ---------- Palette loading and validation ----------
@@ -73,13 +102,46 @@ def validate(presets):
                 if key in NUMBERS:
                     if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 < value <= 1:
                         errors.append(f"{name}.{theme}.{key}: '{value}' is not a number above 0, up to 1")
+                elif key in PIXELS:
+                    low, high = PIXELS[key]
+                    if isinstance(value, bool) or not isinstance(value, int) or not low <= value <= high:
+                        errors.append(f"{name}.{theme}.{key}: '{value}' is not a whole number from {low} to {high}")
                 elif key in FLAGS:
                     if value is not True:
                         errors.append(f"{name}.{theme}.{key}: must be true (or left out)")
+                elif key in PADDINGS:
+                    if not isinstance(value, str) or not PADDING.match(value):
+                        errors.append(f"{name}.{theme}.{key}: '{value}' is not 1 to 4 lengths like \"2px 8px\"")
+                elif key == "alerts":
+                    errors += validate_alerts(f"{name}.{theme}.alerts", value)
                 elif key not in REQUIRED + OPTIONAL:
                     errors.append(f"{name}.{theme}.{key}: unknown key")
                 elif not isinstance(value, str) or not HEX.match(value):
                     errors.append(f"{name}.{theme}.{key}: '{value}' is not #rrggbb")
+    return errors
+
+
+def validate_alerts(where, alerts):
+    """Each alert type needs text, bg and border colours; bgAlpha (0 to 1) is optional."""
+    if not isinstance(alerts, dict):
+        return [f"{where}: must be an object"]
+    errors = [f"{where}.{kind}: unknown alert type" for kind in alerts if kind not in ALERT_TYPES]
+    for kind in ALERT_TYPES:
+        box = alerts.get(kind)
+        if not isinstance(box, dict):
+            errors.append(f"{where}.{kind}: missing")
+            continue
+        for key, required in ALERT_KEYS.items():
+            if required and key not in box:
+                errors.append(f"{where}.{kind}.{key}: missing")
+        for key, value in box.items():
+            if key == "bgAlpha":
+                if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 < value <= 1:
+                    errors.append(f"{where}.{kind}.{key}: '{value}' is not a number above 0, up to 1")
+            elif key not in ALERT_KEYS:
+                errors.append(f"{where}.{kind}.{key}: unknown key")
+            elif not isinstance(value, str) or not HEX.match(value):
+                errors.append(f"{where}.{kind}.{key}: '{value}' is not #rrggbb")
     return errors
 
 
@@ -136,6 +198,14 @@ def check(presets, quiet=False):
                 pairs.append(("text", c["text"], base, MIN_TEXT))
             if "link" in c:
                 pairs.append(("link", c["link"], base, MIN_TEXT))
+            # Table text sits on the table surface when the preset sets one
+            table_bg = rgb(c["tableBg"]) if "tableBg" in c else base
+            if "tableHead" in c:
+                pairs.append(("tableHead", c["tableHead"], table_bg, MIN_TEXT))
+            if "tableBg" in c and "text" in c:
+                pairs.append(("table text", c["text"], table_bg, MIN_TEXT))
+            for kind, box in c.get("alerts", {}).items():
+                pairs.append((f"{kind} alert", box["text"], blend(box["bg"], box.get("bgAlpha", 1), base), MIN_TEXT))
             bad = [
                 (k, round(contrast(rgb(fg), bg), 2), need) for k, fg, bg, need in pairs if contrast(rgb(fg), bg) < need
             ]
@@ -185,7 +255,30 @@ def preset_block(name, theme, c):
     ]
     if "codeBorderAlpha" in c:
         lines.append(f"  --mpp-code-border: 0.5px solid {rgba(tint, c['codeBorderAlpha'])};")
+    if "tableBg" in c:
+        lines.append(f"  --mpp-table-bg: {c['tableBg']};")
+    if "tableHead" in c:
+        lines.append(f"  --mpp-table-head: {c['tableHead']};")
+    if "tableBorder" in c:
+        lines.append(f"  --mpp-table-border: {rgba(c['tableBorder'], c.get('tableBorderAlpha', 1))};")
+    if "tableHeadBorder" in c:
+        lines.append(f"  --mpp-table-head-border: {rgba(c['tableHeadBorder'], c.get('tableHeadBorderAlpha', 1))};")
     lines.append("}")
+    lines += extra_rules(scope, c)
+    if "tableRadius" in c:
+        # Rounded corners need separate borders: each cell draws its top and left line, the table draws the outer edge
+        lines += [
+            f"{scope} table {{",
+            "  border-collapse: separate;",
+            f"  border: 1px solid var(--mpp-table-border, {TABLE_BORDER});",
+            f"  border-radius: {c['tableRadius']}px;",
+            "  overflow: hidden;",
+            "}",
+            f"{scope} :is(th, td) {{ border-width: 1px 0 0 1px; }}",
+            f"{scope} :is(th, td):first-child {{ border-left-width: 0; }}",
+            f"{scope} thead :is(th, td) {{ border-top-width: 0; }}",
+            f"{scope} tbody tr:first-child > td {{ border-top-color: {TABLE_HEAD_BORDER}; }}",
+        ]
     if c.get("linkUnderline"):
         # Underline at 40% of the link colour, full colour on hover
         lines += [
@@ -197,6 +290,82 @@ def preset_block(name, theme, c):
             f"{scope} a:hover {{ text-decoration-color: currentColor; }}",
         ]
     return "\n".join(lines)
+
+
+def extra_rules(scope, c):
+    """Optional per-preset rules: link border underline, inline-code shape, code-block box, alert callouts."""
+    lines = []
+    link = []
+    if "linkWeight" in c:
+        link.append(f"  font-weight: {c['linkWeight']};")
+    if "linkBorder" in c:
+        # Underline drawn as a bottom border, as on the Claude Code docs; thicker on hover
+        link += ["  text-decoration: none;", f"  border-bottom: 1px solid {c['linkBorder']};"]
+    if link:
+        lines += [f"{scope} a {{", *link, "}"]
+    if "linkBorder" in c:
+        lines.append(f"{scope} a:hover {{ text-decoration: none; border-bottom-width: 2px; }}")
+    code = []
+    if "codeRadius" in c:
+        code.append(f"  border-radius: {c['codeRadius']}px;")
+    if "codePadding" in c:
+        code.append(f"  padding: {c['codePadding']};")
+    if code:
+        lines += [f"{scope} :not(pre) > code {{", *code, "}"]
+    if "preBg" in c:
+        # The box only: syntax colours inside code blocks always stay the VS Code ones
+        box = [f"  --vscode-textCodeBlock-background: {c['preBg']};", f"  background-color: {c['preBg']};"]
+        if "preBorder" in c:
+            box.append(f"  border: 1px solid {rgba(c['preBorder'], c.get('preBorderAlpha', 1))};")
+        if "preRadius" in c:
+            box.append(f"  border-radius: {c['preRadius']}px;")
+        lines += [f"{scope} pre {{", *box, "}", f"{scope} pre.hljs {{ overflow: hidden; }}"]
+        if "prePadding" in c:
+            lines.append(f"{scope} :is(pre:not(.hljs), pre.hljs code > div) {{ padding: {c['prePadding']}; }}")
+    if "alerts" in c:
+        # extension.js marks > [!NOTE], > [!INFO], > [!TIP] and > [!WARNING] quotes; other presets show them as quotes
+        box = ["  margin: 16px 0;", "  border: 1px solid;"]
+        if "alertRadius" in c:
+            box.append(f"  border-radius: {c['alertRadius']}px;")
+        if "alertPadding" in c:
+            box.append(f"  padding: {c['alertPadding']};")
+        # Markdown All in One (markdown-it-github-alerts) turns the same quotes into
+        # <div class="markdown-alert markdown-alert-tip"> with an icon title before extension.js sees them
+        theirs = f".markdown-alert:is({', '.join(f'.markdown-alert-{kind}' for kind in ALERT_TYPES)})"
+        alert = f":is(.mpp-alert, {theirs})"
+        lines += [f"{scope} :is(blockquote.mpp-alert, {theirs}) {{", *box, "}"]
+        for kind in ALERT_TYPES:
+            a = c["alerts"][kind]
+            lines.append(
+                f"{scope} :is(blockquote.mpp-alert-{kind}, .markdown-alert.markdown-alert-{kind}) {{ color: {a['text']}; "
+                f"background-color: {rgba(a['bg'], a.get('bgAlpha', 1))}; border-color: {a['border']}; }}"
+            )
+        lines += [
+            f"{scope} {alert} :is(strong, code, a) {{ color: inherit; }}",
+            f"{scope} {alert} a {{ border-bottom-color: currentColor; }}",
+            f"{scope} :is(.mpp-alert-marker, .mpp-alert-marker + br, .mpp-alert-title-only) {{ display: none; }}",
+            f"{scope} {alert} > :last-child {{ margin-bottom: 0; }}",
+        ]
+        lines += alert_icon_rules(scope, theirs, c.get("alertPadding"))
+    return lines
+
+
+ICON_SIZE, ICON_COLUMN, ICON_GAP = 18, 16, 12  # the docs site: 18px icon in a 16px column, 12px gap
+
+
+def alert_icon_rules(scope, theirs, padding):
+    """Keep the other extension's icon in a left column, like the docs site, and hide its title word."""
+    title = f"{scope} {theirs} > .markdown-alert-title"
+    if not padding:
+        return [f"{title} {{ display: none; }}"]
+    sides = [int(part[:-2]) for part in padding.split()]
+    top, left = sides[0], sides[{1: 0, 2: 1, 3: 1, 4: 3}[len(sides)]]
+    return [
+        f"{scope} {theirs} {{ position: relative; padding-left: {left + ICON_COLUMN + ICON_GAP}px; }}",
+        f"{title} {{ position: absolute; top: {top + 2}px; left: {left}px; margin: 0; font-size: 0; line-height: 0; color: inherit; }}",
+        f"{title} svg {{ width: {ICON_SIZE}px; height: {ICON_SIZE}px; margin: 0; }}",
+        f"{title} + * {{ margin-top: 0; }}",
+    ]
 
 
 def render_css(presets):
@@ -235,15 +404,19 @@ def render_css(presets):
 }}
 
 /* Tables, GitHub style: full grid border and striped body rows.
-   Tints mix the text colour into the background, so they suit every preset and theme. */
+   Tints mix the text colour into the background, so they suit every preset and theme.
+   A preset can set its own surface, header text and line colours (--mpp-table-*). */
 {S} table {{
   border-collapse: collapse;
   border-spacing: 0;
+  background-color: var(--mpp-table-bg, transparent);
 }}
 {S} :is(th, td) {{
   padding: 6px 13px;
-  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  border: 1px solid var(--mpp-table-border, {TABLE_BORDER});
 }}
+{S} th {{ color: var(--mpp-table-head, inherit); }}
+{S} thead :is(th, td) {{ border-bottom-color: {TABLE_HEAD_BORDER}; }}
 {S} tbody tr:nth-child(2n) {{ background-color: color-mix(in srgb, currentColor 5%, transparent); }}
 
 /* ---------- Exceptions ---------- */
