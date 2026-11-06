@@ -38,6 +38,7 @@ OPTIONAL = (
     "codeTint",
     "tableBg",
     "tableHead",
+    "tableHeadBg",
     "tableBorder",
     "tableHeadBorder",
     "linkBorder",
@@ -45,13 +46,23 @@ OPTIONAL = (
     "preBorder",
 )
 # Non-colour options: opacities (0 to 1), sizes in whole pixels and on/off switches
-NUMBERS = ("codeTintAlpha", "codeBorderAlpha", "tableBorderAlpha", "tableHeadBorderAlpha", "preBorderAlpha")
+NUMBERS = (
+    "codeTintAlpha",
+    "codeBorderAlpha",
+    "tableBorderAlpha",
+    "tableHeadBorderAlpha",
+    "tableHeadBgAlpha",
+    "preBorderAlpha",
+)
 PIXELS = {
     "tableRadius": (1, 32),
     "codeRadius": (1, 32),
     "preRadius": (1, 32),
     "alertRadius": (1, 32),
+    "alertIcon": (8, 32),
+    "alertIconGap": (1, 32),
     "linkWeight": (100, 900),
+    "tableHeadWeight": (100, 900),
 }
 # Padding as CSS lengths in whole pixels, for example "2px 8px"
 PADDINGS = ("codePadding", "prePadding", "alertPadding")
@@ -67,6 +78,8 @@ MIN_LARGE, MIN_TEXT = 3.0, 4.5
 
 # Preset is active (marker present) and the theme is plain dark or light; high-contrast keeps VS Code defaults
 SCOPE = "body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset)"
+# Links that leave the document: web and mail addresses (data-href holds the link target as written)
+EXTERNAL_LINK = '[data-href^="http:" i], [data-href^="https:" i], [data-href^="mailto:" i]'
 # Table lines when a preset sets no table colours: the text colour mixed into the background
 TABLE_BORDER = "color-mix(in srgb, currentColor 20%, transparent)"
 TABLE_HEAD_BORDER = f"var(--mpp-table-head-border, var(--mpp-table-border, {TABLE_BORDER}))"
@@ -106,6 +119,9 @@ def validate(presets):
                     low, high = PIXELS[key]
                     if isinstance(value, bool) or not isinstance(value, int) or not low <= value <= high:
                         errors.append(f"{name}.{theme}.{key}: '{value}' is not a whole number from {low} to {high}")
+                elif key == "linkUnderline":
+                    if value is not True and value != "external":
+                        errors.append(f'{name}.{theme}.{key}: must be true, "external" (or left out)')
                 elif key in FLAGS:
                     if value is not True:
                         errors.append(f"{name}.{theme}.{key}: must be true (or left out)")
@@ -201,7 +217,10 @@ def check(presets, quiet=False):
             # Table text sits on the table surface when the preset sets one
             table_bg = rgb(c["tableBg"]) if "tableBg" in c else base
             if "tableHead" in c:
-                pairs.append(("tableHead", c["tableHead"], table_bg, MIN_TEXT))
+                head_bg = (
+                    blend(c["tableHeadBg"], c.get("tableHeadBgAlpha", 1), table_bg) if "tableHeadBg" in c else table_bg
+                )
+                pairs.append(("tableHead", c["tableHead"], head_bg, MIN_TEXT))
             if "tableBg" in c and "text" in c:
                 pairs.append(("table text", c["text"], table_bg, MIN_TEXT))
             for kind, box in c.get("alerts", {}).items():
@@ -265,6 +284,12 @@ def preset_block(name, theme, c):
         lines.append(f"  --mpp-table-head-border: {rgba(c['tableHeadBorder'], c.get('tableHeadBorderAlpha', 1))};")
     lines.append("}")
     lines += extra_rules(scope, c)
+    if "tableHeadBg" in c:
+        lines.append(
+            f"{scope} thead :is(th, td) {{ background-color: {rgba(c['tableHeadBg'], c.get('tableHeadBgAlpha', 1))}; }}"
+        )
+    if "tableHeadWeight" in c:
+        lines.append(f"{scope} th {{ font-weight: {c['tableHeadWeight']}; }}")
     if "tableRadius" in c:
         # Rounded corners need separate borders: each cell draws its top and left line, the table draws the outer edge
         lines += [
@@ -279,15 +304,23 @@ def preset_block(name, theme, c):
             f"{scope} thead :is(th, td) {{ border-top-width: 0; }}",
             f"{scope} tbody tr:first-child > td {{ border-top-color: {TABLE_HEAD_BORDER}; }}",
         ]
-    if c.get("linkUnderline"):
-        # Underline at 40% of the link colour, full colour on hover
+    underline = c.get("linkUnderline")
+    if underline:
+        # Underline at 40% of the link colour, full colour on hover.
+        # "external": only web and mail links are underlined; links inside the document or to other files
+        # show the underline on hover only (VS Code keeps each link's original target in data-href).
+        links = f"{scope} a:is({EXTERNAL_LINK})" if underline == "external" else f"{scope} a"
         lines += [
-            f"{scope} a {{",
+            f"{links} {{",
             "  text-decoration: underline;",
             "  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);",
             "  text-underline-offset: 3px;",
             "}",
-            f"{scope} a:hover {{ text-decoration-color: currentColor; }}",
+            f"{scope} a:hover {{",
+            "  text-decoration: underline;",
+            "  text-decoration-color: currentColor;",
+            "  text-underline-offset: 3px;",
+            "}",
         ]
     return "\n".join(lines)
 
@@ -346,24 +379,36 @@ def extra_rules(scope, c):
             f"{scope} :is(.mpp-alert-marker, .mpp-alert-marker + br, .mpp-alert-title-only) {{ display: none; }}",
             f"{scope} {alert} > :last-child {{ margin-bottom: 0; }}",
         ]
-        lines += alert_icon_rules(scope, theirs, c.get("alertPadding"))
+        if c.get("linkUnderline"):
+            # Links inside a callout are always underlined, at 65% of the callout colour
+            lines.append(
+                f"{scope} {alert} a {{ text-decoration: underline; "
+                "text-decoration-color: color-mix(in srgb, currentColor 65%, transparent); text-underline-offset: 3px; }"
+            )
+        lines += alert_icon_rules(scope, theirs, c)
     return lines
 
 
-ICON_SIZE, ICON_COLUMN, ICON_GAP = 18, 16, 12  # the docs site: 18px icon in a 16px column, 12px gap
+# Default icon layout (the Claude Code docs: 18px icon in a 16px column, 12px gap); alertIcon / alertIconGap override it
+ICON_SIZE, ICON_COLUMN, ICON_GAP = 18, 16, 12
+LINE_HEIGHT = 22  # VS Code preview line height at its 14px default font size
 
 
-def alert_icon_rules(scope, theirs, padding):
-    """Keep the other extension's icon in a left column, like the docs site, and hide its title word."""
+def alert_icon_rules(scope, theirs, c):
+    """Keep the other extension's icon in a left column, like the docs sites, and hide its title word."""
     title = f"{scope} {theirs} > .markdown-alert-title"
+    padding = c.get("alertPadding")
+    size = c.get("alertIcon", ICON_SIZE)
+    column = c.get("alertIcon", ICON_COLUMN)
+    gap = c.get("alertIconGap", ICON_GAP)
     if not padding:
         return [f"{title} {{ display: none; }}"]
     sides = [int(part[:-2]) for part in padding.split()]
     top, left = sides[0], sides[{1: 0, 2: 1, 3: 1, 4: 3}[len(sides)]]
     return [
-        f"{scope} {theirs} {{ position: relative; padding-left: {left + ICON_COLUMN + ICON_GAP}px; }}",
-        f"{title} {{ position: absolute; top: {top + 2}px; left: {left}px; margin: 0; font-size: 0; line-height: 0; color: inherit; }}",
-        f"{title} svg {{ width: {ICON_SIZE}px; height: {ICON_SIZE}px; margin: 0; }}",
+        f"{scope} {theirs} {{ position: relative; padding-left: {left + column + gap}px; }}",
+        f"{title} {{ position: absolute; top: {top + (LINE_HEIGHT - size) // 2}px; left: {left}px; margin: 0; font-size: 0; line-height: 0; color: inherit; }}",
+        f"{title} svg {{ width: {size}px; height: {size}px; margin: 0; }}",
         f"{title} + * {{ margin-top: 0; }}",
     ]
 

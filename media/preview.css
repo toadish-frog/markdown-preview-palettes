@@ -501,13 +501,49 @@ body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]
   --mpp-quote2-bar: #52514e;
   --mpp-quote2-bg: rgba(82, 81, 78, 0.08);
   --mpp-code-border: 0.5px solid rgba(255, 255, 255, 0.10);
+  --mpp-table-head: #f0efec;
+  --mpp-table-border: rgba(255, 255, 255, 0.10);
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a {
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(blockquote.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) {
+  margin: 16px 0;
+  border: 1px solid;
+  border-radius: 11px;
+  padding: 10px 14px;
+}
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(blockquote.mpp-alert-note, .markdown-alert.markdown-alert-note) { color: #6da7ec; background-color: rgba(3, 32, 66, 1.00); border-color: #0d366b; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(blockquote.mpp-alert-tip, .markdown-alert.markdown-alert-tip) { color: #0ca30c; background-color: rgba(17, 38, 15, 1.00); border-color: #074506; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(blockquote.mpp-alert-warning, .markdown-alert.markdown-alert-warning) { color: #db9300; background-color: rgba(49, 26, 0, 1.00); border-color: #512e00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) :is(strong, code, a) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) a { border-bottom-color: currentColor; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(.mpp-alert-marker, .mpp-alert-marker + br, .mpp-alert-title-only) { display: none; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) > :last-child { margin-bottom: 0; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) a { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 65%, transparent); text-underline-offset: 3px; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) { position: relative; padding-left: 42px; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title { position: absolute; top: 11px; left: 14px; margin: 0; font-size: 0; line-height: 0; color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title svg { width: 20px; height: 20px; margin: 0; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title + * { margin-top: 0; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) thead :is(th, td) { background-color: rgba(255, 255, 255, 0.05); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) th { font-weight: 500; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) table {
+  border-collapse: separate;
+  border: 1px solid var(--mpp-table-border, color-mix(in srgb, currentColor 20%, transparent));
+  border-radius: 7px;
+  overflow: hidden;
+}
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(th, td) { border-width: 1px 0 0 1px; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(th, td):first-child { border-left-width: 0; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) thead :is(th, td) { border-top-width: 0; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) tbody tr:first-child > td { border-top-color: var(--mpp-table-head-border, var(--mpp-table-border, color-mix(in srgb, currentColor 20%, transparent))); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a:is([data-href^="http:" i], [data-href^="https:" i], [data-href^="mailto:" i]) {
   text-decoration: underline;
   text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
   text-underline-offset: 3px;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a:hover { text-decoration-color: currentColor; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a:hover {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 3px;
+}
 
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) {
   background-color: #fcfcfb;
@@ -532,13 +568,49 @@ body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"
   --mpp-quote2-bar: #c3c2b7;
   --mpp-quote2-bg: rgba(195, 194, 183, 0.06);
   --mpp-code-border: 0.5px solid rgba(11, 11, 11, 0.10);
+  --mpp-table-head: #0b0b0b;
+  --mpp-table-border: rgba(11, 11, 11, 0.10);
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a {
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(blockquote.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) {
+  margin: 16px 0;
+  border: 1px solid;
+  border-radius: 11px;
+  padding: 10px 14px;
+}
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(blockquote.mpp-alert-note, .markdown-alert.markdown-alert-note) { color: #184f95; background-color: rgba(205, 226, 251, 1.00); border-color: #86b6ef; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(blockquote.mpp-alert-tip, .markdown-alert.markdown-alert-tip) { color: #006300; background-color: rgba(202, 234, 199, 1.00); border-color: #73cb6d; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(blockquote.mpp-alert-warning, .markdown-alert.markdown-alert-warning) { color: #734500; background-color: rgba(249, 220, 164, 1.00); border-color: #eda100; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) :is(strong, code, a) { color: inherit; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) a { border-bottom-color: currentColor; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(.mpp-alert-marker, .mpp-alert-marker + br, .mpp-alert-title-only) { display: none; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) > :last-child { margin-bottom: 0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) a { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 65%, transparent); text-underline-offset: 3px; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) { position: relative; padding-left: 42px; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title { position: absolute; top: 11px; left: 14px; margin: 0; font-size: 0; line-height: 0; color: inherit; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title svg { width: 20px; height: 20px; margin: 0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title + * { margin-top: 0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) thead :is(th, td) { background-color: rgba(11, 11, 11, 0.05); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) th { font-weight: 500; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) table {
+  border-collapse: separate;
+  border: 1px solid var(--mpp-table-border, color-mix(in srgb, currentColor 20%, transparent));
+  border-radius: 7px;
+  overflow: hidden;
+}
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(th, td) { border-width: 1px 0 0 1px; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(th, td):first-child { border-left-width: 0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) thead :is(th, td) { border-top-width: 0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) tbody tr:first-child > td { border-top-color: var(--mpp-table-head-border, var(--mpp-table-border, color-mix(in srgb, currentColor 20%, transparent))); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a:is([data-href^="http:" i], [data-href^="https:" i], [data-href^="mailto:" i]) {
   text-decoration: underline;
   text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
   text-underline-offset: 3px;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a:hover { text-decoration-color: currentColor; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) a:hover {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 3px;
+}
 
 /* ---------- Rules (shared by every preset) ---------- */
 

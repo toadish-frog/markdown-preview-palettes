@@ -88,6 +88,19 @@ class GeneratedCss(unittest.TestCase):
         self.assertNotIn("--mpp-code-border", plain)
         self.assertNotIn("text-decoration", plain)
 
+    def test_external_only_link_underline(self):
+        c = dict(build.load_palettes()["mono"]["dark"], linkUnderline="external")
+        scope = 'body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono"])'
+        block = build.preset_block("mono", "dark", c)
+        # Web and mail links are underlined; any link is underlined on hover; other links are not otherwise
+        self.assertIn(
+            f'{scope} a:is([data-href^="http:" i], [data-href^="https:" i], [data-href^="mailto:" i]) {{', block
+        )
+        self.assertIn(f"{scope} a:hover {{", block)
+        self.assertNotIn(f"{scope} a {{", block)
+        every = build.preset_block("mono", "dark", dict(c, linkUnderline=True))
+        self.assertIn(f"{scope} a {{", every)
+
     def test_option_types_are_validated(self):
         bad = build.load_palettes()
         bad["mono"]["dark"].update(codeTintAlpha=0, codeBorderAlpha="0.1", linkUnderline="yes")
@@ -104,6 +117,9 @@ class GeneratedCss(unittest.TestCase):
             tableBorderAlpha=0.1,
             tableHeadBorder="#3e3e3e",
             tableRadius=11,
+            tableHeadBg="#ffffff",
+            tableHeadBgAlpha=0.05,
+            tableHeadWeight=500,
         )
         block = build.preset_block("mono", "dark", c)
         for expected in (
@@ -113,6 +129,8 @@ class GeneratedCss(unittest.TestCase):
             "--mpp-table-head-border: rgba(62, 62, 62, 1.00);",
             "border-collapse: separate;",
             "border-radius: 11px;",
+            "thead :is(th, td) { background-color: rgba(255, 255, 255, 0.05); }",
+            "th { font-weight: 500; }",
         ):
             self.assertIn(expected, block)
         plain = build.preset_block("mono", "dark", build.load_palettes()["mono"]["dark"])
@@ -121,10 +139,16 @@ class GeneratedCss(unittest.TestCase):
 
     def test_table_options_are_validated_and_contrast_checked(self):
         bad = build.load_palettes()
-        bad["mono"]["dark"].update(tableRadius=0, tableBorderAlpha=2, tableBg="grey")
+        bad["mono"]["dark"].update(tableRadius=0, tableBorderAlpha=2, tableBg="grey", tableHeadWeight=50)
         bad["mono"]["light"].update(tableRadius=True)
         errors = " | ".join(build.validate(bad))
-        for key in ("dark.tableRadius", "dark.tableBorderAlpha", "dark.tableBg", "light.tableRadius"):
+        for key in (
+            "dark.tableRadius",
+            "dark.tableBorderAlpha",
+            "dark.tableBg",
+            "dark.tableHeadWeight",
+            "light.tableRadius",
+        ):
             self.assertIn(f"mono.{key}", errors)
         dim = build.load_palettes()
         dim["mono"]["dark"].update(tableBg="#d0d0d0")
@@ -163,10 +187,31 @@ class GeneratedCss(unittest.TestCase):
             ".mpp-alert-title-only) { display: none; }",
         ):
             self.assertIn(expected, block)
-        for name in ("mono", "folio"):
-            plain = build.preset_block(name, "dark", build.load_palettes()[name]["dark"])
-            for absent in ("mpp-alert", "border-bottom:", " pre {", "font-weight"):
-                self.assertNotIn(absent, plain)
+        plain = build.preset_block("mono", "dark", build.load_palettes()["mono"]["dark"])
+        for absent in ("mpp-alert", "border-bottom:", " pre {", "font-weight"):
+            self.assertNotIn(absent, plain)
+        folio = build.preset_block("folio", "dark", build.load_palettes()["folio"]["dark"])
+        for absent in ("border-bottom:", " pre {", "  font-weight:"):  # no link weight or code box
+            self.assertNotIn(absent, folio)
+
+    def test_folio_callouts(self):
+        block = build.preset_block("folio", "dark", build.load_palettes()["folio"]["dark"])
+        for expected in (
+            ":is(blockquote.mpp-alert-note, .markdown-alert.markdown-alert-note) { color: #6da7ec; "
+            "background-color: rgba(3, 32, 66, 1.00); border-color: #0d366b; }",
+            "  border-radius: 11px;",
+            "  padding: 10px 14px;",
+            "position: relative; padding-left: 42px;",
+            "> .markdown-alert-title { position: absolute; top: 11px; left: 14px;",
+            "> .markdown-alert-title svg { width: 20px; height: 20px;",
+            "a { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 65%, transparent);",
+        ):
+            self.assertIn(expected, block)
+        bad = build.load_palettes()
+        bad["folio"]["dark"].update(alertIcon=40, alertIconGap=0)
+        errors = " | ".join(build.validate(bad))
+        for key in ("alertIcon", "alertIconGap"):
+            self.assertIn(f"folio.dark.{key}", errors)
 
     def test_ember_options_are_validated(self):
         bad = build.load_palettes()
