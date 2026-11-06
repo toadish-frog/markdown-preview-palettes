@@ -46,7 +46,14 @@ OPTIONAL = (
     "preBorder",
 )
 # Non-colour options: opacities (0 to 1), sizes in whole pixels and on/off switches
-NUMBERS = ("codeTintAlpha", "codeBorderAlpha", "tableBorderAlpha", "tableHeadBorderAlpha", "tableHeadBgAlpha", "preBorderAlpha")
+NUMBERS = (
+    "codeTintAlpha",
+    "codeBorderAlpha",
+    "tableBorderAlpha",
+    "tableHeadBorderAlpha",
+    "tableHeadBgAlpha",
+    "preBorderAlpha",
+)
 PIXELS = {
     "tableRadius": (1, 32),
     "codeRadius": (1, 32),
@@ -210,7 +217,9 @@ def check(presets, quiet=False):
             # Table text sits on the table surface when the preset sets one
             table_bg = rgb(c["tableBg"]) if "tableBg" in c else base
             if "tableHead" in c:
-                head_bg = blend(c["tableHeadBg"], c.get("tableHeadBgAlpha", 1), table_bg) if "tableHeadBg" in c else table_bg
+                head_bg = (
+                    blend(c["tableHeadBg"], c.get("tableHeadBgAlpha", 1), table_bg) if "tableHeadBg" in c else table_bg
+                )
                 pairs.append(("tableHead", c["tableHead"], head_bg, MIN_TEXT))
             if "tableBg" in c and "text" in c:
                 pairs.append(("table text", c["text"], table_bg, MIN_TEXT))

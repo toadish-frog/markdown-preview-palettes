@@ -129,7 +129,7 @@ class GeneratedCss(unittest.TestCase):
             "--mpp-table-head-border: rgba(62, 62, 62, 1.00);",
             "border-collapse: separate;",
             "border-radius: 11px;",
-            'thead :is(th, td) { background-color: rgba(255, 255, 255, 0.05); }',
+            "thead :is(th, td) { background-color: rgba(255, 255, 255, 0.05); }",
             "th { font-weight: 500; }",
         ):
             self.assertIn(expected, block)
@@ -142,7 +142,13 @@ class GeneratedCss(unittest.TestCase):
         bad["mono"]["dark"].update(tableRadius=0, tableBorderAlpha=2, tableBg="grey", tableHeadWeight=50)
         bad["mono"]["light"].update(tableRadius=True)
         errors = " | ".join(build.validate(bad))
-        for key in ("dark.tableRadius", "dark.tableBorderAlpha", "dark.tableBg", "dark.tableHeadWeight", "light.tableRadius"):
+        for key in (
+            "dark.tableRadius",
+            "dark.tableBorderAlpha",
+            "dark.tableBg",
+            "dark.tableHeadWeight",
+            "light.tableRadius",
+        ):
             self.assertIn(f"mono.{key}", errors)
         dim = build.load_palettes()
         dim["mono"]["dark"].update(tableBg="#d0d0d0")
