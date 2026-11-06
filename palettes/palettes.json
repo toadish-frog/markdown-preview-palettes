@@ -4,7 +4,7 @@
     "Each preset has a dark and a light set. Optional keys: background, text, link, linkHover, codeTint.",
     "background: replaces the preview background. text: replaces the body text colour. link / linkHover: replace the VS Code link colours.",
     "codeTint: colour of the inline-code box (defaults to the code colour). Tints and borders are derived automatically. codeTintAlpha / codeBorderAlpha (0 to 1): opacity of the inline-code box and of an optional thin border. linkUnderline: true underlines every link; \"external\" underlines web and mail links only, other links on hover.",
-    "Tables: tableBg (surface), tableHead (header text), tableBorder / tableHeadBorder (grid lines and the line under the header), tableBorderAlpha / tableHeadBorderAlpha (0 to 1), tableRadius (1 to 32 px, rounded outer edge). Without them, lines mix the text colour into the background.",
+    "Tables: tableBg (surface), tableHead (header text), tableBorder / tableHeadBorder (grid lines and the line under the header), tableBorderAlpha / tableHeadBorderAlpha (0 to 1), tableRadius (1 to 32 px, rounded outer edge), tableHeadBg / tableHeadBgAlpha (header row fill), tableHeadWeight (100 to 900). Without them, lines mix the text colour into the background.",
     "Links: linkBorder draws the underline as a bottom border (thicker on hover); linkWeight (100 to 900). Inline code: codeRadius (px), codePadding (for example \"2px 8px\").",
     "Code blocks (box only; syntax colours stay VS Code): preBg, preBorder, preBorderAlpha, preRadius, prePadding.",
     "Callouts for > [!NOTE] / [!INFO], > [!TIP] and > [!WARNING] quotes: alerts.note / tip / warning, each with text, bg, border and optional bgAlpha; alertRadius, alertPadding; alertIcon / alertIconGap (px): size of the Markdown All in One icon and the gap before the text."
@@ -205,7 +205,8 @@
     "dark": {
       "background": "#151515", "text": "#c3c2b7",
       "link": "#6da7ec", "linkUnderline": "external",
-      "tableBg": "#1a1a19", "tableBorder": "#ffffff", "tableBorderAlpha": 0.1, "tableRadius": 11,
+      "tableHead": "#f0efec", "tableHeadBg": "#ffffff", "tableHeadBgAlpha": 0.05, "tableHeadWeight": 500,
+      "tableBorder": "#ffffff", "tableBorderAlpha": 0.1, "tableRadius": 7,
       "h1": "#f0efec", "h2": "#f0efec", "h3": "#f0efec", "h4": "#f0efec", "h5": "#f0efec", "h6": "#f0efec",
       "bold": "#f0efec",
       "code": "#ec7e7e", "codeTint": "#ffffff", "codeTintAlpha": 0.05, "codeBorderAlpha": 0.1,
@@ -221,7 +222,8 @@
     "light": {
       "background": "#fcfcfb", "text": "#52514e",
       "link": "#184f95", "linkUnderline": "external",
-      "tableBg": "#ffffff", "tableBorder": "#0b0b0b", "tableBorderAlpha": 0.1, "tableRadius": 11,
+      "tableHead": "#0b0b0b", "tableHeadBg": "#0b0b0b", "tableHeadBgAlpha": 0.05, "tableHeadWeight": 500,
+      "tableBorder": "#0b0b0b", "tableBorderAlpha": 0.1, "tableRadius": 7,
       "h1": "#0b0b0b", "h2": "#0b0b0b", "h3": "#0b0b0b", "h4": "#0b0b0b", "h5": "#0b0b0b", "h6": "#0b0b0b",
       "bold": "#0b0b0b",
       "code": "#8e2626", "codeTint": "#0b0b0b", "codeTintAlpha": 0.05, "codeBorderAlpha": 0.1,

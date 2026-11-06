@@ -501,7 +501,7 @@ body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]
   --mpp-quote2-bar: #52514e;
   --mpp-quote2-bg: rgba(82, 81, 78, 0.08);
   --mpp-code-border: 0.5px solid rgba(255, 255, 255, 0.10);
-  --mpp-table-bg: #1a1a19;
+  --mpp-table-head: #f0efec;
   --mpp-table-border: rgba(255, 255, 255, 0.10);
 }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(blockquote.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) {
@@ -522,10 +522,12 @@ body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title { position: absolute; top: 11px; left: 14px; margin: 0; font-size: 0; line-height: 0; color: inherit; }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title svg { width: 20px; height: 20px; margin: 0; }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title + * { margin-top: 0; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) thead :is(th, td) { background-color: rgba(255, 255, 255, 0.05); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) th { font-weight: 500; }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) table {
   border-collapse: separate;
   border: 1px solid var(--mpp-table-border, color-mix(in srgb, currentColor 20%, transparent));
-  border-radius: 11px;
+  border-radius: 7px;
   overflow: hidden;
 }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(th, td) { border-width: 1px 0 0 1px; }
@@ -566,7 +568,7 @@ body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"
   --mpp-quote2-bar: #c3c2b7;
   --mpp-quote2-bg: rgba(195, 194, 183, 0.06);
   --mpp-code-border: 0.5px solid rgba(11, 11, 11, 0.10);
-  --mpp-table-bg: #ffffff;
+  --mpp-table-head: #0b0b0b;
   --mpp-table-border: rgba(11, 11, 11, 0.10);
 }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(blockquote.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) {
@@ -587,10 +589,12 @@ body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title { position: absolute; top: 11px; left: 14px; margin: 0; font-size: 0; line-height: 0; color: inherit; }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title svg { width: 20px; height: 20px; margin: 0; }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title + * { margin-top: 0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) thead :is(th, td) { background-color: rgba(11, 11, 11, 0.05); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) th { font-weight: 500; }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) table {
   border-collapse: separate;
   border: 1px solid var(--mpp-table-border, color-mix(in srgb, currentColor 20%, transparent));
-  border-radius: 11px;
+  border-radius: 7px;
   overflow: hidden;
 }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"]) :is(th, td) { border-width: 1px 0 0 1px; }

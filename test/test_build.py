@@ -117,6 +117,9 @@ class GeneratedCss(unittest.TestCase):
             tableBorderAlpha=0.1,
             tableHeadBorder="#3e3e3e",
             tableRadius=11,
+            tableHeadBg="#ffffff",
+            tableHeadBgAlpha=0.05,
+            tableHeadWeight=500,
         )
         block = build.preset_block("mono", "dark", c)
         for expected in (
@@ -126,6 +129,8 @@ class GeneratedCss(unittest.TestCase):
             "--mpp-table-head-border: rgba(62, 62, 62, 1.00);",
             "border-collapse: separate;",
             "border-radius: 11px;",
+            'thead :is(th, td) { background-color: rgba(255, 255, 255, 0.05); }',
+            "th { font-weight: 500; }",
         ):
             self.assertIn(expected, block)
         plain = build.preset_block("mono", "dark", build.load_palettes()["mono"]["dark"])
@@ -134,10 +139,10 @@ class GeneratedCss(unittest.TestCase):
 
     def test_table_options_are_validated_and_contrast_checked(self):
         bad = build.load_palettes()
-        bad["mono"]["dark"].update(tableRadius=0, tableBorderAlpha=2, tableBg="grey")
+        bad["mono"]["dark"].update(tableRadius=0, tableBorderAlpha=2, tableBg="grey", tableHeadWeight=50)
         bad["mono"]["light"].update(tableRadius=True)
         errors = " | ".join(build.validate(bad))
-        for key in ("dark.tableRadius", "dark.tableBorderAlpha", "dark.tableBg", "light.tableRadius"):
+        for key in ("dark.tableRadius", "dark.tableBorderAlpha", "dark.tableBg", "dark.tableHeadWeight", "light.tableRadius"):
             self.assertIn(f"mono.{key}", errors)
         dim = build.load_palettes()
         dim["mono"]["dark"].update(tableBg="#d0d0d0")
@@ -180,7 +185,7 @@ class GeneratedCss(unittest.TestCase):
         for absent in ("mpp-alert", "border-bottom:", " pre {", "font-weight"):
             self.assertNotIn(absent, plain)
         folio = build.preset_block("folio", "dark", build.load_palettes()["folio"]["dark"])
-        for absent in ("border-bottom:", " pre {", "font-weight"):
+        for absent in ("border-bottom:", " pre {", "  font-weight:"):  # no link weight or code box
             self.assertNotIn(absent, folio)
 
     def test_folio_callouts(self):

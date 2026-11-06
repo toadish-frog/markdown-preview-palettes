@@ -38,6 +38,7 @@ OPTIONAL = (
     "codeTint",
     "tableBg",
     "tableHead",
+    "tableHeadBg",
     "tableBorder",
     "tableHeadBorder",
     "linkBorder",
@@ -45,7 +46,7 @@ OPTIONAL = (
     "preBorder",
 )
 # Non-colour options: opacities (0 to 1), sizes in whole pixels and on/off switches
-NUMBERS = ("codeTintAlpha", "codeBorderAlpha", "tableBorderAlpha", "tableHeadBorderAlpha", "preBorderAlpha")
+NUMBERS = ("codeTintAlpha", "codeBorderAlpha", "tableBorderAlpha", "tableHeadBorderAlpha", "tableHeadBgAlpha", "preBorderAlpha")
 PIXELS = {
     "tableRadius": (1, 32),
     "codeRadius": (1, 32),
@@ -54,6 +55,7 @@ PIXELS = {
     "alertIcon": (8, 32),
     "alertIconGap": (1, 32),
     "linkWeight": (100, 900),
+    "tableHeadWeight": (100, 900),
 }
 # Padding as CSS lengths in whole pixels, for example "2px 8px"
 PADDINGS = ("codePadding", "prePadding", "alertPadding")
@@ -208,7 +210,8 @@ def check(presets, quiet=False):
             # Table text sits on the table surface when the preset sets one
             table_bg = rgb(c["tableBg"]) if "tableBg" in c else base
             if "tableHead" in c:
-                pairs.append(("tableHead", c["tableHead"], table_bg, MIN_TEXT))
+                head_bg = blend(c["tableHeadBg"], c.get("tableHeadBgAlpha", 1), table_bg) if "tableHeadBg" in c else table_bg
+                pairs.append(("tableHead", c["tableHead"], head_bg, MIN_TEXT))
             if "tableBg" in c and "text" in c:
                 pairs.append(("table text", c["text"], table_bg, MIN_TEXT))
             for kind, box in c.get("alerts", {}).items():
@@ -272,6 +275,12 @@ def preset_block(name, theme, c):
         lines.append(f"  --mpp-table-head-border: {rgba(c['tableHeadBorder'], c.get('tableHeadBorderAlpha', 1))};")
     lines.append("}")
     lines += extra_rules(scope, c)
+    if "tableHeadBg" in c:
+        lines.append(
+            f"{scope} thead :is(th, td) {{ background-color: {rgba(c['tableHeadBg'], c.get('tableHeadBgAlpha', 1))}; }}"
+        )
+    if "tableHeadWeight" in c:
+        lines.append(f"{scope} th {{ font-weight: {c['tableHeadWeight']}; }}")
     if "tableRadius" in c:
         # Rounded corners need separate borders: each cell draws its top and left line, the table draws the outer edge
         lines += [
