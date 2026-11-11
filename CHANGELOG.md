@@ -2,7 +2,7 @@
 
 All notable changes to this extension. Versions follow Semantic Versioning (Major.Minor.Patch).
 
-## Unreleased
+## 0.4.0 (2026-11-12)
 
 - New preset `onyx`: white headings on near-black (white page in light themes), amber bold, orange inline code, soft blue links, and blue, green and amber callouts.
 - New preset `graphite`, in a docs style: white or black headings, grey text, orange inline code without a box, dotted link underlines, tables with a line under each row only, and grey callouts (muted amber for warnings).
