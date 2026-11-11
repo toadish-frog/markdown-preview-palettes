@@ -232,6 +232,63 @@ class GeneratedCss(unittest.TestCase):
         ):
             self.assertIn(expected, errors)
 
+    def test_graphite_options(self):
+        dark = build.load_palettes()["graphite"]["dark"]
+        block = build.preset_block("graphite", "dark", dark)
+        for expected in (
+            "--mpp-code-bg: transparent;",
+            "  padding: 0;",
+            ":is(a, a:hover) { text-decoration: underline dotted; text-decoration-color: currentColor;",
+            "a code { color: var(--mpp-code); background-color: transparent; }",
+            ":is(a, a:hover):has(code) { text-decoration-color: var(--mpp-code); }",
+            ":is(th, td) { border-width: 0 0 1px; }",
+            "tbody tr:nth-child(2n) { background-color: transparent; }",
+            "a { font-weight: inherit; text-decoration: underline dotted;",
+            ".markdown-alert.markdown-alert-note) code { color: #ffffff; background-color: rgba(255, 255, 255, 0.10);",
+            ".markdown-alert.markdown-alert-warning) code { color: #ffdb8f; }",
+            ".markdown-alert.markdown-alert-warning) a { text-decoration-color: #746a4e; }",
+            ".markdown-alert.markdown-alert-warning > .markdown-alert-title { color: #555555; }",
+        ):
+            self.assertIn(expected, block)
+
+    def test_new_options_leave_other_presets_alone(self):
+        # Building the presets without graphite and onyx must not pick up any of their rules
+        presets = build.load_palettes()
+        for name in ("ember", "folio", "mono"):
+            block = build.preset_block(name, "dark", presets[name]["dark"])
+            for absent in (
+                "dotted",
+                "border-width: 0 0 1px",
+                "var(--mpp-code); background-color",
+                ".markdown-alert-title { color: #",
+            ):
+                self.assertNotIn(absent, block)
+
+    def test_graphite_options_are_validated(self):
+        bad = build.load_palettes()
+        dark = bad["graphite"]["dark"]
+        dark.update(codePlain="yes", tableRowLines=1, linkUnderline="dashed")
+        dark["alerts"]["note"].update(codeBgAlpha=2, icon="grey")
+        errors = " | ".join(build.validate(bad))
+        for expected in (
+            "graphite.dark.codePlain",
+            "graphite.dark.tableRowLines",
+            "graphite.dark.linkUnderline",
+            "graphite.dark.alerts.note.codeBgAlpha",
+            "graphite.dark.alerts.note.icon",
+        ):
+            self.assertIn(expected, errors)
+
+    def test_plain_and_callout_code_are_contrast_checked(self):
+        dim = build.load_palettes()
+        dim["graphite"]["light"]["code"] = "#ff640a"  # 2.97:1 on the white page (no box)
+        with self.assertRaises(SystemExit):
+            build.check(dim, quiet=True)
+        dim = build.load_palettes()
+        dim["graphite"]["light"]["alerts"]["warning"]["code"] = "#9c7711"
+        with self.assertRaises(SystemExit):
+            build.check(dim, quiet=True)
+
     def test_alert_text_is_contrast_checked(self):
         dim = build.load_palettes()
         dim["ember"]["light"]["alerts"]["tip"]["text"] = "#e0f5e6"

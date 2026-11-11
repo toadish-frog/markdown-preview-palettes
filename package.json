@@ -49,6 +49,8 @@
             "azure",
             "ember",
             "folio",
+            "onyx",
+            "graphite",
             "default"
           ],
           "enumDescriptions": [
@@ -62,6 +64,8 @@
             "Clean blue headings on the theme background, plain bold, blue inline code.",
             "Claude Code docs look: white headings, grey text, orange-underlined links, green, blue and yellow callouts.",
             "Document style: near-white or near-black headings, warm grey text, red inline code, blue links.",
+            "White headings on near-black, amber bold, orange inline code, soft blue links, blue, green and amber callouts.",
+            "Docs style: white or black headings, grey text, orange inline code without a box, dotted link underlines, grey callouts.",
             "Built-in VS Code preview look (turns all colouring off)."
           ],
           "markdownDescription": "Colour preset for the Markdown preview. `default` restores the built-in VS Code look. High-contrast themes always keep the built-in look."

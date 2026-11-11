@@ -3,11 +3,12 @@
     "Single source of every preset colour. Edit here, then run: python3 scripts/build.py css",
     "Each preset has a dark and a light set. Optional keys: background, text, link, linkHover, codeTint.",
     "background: replaces the preview background. text: replaces the body text colour. link / linkHover: replace the VS Code link colours.",
-    "codeTint: colour of the inline-code box (defaults to the code colour). Tints and borders are derived automatically. codeTintAlpha / codeBorderAlpha (0 to 1): opacity of the inline-code box and of an optional thin border. linkUnderline: true underlines every link; \"external\" underlines web and mail links only, other links on hover.",
+    "codeTint: colour of the inline-code box (defaults to the code colour). Tints and borders are derived automatically. codeTintAlpha / codeBorderAlpha (0 to 1): opacity of the inline-code box and of an optional thin border. linkUnderline: true underlines every link; \"external\" underlines web and mail links only, other links on hover; \"dotted\" gives every link a dotted underline in the full link colour, unchanged on hover.",
+    "Switches (true or left out): codePlain shows inline code without a box; codeLinks keeps code inside a link in the code colour and gives that link's underline the same colour; tableRowLines draws a line under each table row only (no column lines, outer edge or stripes).",
     "Tables: tableBg (surface), tableHead (header text), tableBorder / tableHeadBorder (grid lines and the line under the header), tableBorderAlpha / tableHeadBorderAlpha (0 to 1), tableRadius (1 to 32 px, rounded outer edge), tableHeadBg / tableHeadBgAlpha (header row fill), tableHeadWeight (100 to 900). Without them, lines mix the text colour into the background.",
     "Links: linkBorder draws the underline as a bottom border (thicker on hover); linkWeight (100 to 900). Inline code: codeRadius (px), codePadding (for example \"2px 8px\").",
     "Code blocks (box only; syntax colours stay VS Code): preBg, preBorder, preBorderAlpha, preRadius, prePadding.",
-    "Callouts for > [!NOTE] / [!INFO], > [!TIP] and > [!WARNING] quotes: alerts.note / tip / warning, each with text, bg, border and optional bgAlpha; alertRadius, alertPadding; alertIcon / alertIconGap (px): size of the Markdown All in One icon and the gap before the text."
+    "Callouts for > [!NOTE] / [!INFO], > [!TIP] and > [!WARNING] quotes: alerts.note / tip / warning, each with text, bg, border and optional bgAlpha, code (inline-code colour), codeBg / codeBgAlpha (inline-code box), icon (Markdown All in One icon colour) and underline (link underline colour); alertRadius, alertPadding; alertIcon / alertIconGap (px): size of the Markdown All in One icon and the gap before the text."
   ],
   "teal": {
     "description": "Green-teal headings, amber bold, orange inline code.",
@@ -234,6 +235,80 @@
         "note": { "text": "#184f95", "bg": "#cde2fb", "border": "#86b6ef" },
         "tip": { "text": "#006300", "bg": "#caeac7", "border": "#73cb6d" },
         "warning": { "text": "#734500", "bg": "#f9dca4", "border": "#eda100" }
+      }
+    }
+  },
+  "onyx": {
+    "description": "White headings on near-black, amber bold, orange inline code, soft blue links, blue, green and amber callouts.",
+    "dark": {
+      "background": "#0a0a0a", "text": "#d5d9e2",
+      "link": "#9cb8dd", "linkHover": "#ffffff",
+      "h1": "#ffffff", "h2": "#ffffff", "h3": "#ffffff", "h4": "#d5d9e2", "h5": "#a9b2bc", "h6": "#7d8187",
+      "bold": "#ffd085",
+      "code": "#ff6308",
+      "quote": "#d5d9e2", "quoteBar": "#a689fa",
+      "quote2": "#a9b2bc", "quote2Bar": "#3c4653",
+      "tableHead": "#ffffff", "tableBorder": "#1f2228",
+      "preBg": "#121212", "preBorder": "#1f2228", "preRadius": 12, "prePadding": "12px 16px",
+      "alertRadius": 12, "alertPadding": "12px 16px",
+      "alerts": {
+        "note": { "text": "#9cb8dd", "bg": "#9cb8dd", "bgAlpha": 0.1, "border": "#1f2228" },
+        "tip": { "text": "#4ade80", "bg": "#4ade80", "bgAlpha": 0.1, "border": "#1f2228" },
+        "warning": { "text": "#f8c630", "bg": "#f8c630", "bgAlpha": 0.1, "border": "#1f2228" }
+      }
+    },
+    "light": {
+      "background": "#ffffff", "text": "#0a0a0a",
+      "link": "#4177be", "linkHover": "#0a0a0a",
+      "h1": "#0a0a0a", "h2": "#0a0a0a", "h3": "#0a0a0a", "h4": "#1f2228", "h5": "#3c4653", "h6": "#36383a",
+      "bold": "#a86800",
+      "code": "#bf4600",
+      "quote": "#36383a", "quoteBar": "#a689fa",
+      "quote2": "#3c4653", "quote2Bar": "#a9b2bc",
+      "tableHead": "#0a0a0a", "tableBorder": "#d5d9e2",
+      "preBg": "#f9f8f6", "preBorder": "#d5d9e2", "preRadius": 12, "prePadding": "12px 16px",
+      "alertRadius": 12, "alertPadding": "12px 16px",
+      "alerts": {
+        "note": { "text": "#3f72b6", "bg": "#9cb8dd", "bgAlpha": 0.1, "border": "#d5d9e2" },
+        "tip": { "text": "#16813d", "bg": "#21c45d", "bgAlpha": 0.1, "border": "#d5d9e2" },
+        "warning": { "text": "#8f6c05", "bg": "#e7b008", "bgAlpha": 0.1, "border": "#d5d9e2" }
+      }
+    }
+  },
+  "graphite": {
+    "description": "Docs style: white or black headings, grey text, orange inline code without a box, dotted link underlines, grey callouts.",
+    "dark": {
+      "background": "#0a0a0a", "text": "#d5d9e2",
+      "link": "#ffffff", "linkHover": "#ffffff", "linkWeight": 500, "linkUnderline": "dotted",
+      "h1": "#ffffff", "h2": "#ffffff", "h3": "#ffffff", "h4": "#d5d9e2", "h5": "#d5d9e2", "h6": "#d5d9e2",
+      "bold": "#ffffff",
+      "code": "#ff640a", "codePlain": true, "codeLinks": true,
+      "quote": "#d5d9e2", "quoteBar": "#36383a",
+      "quote2": "#d5d9e2", "quote2Bar": "#1f2228",
+      "tableHead": "#d5d9e2", "tableHeadWeight": 500, "tableBorder": "#1f2228", "tableBorderAlpha": 0.6, "tableRowLines": true,
+      "preBg": "#121212", "preBorder": "#1f2228", "preBorderAlpha": 0.6, "preRadius": 12, "prePadding": "12px 16px",
+      "alertRadius": 16, "alertPadding": "12px 16px", "alertIcon": 14, "alertIconGap": 8,
+      "alerts": {
+        "note": { "text": "#ffffff", "bg": "#1a1a1a", "border": "#1a1a1a", "code": "#ffffff", "codeBg": "#ffffff", "codeBgAlpha": 0.1, "icon": "#555555" },
+        "tip": { "text": "#ffffff", "bg": "#1a1a1a", "border": "#1a1a1a", "code": "#ffffff", "codeBg": "#ffffff", "codeBgAlpha": 0.1, "icon": "#555555" },
+        "warning": { "text": "#b8ae94", "bg": "#1a1a1a", "border": "#1a1a1a", "code": "#ffdb8f", "icon": "#555555", "underline": "#746a4e" }
+      }
+    },
+    "light": {
+      "background": "#ffffff", "text": "#0a0a0a",
+      "link": "#0a0a0a", "linkHover": "#0a0a0a", "linkWeight": 500, "linkUnderline": "dotted",
+      "h1": "#0a0a0a", "h2": "#0a0a0a", "h3": "#0a0a0a", "h4": "#0a0a0a", "h5": "#0a0a0a", "h6": "#0a0a0a",
+      "bold": "#171717",
+      "code": "#cc4b00", "codePlain": true, "codeLinks": true,
+      "quote": "#0a0a0a", "quoteBar": "#d5d9e2",
+      "quote2": "#0a0a0a", "quote2Bar": "#d5d9e2",
+      "tableHead": "#0a0a0a", "tableHeadWeight": 500, "tableBorder": "#d5d9e2", "tableBorderAlpha": 0.55, "tableRowLines": true,
+      "preBg": "#ffffff", "preBorder": "#d5d9e2", "preBorderAlpha": 0.55, "preRadius": 12, "prePadding": "12px 16px",
+      "alertRadius": 16, "alertPadding": "12px 16px", "alertIcon": 14, "alertIconGap": 8,
+      "alerts": {
+        "note": { "text": "#0a0a0a", "bg": "#f9f8f6", "border": "#f9f8f6", "code": "#0a0a0a", "codeBg": "#0a0a0a", "codeBgAlpha": 0.05, "icon": "#999999" },
+        "tip": { "text": "#0a0a0a", "bg": "#f9f8f6", "border": "#f9f8f6", "code": "#0a0a0a", "codeBg": "#0a0a0a", "codeBgAlpha": 0.05, "icon": "#999999" },
+        "warning": { "text": "#5c543d", "bg": "#f9f8f6", "border": "#f9f8f6", "code": "#8e6d10", "icon": "#9c7711", "underline": "#a99a70" }
       }
     }
   }

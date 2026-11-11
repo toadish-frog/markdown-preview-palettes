@@ -2,6 +2,12 @@
 
 All notable changes to this extension. Versions follow Semantic Versioning (Major.Minor.Patch).
 
+## Unreleased
+
+- New preset `onyx`: white headings on near-black (white page in light themes), amber bold, orange inline code, soft blue links, and blue, green and amber callouts.
+- New preset `graphite`, in a docs style: white or black headings, grey text, orange inline code without a box, dotted link underlines, tables with a line under each row only, and grey callouts (muted amber for warnings).
+- New preset options: `linkUnderline: "dotted"`, `codePlain`, `codeLinks`, `tableRowLines`, and per-callout `code`, `codeBg`, `codeBgAlpha`, `icon` and `underline` colours. Existing presets look the same as before.
+
 ## 0.3.0 (2026-11-06)
 
 - `ember` now follows the Claude Code docs, dark and light: near-black (`#09090b`) or off-white (`#fdfdf7`) background, grey text, white headings, links with an orange (dark) or black (light) bottom-border underline that thickens on hover, inline code and code-block boxes, and tables with striped rows and column lines.

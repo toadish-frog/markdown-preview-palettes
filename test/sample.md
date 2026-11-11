@@ -6,7 +6,7 @@ Every element the presets colour, for checking each preset in the dark and light
 
 Normal text with **bold text**, *italic text* and `inline code`.
 
-A [plain link](https://code.visualstudio.com), a bare URL <https://code.visualstudio.com>, a [**bold link**](https://code.visualstudio.com) and a [`code link`](https://code.visualstudio.com).
+A [plain link](https://code.visualstudio.com), a bare URL <https://code.visualstudio.com>, a [**bold link**](https://code.visualstudio.com) a [`code link`](https://code.visualstudio.com) and a [link with `code` inside](https://code.visualstudio.com).
 
 Links inside the project: a [link to a heading](#heading-2-quotes) and a [link to another file](../README.md).
 
@@ -26,7 +26,7 @@ Links inside the project: a [link to a heading](#heading-2-quotes) and a [link t
 
 ## Heading 2: Callouts
 
-Presets with callout colours (`ember`) turn these GitHub alerts into coloured boxes; the others show plain quotes.
+Presets with callout colours (`ember`, `folio`, `onyx`, `graphite`) turn these GitHub alerts into coloured boxes; the others show plain quotes.
 
 > [!TIP]
 > A tip with `inline code`, **bold** and a [link to a heading](#heading-2-quotes).
@@ -39,7 +39,7 @@ Text between callouts.
 Text between callouts.
 
 > [!WARNING]
-> A warning with `inline code`.
+> A warning with `inline code` and a [link to a heading](#heading-2-quotes).
 
 ## Heading 2: Code Block (Syntax Colours Must Keep the VS Code Default)
 
