@@ -2,7 +2,7 @@
   "name": "markdown-preview-colours",
   "displayName": "Markdown Preview Palettes (Toadish)",
   "description": "Colour presets for the built-in Markdown preview: headings, bold text, inline code, quotes and links. Preview only; Markdown files are never changed.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "publisher": "ToadishFrog67",
   "license": "MIT",
   "icon":"icon.png",
