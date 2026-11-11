@@ -612,6 +612,254 @@ body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio"
   text-underline-offset: 3px;
 }
 
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) {
+  background-color: #0a0a0a;
+  color: #d5d9e2;
+  --vscode-textLink-foreground: #9cb8dd;
+  --vscode-textLink-activeForeground: #ffffff;
+  --mpp-h1: #ffffff;
+  --mpp-h2: #ffffff;
+  --mpp-h3: #ffffff;
+  --mpp-h4: #d5d9e2;
+  --mpp-h5: #a9b2bc;
+  --mpp-h6: #7d8187;
+  --mpp-h1-border: rgba(255, 255, 255, 0.35);
+  --mpp-h2-border: rgba(255, 255, 255, 0.30);
+  --mpp-bold: #ffd085;
+  --mpp-code: #ff6308;
+  --mpp-code-bg: rgba(255, 99, 8, 0.12);
+  --mpp-quote: #d5d9e2;
+  --mpp-quote-bar: #a689fa;
+  --mpp-quote-bg: rgba(166, 137, 250, 0.08);
+  --mpp-quote2: #a9b2bc;
+  --mpp-quote2-bar: #3c4653;
+  --mpp-quote2-bg: rgba(60, 70, 83, 0.08);
+  --mpp-table-head: #ffffff;
+  --mpp-table-border: rgba(31, 34, 40, 1.00);
+}
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) pre {
+  --vscode-textCodeBlock-background: #121212;
+  background-color: #121212;
+  border: 1px solid rgba(31, 34, 40, 1.00);
+  border-radius: 12px;
+}
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) pre.hljs { overflow: hidden; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(pre:not(.hljs), pre.hljs code > div) { padding: 12px 16px; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(blockquote.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) {
+  margin: 16px 0;
+  border: 1px solid;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(blockquote.mpp-alert-note, .markdown-alert.markdown-alert-note) { color: #9cb8dd; background-color: rgba(156, 184, 221, 0.10); border-color: #1f2228; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(blockquote.mpp-alert-tip, .markdown-alert.markdown-alert-tip) { color: #4ade80; background-color: rgba(74, 222, 128, 0.10); border-color: #1f2228; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(blockquote.mpp-alert-warning, .markdown-alert.markdown-alert-warning) { color: #f8c630; background-color: rgba(248, 198, 48, 0.10); border-color: #1f2228; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) :is(strong, code, a) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) a { border-bottom-color: currentColor; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(.mpp-alert-marker, .mpp-alert-marker + br, .mpp-alert-title-only) { display: none; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) > :last-child { margin-bottom: 0; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) { position: relative; padding-left: 44px; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title { position: absolute; top: 14px; left: 16px; margin: 0; font-size: 0; line-height: 0; color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title svg { width: 18px; height: 18px; margin: 0; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title + * { margin-top: 0; }
+
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) {
+  background-color: #ffffff;
+  color: #0a0a0a;
+  --vscode-textLink-foreground: #4177be;
+  --vscode-textLink-activeForeground: #0a0a0a;
+  --mpp-h1: #0a0a0a;
+  --mpp-h2: #0a0a0a;
+  --mpp-h3: #0a0a0a;
+  --mpp-h4: #1f2228;
+  --mpp-h5: #3c4653;
+  --mpp-h6: #36383a;
+  --mpp-h1-border: rgba(10, 10, 10, 0.30);
+  --mpp-h2-border: rgba(10, 10, 10, 0.25);
+  --mpp-bold: #a86800;
+  --mpp-code: #bf4600;
+  --mpp-code-bg: rgba(191, 70, 0, 0.08);
+  --mpp-quote: #36383a;
+  --mpp-quote-bar: #a689fa;
+  --mpp-quote-bg: rgba(166, 137, 250, 0.06);
+  --mpp-quote2: #3c4653;
+  --mpp-quote2-bar: #a9b2bc;
+  --mpp-quote2-bg: rgba(169, 178, 188, 0.06);
+  --mpp-table-head: #0a0a0a;
+  --mpp-table-border: rgba(213, 217, 226, 1.00);
+}
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) pre {
+  --vscode-textCodeBlock-background: #f9f8f6;
+  background-color: #f9f8f6;
+  border: 1px solid rgba(213, 217, 226, 1.00);
+  border-radius: 12px;
+}
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) pre.hljs { overflow: hidden; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(pre:not(.hljs), pre.hljs code > div) { padding: 12px 16px; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(blockquote.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) {
+  margin: 16px 0;
+  border: 1px solid;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(blockquote.mpp-alert-note, .markdown-alert.markdown-alert-note) { color: #3f72b6; background-color: rgba(156, 184, 221, 0.10); border-color: #d5d9e2; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(blockquote.mpp-alert-tip, .markdown-alert.markdown-alert-tip) { color: #16813d; background-color: rgba(33, 196, 93, 0.10); border-color: #d5d9e2; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(blockquote.mpp-alert-warning, .markdown-alert.markdown-alert-warning) { color: #8f6c05; background-color: rgba(231, 176, 8, 0.10); border-color: #d5d9e2; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) :is(strong, code, a) { color: inherit; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) a { border-bottom-color: currentColor; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(.mpp-alert-marker, .mpp-alert-marker + br, .mpp-alert-title-only) { display: none; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) > :last-child { margin-bottom: 0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) { position: relative; padding-left: 44px; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title { position: absolute; top: 14px; left: 16px; margin: 0; font-size: 0; line-height: 0; color: inherit; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title svg { width: 18px; height: 18px; margin: 0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title + * { margin-top: 0; }
+
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) {
+  background-color: #0a0a0a;
+  color: #d5d9e2;
+  --vscode-textLink-foreground: #ffffff;
+  --vscode-textLink-activeForeground: #ffffff;
+  --mpp-h1: #ffffff;
+  --mpp-h2: #ffffff;
+  --mpp-h3: #ffffff;
+  --mpp-h4: #d5d9e2;
+  --mpp-h5: #d5d9e2;
+  --mpp-h6: #d5d9e2;
+  --mpp-h1-border: rgba(255, 255, 255, 0.35);
+  --mpp-h2-border: rgba(255, 255, 255, 0.30);
+  --mpp-bold: #ffffff;
+  --mpp-code: #ff640a;
+  --mpp-code-bg: transparent;
+  --mpp-quote: #d5d9e2;
+  --mpp-quote-bar: #36383a;
+  --mpp-quote-bg: rgba(54, 56, 58, 0.08);
+  --mpp-quote2: #d5d9e2;
+  --mpp-quote2-bar: #1f2228;
+  --mpp-quote2-bg: rgba(31, 34, 40, 0.08);
+  --mpp-table-head: #d5d9e2;
+  --mpp-table-border: rgba(31, 34, 40, 0.60);
+}
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) a {
+  font-weight: 500;
+}
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :not(pre) > code {
+  padding: 0;
+  border-radius: 0;
+}
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) pre {
+  --vscode-textCodeBlock-background: #121212;
+  background-color: #121212;
+  border: 1px solid rgba(31, 34, 40, 0.60);
+  border-radius: 12px;
+}
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) pre.hljs { overflow: hidden; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(pre:not(.hljs), pre.hljs code > div) { padding: 12px 16px; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) {
+  margin: 16px 0;
+  border: 1px solid;
+  border-radius: 16px;
+  padding: 12px 16px;
+}
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert-note, .markdown-alert.markdown-alert-note) { color: #ffffff; background-color: rgba(26, 26, 26, 1.00); border-color: #1a1a1a; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert-tip, .markdown-alert.markdown-alert-tip) { color: #ffffff; background-color: rgba(26, 26, 26, 1.00); border-color: #1a1a1a; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert-warning, .markdown-alert.markdown-alert-warning) { color: #b8ae94; background-color: rgba(26, 26, 26, 1.00); border-color: #1a1a1a; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) :is(strong, code, a) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) a { border-bottom-color: currentColor; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(.mpp-alert-marker, .mpp-alert-marker + br, .mpp-alert-title-only) { display: none; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) > :last-child { margin-bottom: 0; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) a { font-weight: inherit; text-decoration: underline dotted; text-decoration-color: color-mix(in srgb, currentColor 50%, transparent); text-underline-offset: 3px; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) { position: relative; padding-left: 38px; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title { position: absolute; top: 16px; left: 16px; margin: 0; font-size: 0; line-height: 0; color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title svg { width: 14px; height: 14px; margin: 0; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title + * { margin-top: 0; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert-note, .markdown-alert.markdown-alert-note) code { color: #ffffff; background-color: rgba(255, 255, 255, 0.10); border-radius: 2px; padding: 1px 2px; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) .markdown-alert.markdown-alert-note > .markdown-alert-title { color: #555555; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert-tip, .markdown-alert.markdown-alert-tip) code { color: #ffffff; background-color: rgba(255, 255, 255, 0.10); border-radius: 2px; padding: 1px 2px; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) .markdown-alert.markdown-alert-tip > .markdown-alert-title { color: #555555; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert-warning, .markdown-alert.markdown-alert-warning) code { color: #ffdb8f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert-warning, .markdown-alert.markdown-alert-warning) a { text-decoration-color: #746a4e; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) .markdown-alert.markdown-alert-warning > .markdown-alert-title { color: #555555; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) th { font-weight: 500; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(th, td) { border-width: 0 0 1px; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) tbody tr:last-child > td { border-bottom-width: 0; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) tbody tr:nth-child(2n) { background-color: transparent; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(a, a:hover) { text-decoration: underline dotted; text-decoration-color: currentColor; text-underline-offset: 3.5px; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) a code { color: var(--mpp-code); background-color: transparent; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(a, a:hover):has(code) { text-decoration-color: var(--mpp-code); }
+
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) {
+  background-color: #ffffff;
+  color: #0a0a0a;
+  --vscode-textLink-foreground: #0a0a0a;
+  --vscode-textLink-activeForeground: #0a0a0a;
+  --mpp-h1: #0a0a0a;
+  --mpp-h2: #0a0a0a;
+  --mpp-h3: #0a0a0a;
+  --mpp-h4: #0a0a0a;
+  --mpp-h5: #0a0a0a;
+  --mpp-h6: #0a0a0a;
+  --mpp-h1-border: rgba(10, 10, 10, 0.30);
+  --mpp-h2-border: rgba(10, 10, 10, 0.25);
+  --mpp-bold: #171717;
+  --mpp-code: #cc4b00;
+  --mpp-code-bg: transparent;
+  --mpp-quote: #0a0a0a;
+  --mpp-quote-bar: #d5d9e2;
+  --mpp-quote-bg: rgba(213, 217, 226, 0.06);
+  --mpp-quote2: #0a0a0a;
+  --mpp-quote2-bar: #d5d9e2;
+  --mpp-quote2-bg: rgba(213, 217, 226, 0.06);
+  --mpp-table-head: #0a0a0a;
+  --mpp-table-border: rgba(213, 217, 226, 0.55);
+}
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) a {
+  font-weight: 500;
+}
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :not(pre) > code {
+  padding: 0;
+  border-radius: 0;
+}
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) pre {
+  --vscode-textCodeBlock-background: #ffffff;
+  background-color: #ffffff;
+  border: 1px solid rgba(213, 217, 226, 0.55);
+  border-radius: 12px;
+}
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) pre.hljs { overflow: hidden; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(pre:not(.hljs), pre.hljs code > div) { padding: 12px 16px; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) {
+  margin: 16px 0;
+  border: 1px solid;
+  border-radius: 16px;
+  padding: 12px 16px;
+}
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert-note, .markdown-alert.markdown-alert-note) { color: #0a0a0a; background-color: rgba(249, 248, 246, 1.00); border-color: #f9f8f6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert-tip, .markdown-alert.markdown-alert-tip) { color: #0a0a0a; background-color: rgba(249, 248, 246, 1.00); border-color: #f9f8f6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert-warning, .markdown-alert.markdown-alert-warning) { color: #5c543d; background-color: rgba(249, 248, 246, 1.00); border-color: #f9f8f6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) :is(strong, code, a) { color: inherit; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) a { border-bottom-color: currentColor; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(.mpp-alert-marker, .mpp-alert-marker + br, .mpp-alert-title-only) { display: none; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) > :last-child { margin-bottom: 0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(.mpp-alert, .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning)) a { font-weight: inherit; text-decoration: underline dotted; text-decoration-color: color-mix(in srgb, currentColor 50%, transparent); text-underline-offset: 3px; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) { position: relative; padding-left: 38px; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title { position: absolute; top: 16px; left: 16px; margin: 0; font-size: 0; line-height: 0; color: inherit; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title svg { width: 14px; height: 14px; margin: 0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title + * { margin-top: 0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert-note, .markdown-alert.markdown-alert-note) code { color: #0a0a0a; background-color: rgba(10, 10, 10, 0.05); border-radius: 2px; padding: 1px 2px; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) .markdown-alert.markdown-alert-note > .markdown-alert-title { color: #999999; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert-tip, .markdown-alert.markdown-alert-tip) code { color: #0a0a0a; background-color: rgba(10, 10, 10, 0.05); border-radius: 2px; padding: 1px 2px; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) .markdown-alert.markdown-alert-tip > .markdown-alert-title { color: #999999; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert-warning, .markdown-alert.markdown-alert-warning) code { color: #8e6d10; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(blockquote.mpp-alert-warning, .markdown-alert.markdown-alert-warning) a { text-decoration-color: #a99a70; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) .markdown-alert.markdown-alert-warning > .markdown-alert-title { color: #9c7711; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) th { font-weight: 500; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(th, td) { border-width: 0 0 1px; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) tbody tr:last-child > td { border-bottom-width: 0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) tbody tr:nth-child(2n) { background-color: transparent; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(a, a:hover) { text-decoration: underline dotted; text-decoration-color: currentColor; text-underline-offset: 3.5px; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) a code { color: var(--mpp-code); background-color: transparent; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite"]) :is(a, a:hover):has(code) { text-decoration-color: var(--mpp-code); }
+
 /* ---------- Rules (shared by every preset) ---------- */
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset) h1 { color: var(--mpp-h1); border-bottom-color: var(--mpp-h1-border); }

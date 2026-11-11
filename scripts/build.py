@@ -69,8 +69,24 @@ PADDINGS = ("codePadding", "prePadding", "alertPadding")
 PADDING = re.compile(r"^\d{1,2}px( \d{1,2}px){0,3}$")
 # Callout boxes for GitHub alerts (> [!NOTE], > [!TIP], > [!WARNING]); [!INFO] uses the note colours
 ALERT_TYPES = ("note", "tip", "warning")
-ALERT_KEYS = {"text": True, "bg": True, "border": True, "bgAlpha": False}
-FLAGS = ("linkUnderline",)
+ALERT_KEYS = {
+    "text": True,
+    "bg": True,
+    "border": True,
+    "bgAlpha": False,
+    # Optional: inline-code colour and box, icon colour and link underline colour inside the callout
+    "code": False,
+    "codeBg": False,
+    "codeBgAlpha": False,
+    "icon": False,
+    "underline": False,
+}
+ALERT_ALPHAS = ("bgAlpha", "codeBgAlpha")
+# On/off switches (true or left out):
+#   codePlain: inline code without a box; codeLinks: code inside a link keeps the code colour and colours the underline;
+#   tableRowLines: tables with a line under each row only (no column lines, outer edge or stripes)
+FLAGS = ("linkUnderline", "codePlain", "codeLinks", "tableRowLines")
+LINK_UNDERLINES = (True, "external", "dotted")
 PRESET_NAME = re.compile(r"^[a-z][a-z0-9-]{0,30}$")
 HEX = re.compile(r"^#[0-9a-fA-F]{6}$")
 # WCAG minimum contrast: 3.0 for large text (H1, H2), 4.5 for everything else
@@ -120,8 +136,8 @@ def validate(presets):
                     if isinstance(value, bool) or not isinstance(value, int) or not low <= value <= high:
                         errors.append(f"{name}.{theme}.{key}: '{value}' is not a whole number from {low} to {high}")
                 elif key == "linkUnderline":
-                    if value is not True and value != "external":
-                        errors.append(f'{name}.{theme}.{key}: must be true, "external" (or left out)')
+                    if value is not True and value not in LINK_UNDERLINES[1:]:
+                        errors.append(f'{name}.{theme}.{key}: must be true, "external", "dotted" (or left out)')
                 elif key in FLAGS:
                     if value is not True:
                         errors.append(f"{name}.{theme}.{key}: must be true (or left out)")
@@ -138,7 +154,7 @@ def validate(presets):
 
 
 def validate_alerts(where, alerts):
-    """Each alert type needs text, bg and border colours; bgAlpha (0 to 1) is optional."""
+    """Each alert type needs text, bg and border colours; the other keys (opacities 0 to 1, colours) are optional."""
     if not isinstance(alerts, dict):
         return [f"{where}: must be an object"]
     errors = [f"{where}.{kind}: unknown alert type" for kind in alerts if kind not in ALERT_TYPES]
@@ -151,7 +167,7 @@ def validate_alerts(where, alerts):
             if required and key not in box:
                 errors.append(f"{where}.{kind}.{key}: missing")
         for key, value in box.items():
-            if key == "bgAlpha":
+            if key in ALERT_ALPHAS:
                 if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 < value <= 1:
                     errors.append(f"{where}.{kind}.{key}: '{value}' is not a number above 0, up to 1")
             elif key not in ALERT_KEYS:
@@ -204,9 +220,10 @@ def check(presets, quiet=False):
             base = rgb(c.get("background", DEFAULT_BG[theme]))
             quote_bg = blend(c["quoteBar"], a["quote"], base)
             pairs = [(f"h{i}", c[f"h{i}"], base, MIN_LARGE if i <= 2 else MIN_TEXT) for i in range(1, 7)]
+            code_bg = base if c.get("codePlain") else blend(c.get("codeTint", c["code"]), code_alpha(c, theme), base)
             pairs += [
                 ("bold", c["bold"], base, MIN_TEXT),
-                ("code", c["code"], blend(c.get("codeTint", c["code"]), code_alpha(c, theme), base), MIN_TEXT),
+                ("code", c["code"], code_bg, MIN_TEXT),
                 ("quote", c["quote"], quote_bg, MIN_TEXT),
                 ("quote2", c["quote2"], blend(c["quote2Bar"], a["quote"], quote_bg), MIN_TEXT),
             ]
@@ -224,7 +241,11 @@ def check(presets, quiet=False):
             if "tableBg" in c and "text" in c:
                 pairs.append(("table text", c["text"], table_bg, MIN_TEXT))
             for kind, box in c.get("alerts", {}).items():
-                pairs.append((f"{kind} alert", box["text"], blend(box["bg"], box.get("bgAlpha", 1), base), MIN_TEXT))
+                alert_bg = blend(box["bg"], box.get("bgAlpha", 1), base)
+                pairs.append((f"{kind} alert", box["text"], alert_bg, MIN_TEXT))
+                if "code" in box:
+                    box_bg = blend(box["codeBg"], box.get("codeBgAlpha", 1), alert_bg) if "codeBg" in box else alert_bg
+                    pairs.append((f"{kind} alert code", box["code"], box_bg, MIN_TEXT))
             bad = [
                 (k, round(contrast(rgb(fg), bg), 2), need) for k, fg, bg, need in pairs if contrast(rgb(fg), bg) < need
             ]
@@ -264,7 +285,7 @@ def preset_block(name, theme, c):
         f"  --mpp-h2-border: {rgba(c['h2'], a['h2Border'])};",
         f"  --mpp-bold: {c['bold']};",
         f"  --mpp-code: {c['code']};",
-        f"  --mpp-code-bg: {rgba(tint, code_alpha(c, theme))};",
+        f"  --mpp-code-bg: {'transparent' if c.get('codePlain') else rgba(tint, code_alpha(c, theme))};",
         f"  --mpp-quote: {c['quote']};",
         f"  --mpp-quote-bar: {c['quoteBar']};",
         f"  --mpp-quote-bg: {rgba(c['quoteBar'], a['quote'])};",
@@ -304,8 +325,21 @@ def preset_block(name, theme, c):
             f"{scope} thead :is(th, td) {{ border-top-width: 0; }}",
             f"{scope} tbody tr:first-child > td {{ border-top-color: {TABLE_HEAD_BORDER}; }}",
         ]
+    if c.get("tableRowLines"):
+        # A line under each row only, as on many docs sites: no column lines, outer edge or striped rows
+        lines += [
+            f"{scope} :is(th, td) {{ border-width: 0 0 1px; }}",
+            f"{scope} tbody tr:last-child > td {{ border-bottom-width: 0; }}",
+            f"{scope} tbody tr:nth-child(2n) {{ background-color: transparent; }}",
+        ]
     underline = c.get("linkUnderline")
-    if underline:
+    if underline == "dotted":
+        # Every link: dotted underline in the full link colour, unchanged on hover
+        lines.append(
+            f"{scope} :is(a, a:hover) {{ text-decoration: underline dotted; text-decoration-color: currentColor; "
+            "text-underline-offset: 3.5px; }"
+        )
+    elif underline:
         # Underline at 40% of the link colour, full colour on hover.
         # "external": only web and mail links are underlined; links inside the document or to other files
         # show the underline on hover only (VS Code keeps each link's original target in data-href).
@@ -321,6 +355,12 @@ def preset_block(name, theme, c):
             "  text-decoration-color: currentColor;",
             "  text-underline-offset: 3px;",
             "}",
+        ]
+    if c.get("codeLinks"):
+        # Code inside a link keeps the code colour, without a box, and the link underline takes that colour
+        lines += [
+            f"{scope} a code {{ color: var(--mpp-code); background-color: transparent; }}",
+            f"{scope} :is(a, a:hover):has(code) {{ text-decoration-color: var(--mpp-code); }}",
         ]
     return "\n".join(lines)
 
@@ -339,6 +379,9 @@ def extra_rules(scope, c):
     if "linkBorder" in c:
         lines.append(f"{scope} a:hover {{ text-decoration: none; border-bottom-width: 2px; }}")
     code = []
+    if c.get("codePlain"):
+        # No box: the code colour alone marks inline code
+        code += ["  padding: 0;", "  border-radius: 0;"]
     if "codeRadius" in c:
         code.append(f"  border-radius: {c['codeRadius']}px;")
     if "codePadding" in c:
@@ -379,13 +422,43 @@ def extra_rules(scope, c):
             f"{scope} :is(.mpp-alert-marker, .mpp-alert-marker + br, .mpp-alert-title-only) {{ display: none; }}",
             f"{scope} {alert} > :last-child {{ margin-bottom: 0; }}",
         ]
-        if c.get("linkUnderline"):
+        if c.get("linkUnderline") == "dotted":
+            # Links inside a callout: callout colour and weight, dotted underline at 50% (or the set underline colour)
+            lines.append(
+                f"{scope} {alert} a {{ font-weight: inherit; text-decoration: underline dotted; "
+                "text-decoration-color: color-mix(in srgb, currentColor 50%, transparent); text-underline-offset: 3px; }"
+            )
+        elif c.get("linkUnderline"):
             # Links inside a callout are always underlined, at 65% of the callout colour
             lines.append(
                 f"{scope} {alert} a {{ text-decoration: underline; "
                 "text-decoration-color: color-mix(in srgb, currentColor 65%, transparent); text-underline-offset: 3px; }"
             )
         lines += alert_icon_rules(scope, theirs, c)
+        lines += alert_extra_rules(scope, c["alerts"])
+    return lines
+
+
+def alert_extra_rules(scope, alerts):
+    """Optional per-callout colours for inline code, the other extension's icon and the link underline."""
+    lines = []
+    for kind in ALERT_TYPES:
+        a = alerts[kind]
+        box = f"{scope} :is(blockquote.mpp-alert-{kind}, .markdown-alert.markdown-alert-{kind})"
+        if "code" in a:
+            code = [f"color: {a['code']};"]
+            if "codeBg" in a:
+                code += [
+                    f"background-color: {rgba(a['codeBg'], a.get('codeBgAlpha', 1))};",
+                    "border-radius: 2px;",
+                    "padding: 1px 2px;",
+                ]
+            lines.append(f"{box} code {{ {' '.join(code)} }}")
+        if "underline" in a:
+            lines.append(f"{box} a {{ text-decoration-color: {a['underline']}; }}")
+        if "icon" in a:
+            title = f"{scope} .markdown-alert.markdown-alert-{kind} > .markdown-alert-title"
+            lines.append(f"{title} {{ color: {a['icon']}; }}")
     return lines
 
 
