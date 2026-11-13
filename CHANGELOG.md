@@ -2,6 +2,12 @@
 
 All notable changes to this extension. Versions follow Semantic Versioning (Major.Minor.Patch).
 
+## Unreleased
+
+- New preset `quartz`, in a docs style: light grey text and headings on charcoal (white page in light themes), grey inline code in a bordered box, links with a soft grey underline that turns to the link colour on hover, tables with a line under each row, and blue, green and amber callouts with coloured icons.
+- New preset `zenith`, in a docs style: off-white text on blue-black (white page in light themes), square grey inline-code boxes, links with a solid underline that fade on hover, rounded tables with row lines, faint stripes and greyer cell text, and callouts with a coloured left bar, border and link colour.
+- New preset options: `linkLine`, `codeBorder`, `codeRadius: 0`, `tableText`, `tableStripe`, `tableStripeAlpha`, and per-callout `link` and `bar` colours. Existing presets look the same as before.
+
 ## 0.4.0 (2026-11-12)
 
 - New preset `onyx`: white headings on near-black (white page in light themes), amber bold, orange inline code, soft blue links, and blue, green and amber callouts.

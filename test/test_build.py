@@ -289,6 +289,62 @@ class GeneratedCss(unittest.TestCase):
         with self.assertRaises(SystemExit):
             build.check(dim, quiet=True)
 
+    def test_quartz_and_zenith_options(self):
+        presets = build.load_palettes()
+        quartz = build.preset_block("quartz", "light", presets["quartz"]["light"])
+        for expected in (
+            "--mpp-code-border: 1px solid rgba(215, 216, 218, 0.50);",
+            "  text-decoration-color: #a3aab8;",
+            "a { text-decoration: underline; text-decoration-color: #a3aab8; text-underline-offset: 3px; }",
+            "a:hover { text-decoration-color: currentColor; }",
+        ):
+            self.assertIn(expected, quartz)
+        zenith = build.preset_block("zenith", "dark", presets["zenith"]["dark"])
+        for expected in (
+            "  border-radius: 0px;",
+            " td { color: #bdc1c6; }",
+            "tbody tr:nth-child(2n) { background-color: rgba(255, 255, 255, 0.03); }",
+            ".markdown-alert.markdown-alert-note) a { color: #aecbfa; }",
+            ".markdown-alert.markdown-alert-tip) { border-left: 4px solid #81c995; }",
+        ):
+            self.assertIn(expected, zenith)
+        # The stripe colour must come after the row-lines rule that clears stripes
+        self.assertLess(zenith.index("background-color: transparent; }"), zenith.index("rgba(255, 255, 255, 0.03)"))
+
+    def test_quartz_and_zenith_options_leave_other_presets_alone(self):
+        presets = build.load_palettes()
+        for name in [n for n in presets if n not in ("quartz", "zenith")]:
+            for theme in build.THEMES:
+                block = build.preset_block(name, theme, presets[name][theme])
+                for absent in ("border-left: 4px", " td { color:", "--mpp-code-border: 1px"):
+                    self.assertNotIn(absent, block)
+
+    def test_quartz_and_zenith_options_are_validated(self):
+        bad = build.load_palettes()
+        dark = bad["zenith"]["dark"]
+        dark.update(linkLine="grey", codeRadius=-1, tableText="#bdc", tableStripeAlpha=0)
+        dark["alerts"]["note"].update(link="blue", bar="#8ab4f")
+        errors = " | ".join(build.validate(bad))
+        for expected in (
+            "zenith.dark.linkLine",
+            "zenith.dark.codeRadius",
+            "zenith.dark.tableText",
+            "zenith.dark.tableStripeAlpha",
+            "zenith.dark.alerts.note.link",
+            "zenith.dark.alerts.note.bar",
+        ):
+            self.assertIn(expected, errors)
+
+    def test_table_text_and_callout_links_are_contrast_checked(self):
+        dim = build.load_palettes()
+        dim["zenith"]["dark"]["tableText"] = "#3a3b40"
+        with self.assertRaises(SystemExit):
+            build.check(dim, quiet=True)
+        dim = build.load_palettes()
+        dim["zenith"]["light"]["alerts"]["tip"]["link"] = "#1e8e3e"  # 4.04:1, the colour before darkening
+        with self.assertRaises(SystemExit):
+            build.check(dim, quiet=True)
+
     def test_alert_text_is_contrast_checked(self):
         dim = build.load_palettes()
         dim["ember"]["light"]["alerts"]["tip"]["text"] = "#e0f5e6"

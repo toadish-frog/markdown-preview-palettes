@@ -3,12 +3,12 @@
     "Single source of every preset colour. Edit here, then run: python3 scripts/build.py css",
     "Each preset has a dark and a light set. Optional keys: background, text, link, linkHover, codeTint.",
     "background: replaces the preview background. text: replaces the body text colour. link / linkHover: replace the VS Code link colours.",
-    "codeTint: colour of the inline-code box (defaults to the code colour). Tints and borders are derived automatically. codeTintAlpha / codeBorderAlpha (0 to 1): opacity of the inline-code box and of an optional thin border. linkUnderline: true underlines every link; \"external\" underlines web and mail links only, other links on hover; \"dotted\" gives every link a dotted underline in the full link colour, unchanged on hover.",
+    "codeTint: colour of the inline-code box (defaults to the code colour). Tints and borders are derived automatically. codeTintAlpha / codeBorderAlpha (0 to 1): opacity of the inline-code box and of an optional thin border. linkUnderline: true underlines every link; \"external\" underlines web and mail links only, other links on hover; \"dotted\" gives every link a dotted underline in the full link colour, unchanged on hover. linkLine: underline colour for linkUnderline true (full link colour on hover). codeBorder: 1px inline-code border colour (opacity from codeBorderAlpha); codeRadius may be 0.",
     "Switches (true or left out): codePlain shows inline code without a box; codeLinks keeps code inside a link in the code colour and gives that link's underline the same colour; tableRowLines draws a line under each table row only (no column lines, outer edge or stripes).",
-    "Tables: tableBg (surface), tableHead (header text), tableBorder / tableHeadBorder (grid lines and the line under the header), tableBorderAlpha / tableHeadBorderAlpha (0 to 1), tableRadius (1 to 32 px, rounded outer edge), tableHeadBg / tableHeadBgAlpha (header row fill), tableHeadWeight (100 to 900). Without them, lines mix the text colour into the background.",
+    "Tables: tableBg (surface), tableHead (header text), tableBorder / tableHeadBorder (grid lines and the line under the header), tableBorderAlpha / tableHeadBorderAlpha (0 to 1), tableRadius (1 to 32 px, rounded outer edge), tableHeadBg / tableHeadBgAlpha (header row fill), tableHeadWeight (100 to 900), tableText (cell text), tableStripe / tableStripeAlpha (striped-row colour). tableRadius with tableRowLines gives a rounded outer edge with row lines only. Without them, lines mix the text colour into the background.",
     "Links: linkBorder draws the underline as a bottom border (thicker on hover); linkWeight (100 to 900). Inline code: codeRadius (px), codePadding (for example \"2px 8px\").",
     "Code blocks (box only; syntax colours stay VS Code): preBg, preBorder, preBorderAlpha, preRadius, prePadding.",
-    "Callouts for > [!NOTE] / [!INFO], > [!TIP] and > [!WARNING] quotes: alerts.note / tip / warning, each with text, bg, border and optional bgAlpha, code (inline-code colour), codeBg / codeBgAlpha (inline-code box), icon (Markdown All in One icon colour) and underline (link underline colour); alertRadius, alertPadding; alertIcon / alertIconGap (px): size of the Markdown All in One icon and the gap before the text."
+    "Callouts for > [!NOTE] / [!INFO], > [!TIP] and > [!WARNING] quotes: alerts.note / tip / warning, each with text, bg, border and optional bgAlpha, code (inline-code colour), codeBg / codeBgAlpha (inline-code box), icon (Markdown All in One icon colour), underline (link underline colour), link (link colour) and bar (4px bar on the left edge); alertRadius, alertPadding; alertIcon / alertIconGap (px): size of the Markdown All in One icon and the gap before the text."
   ],
   "teal": {
     "description": "Green-teal headings, amber bold, orange inline code.",
@@ -309,6 +309,82 @@
         "note": { "text": "#0a0a0a", "bg": "#f9f8f6", "border": "#f9f8f6", "code": "#0a0a0a", "codeBg": "#0a0a0a", "codeBgAlpha": 0.05, "icon": "#999999" },
         "tip": { "text": "#0a0a0a", "bg": "#f9f8f6", "border": "#f9f8f6", "code": "#0a0a0a", "codeBg": "#0a0a0a", "codeBgAlpha": 0.05, "icon": "#999999" },
         "warning": { "text": "#5c543d", "bg": "#f9f8f6", "border": "#f9f8f6", "code": "#8e6d10", "icon": "#9c7711", "underline": "#a99a70" }
+      }
+    }
+  },
+  "quartz": {
+    "description": "Docs style: grey text and headings, boxed grey inline code, soft link underlines, blue, green and amber callouts.",
+    "dark": {
+      "background": "#191919", "text": "#d4d4d4",
+      "link": "#d4d4d4", "linkHover": "#d4d4d4", "linkUnderline": true, "linkLine": "#555555",
+      "h1": "#d4d4d4", "h2": "#d4d4d4", "h3": "#d4d4d4", "h4": "#d4d4d4", "h5": "#d4d4d4", "h6": "#d4d4d4",
+      "bold": "#d4d4d4",
+      "code": "#d4d4d4", "codeTint": "#252525", "codeTintAlpha": 1, "codeBorder": "#262626", "codeRadius": 4, "codePadding": "2px 5px",
+      "quote": "#d4d4d4", "quoteBar": "#555555",
+      "quote2": "#8c8c8c", "quote2Bar": "#333333",
+      "tableHead": "#d4d4d4", "tableHeadWeight": 600, "tableBorder": "#262626", "tableRowLines": true,
+      "preBg": "#1f1f1f", "preBorder": "#262626", "preRadius": 12, "prePadding": "16px",
+      "alertRadius": 12, "alertPadding": "12px", "alertIcon": 18, "alertIconGap": 8,
+      "alerts": {
+        "note": { "text": "#d4d4d4", "bg": "#1c2b42", "border": "#1c2b42", "icon": "#87a9ff" },
+        "tip": { "text": "#d4d4d4", "bg": "#163321", "border": "#163321", "icon": "#3ddb85" },
+        "warning": { "text": "#d4d4d4", "bg": "#362613", "border": "#362613", "icon": "#fcbd00" }
+      }
+    },
+    "light": {
+      "background": "#ffffff", "text": "#1b1b1e",
+      "link": "#1b1b1e", "linkHover": "#1b1b1e", "linkUnderline": true, "linkLine": "#a3aab8",
+      "h1": "#1b1b1e", "h2": "#1b1b1e", "h3": "#1b1b1e", "h4": "#1b1b1e", "h5": "#1b1b1e", "h6": "#1b1b1e",
+      "bold": "#1b1b1e",
+      "code": "#1b1b1e", "codeTint": "#fcfcfc", "codeTintAlpha": 1, "codeBorder": "#d7d8da", "codeBorderAlpha": 0.5, "codeRadius": 4, "codePadding": "2px 5px",
+      "quote": "#1b1b1e", "quoteBar": "#caccce",
+      "quote2": "#565b61", "quote2Bar": "#d7d8da",
+      "tableHead": "#1b1b1e", "tableHeadWeight": 600, "tableBorder": "#d7d8da", "tableBorderAlpha": 0.5, "tableRowLines": true,
+      "preBg": "#ffffff", "preBorder": "#d7d8da", "preBorderAlpha": 0.5, "preRadius": 12, "prePadding": "16px",
+      "alertRadius": 12, "alertPadding": "12px", "alertIcon": 18, "alertIconGap": 8,
+      "alerts": {
+        "note": { "text": "#1b1b1e", "bg": "#eef3fe", "border": "#eef3fe", "icon": "#1a73e8" },
+        "tip": { "text": "#1b1b1e", "bg": "#e6f4ea", "border": "#e6f4ea", "icon": "#3ca059" },
+        "warning": { "text": "#1b1b1e", "bg": "#fff4e5", "border": "#fff4e5", "icon": "#d97706" }
+      }
+    }
+  },
+  "zenith": {
+    "description": "Docs style: off-white text on blue-black, grey inline code, solid link underlines, rounded striped tables, callouts with a coloured left bar.",
+    "dark": {
+      "background": "#121317", "text": "#e8eaed",
+      "link": "#e8eaed", "linkHover": "#bdbfc2", "linkUnderline": true, "linkLine": "#e8eaed",
+      "h1": "#e8eaed", "h2": "#e8eaed", "h3": "#e8eaed", "h4": "#e8eaed", "h5": "#e8eaed", "h6": "#e8eaed",
+      "bold": "#e8eaed",
+      "code": "#e8eaed", "codeTint": "#2f3034", "codeTintAlpha": 1, "codeRadius": 0, "codePadding": "2px 6px",
+      "quote": "#bdc1c6", "quoteBar": "#36363a",
+      "quote2": "#bdc1c6", "quote2Bar": "#2f3034",
+      "tableHead": "#e8eaed", "tableHeadWeight": 600, "tableText": "#bdc1c6",
+      "tableBorder": "#ffffff", "tableBorderAlpha": 0.15, "tableRadius": 8, "tableRowLines": true, "tableStripe": "#ffffff", "tableStripeAlpha": 0.03,
+      "preBg": "#121317", "preBorder": "#ffffff", "preBorderAlpha": 0.15, "preRadius": 8, "prePadding": "14px 16px",
+      "alertRadius": 8, "alertPadding": "14px 18px", "alertIcon": 16, "alertIconGap": 8,
+      "alerts": {
+        "note": { "text": "#e8eaed", "bg": "#8ab4f8", "bgAlpha": 0.08, "border": "#303b4f", "bar": "#8ab4f8", "icon": "#8ab4f8", "link": "#aecbfa", "underline": "#aecbfa", "code": "#e8eaed", "codeBg": "#bdc3ff", "codeBgAlpha": 0.12 },
+        "tip": { "text": "#e8eaed", "bg": "#81c995", "bgAlpha": 0.08, "border": "#2e4036", "bar": "#81c995", "icon": "#81c995", "link": "#a8dab5", "underline": "#a8dab5" },
+        "warning": { "text": "#e8eaed", "bg": "#fdd663", "bgAlpha": 0.08, "border": "#4d442a", "bar": "#fdd663", "icon": "#fdd663", "link": "#fdd663", "underline": "#fdd663" }
+      }
+    },
+    "light": {
+      "background": "#ffffff", "text": "#202124",
+      "link": "#202124", "linkHover": "#4d4d50", "linkUnderline": true, "linkLine": "#202124",
+      "h1": "#202124", "h2": "#202124", "h3": "#202124", "h4": "#202124", "h5": "#202124", "h6": "#202124",
+      "bold": "#202124",
+      "code": "#202124", "codeTint": "#f8f9fc", "codeTintAlpha": 1, "codeRadius": 0, "codePadding": "2px 6px",
+      "quote": "#202124", "quoteBar": "#dadce0",
+      "quote2": "#3c4043", "quote2Bar": "#f1f3f4",
+      "tableHead": "#121317", "tableHeadWeight": 600, "tableText": "#202124",
+      "tableBorder": "#212226", "tableBorderAlpha": 0.06, "tableRadius": 8, "tableRowLines": true, "tableStripe": "#000000", "tableStripeAlpha": 0.016,
+      "preBg": "#ffffff", "preBorder": "#212226", "preBorderAlpha": 0.06, "preRadius": 8, "prePadding": "14px 16px",
+      "alertRadius": 8, "alertPadding": "14px 18px", "alertIcon": 16, "alertIconGap": 8,
+      "alerts": {
+        "note": { "text": "#202124", "bg": "#f8fafd", "border": "#d2e3fc", "bar": "#1a73e8", "icon": "#174ea6", "link": "#176fe4", "underline": "#176fe4", "code": "#202124", "codeBg": "#0f1c8a", "codeBgAlpha": 0.12 },
+        "tip": { "text": "#202124", "bg": "#f6fcf7", "border": "#ceead6", "bar": "#1e8e3e", "icon": "#137333", "link": "#1c8339", "underline": "#1c8339" },
+        "warning": { "text": "#202124", "bg": "#fefcf5", "border": "#feefc3", "bar": "#f9ab00", "icon": "#b06000", "link": "#b06000", "underline": "#b06000" }
       }
     }
   }
