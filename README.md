@@ -25,6 +25,8 @@ Colour presets for the built-in VS Code Markdown preview. Headings, bold text, i
 | `folio` | Near-white, one shade for every level | Near-white | Soft red | Light blue | Charcoal (off-white in light themes) |
 | `onyx` | White, then grey | Amber | Orange | Soft blue | Near-black (white in light themes) |
 | `graphite` | White, then light grey | White | Orange, no box | White, dotted underline | Near-black (white in light themes) |
+| `quartz` | Light grey, same as the text | Light grey | Grey, in a bordered box | Text colour, soft grey underline | Charcoal (white in light themes) |
+| `zenith` | Off-white | Off-white | Off-white, in a square grey box | Text colour, solid underline that fades on hover | Blue-black (white in light themes) |
 | `default` | Built-in VS Code look (all colouring off) | | | | |
 
 `parchment` uses colours from the Apache 2.0 [brand-guidelines skill](https://github.com/anthropics/skills/tree/main/skills/brand-guidelines) (Light `#faf9f5`, Dark `#141413`, Mid Gray `#b0aea5`, Light Gray `#e8e6dc`, Orange `#d97757`, Blue `#6a9bcc`, Green `#788c5d`). In light themes, some are darkened slightly to meet the contrast minimum.
@@ -50,10 +52,10 @@ The setting can also be set per workspace.
 - **Bold text:** bold inside a heading or link keeps the heading or link colour.
 - **Inline code:** coloured, in a tinted box. Inline code inside a link, `` [`text`](url) ``, takes the link colour. `graphite` shows inline code without a box, and code inside a link keeps the code colour and colours the link underline.
 - **Quotes:** `>` and nested `>>` each have their own colour.
-- **Callouts:** in `ember`, `folio`, `onyx` and `graphite`, GitHub alerts `> [!TIP]` (green), `> [!NOTE]` or `> [!INFO]` (blue) and `> [!WARNING]` (yellow in `ember`, orange in `folio`) become coloured boxes; inline code and links inside take the callout colour. With [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) installed, its alert boxes get the same colours, keep its icon and hide its title word. `onyx` uses blue, green and amber. `graphite` uses grey boxes for tips and notes and a muted amber for warnings, with its own colours for inline code and the icon. Other presets show them as plain quotes.
-- **Links:** some presets set their own link colour; the others keep the VS Code link colour. `folio` underlines web and mail links; links within the document or to other files show the underline on hover only. `graphite` gives every link a dotted underline.
-- **Tables:** GitHub style, with a full grid border and striped rows. `folio` follows the Claude Platform docs: a shaded header row, rounded corners and soft lines. `graphite` draws a line under each row only.
-- **Code blocks:** syntax colours always stay the VS Code ones. `ember`, `onyx` and `graphite` also give the box their own background, border and rounded corners.
+- **Callouts:** in `ember`, `folio`, `onyx`, `graphite`, `quartz` and `zenith`, GitHub alerts `> [!TIP]` (green), `> [!NOTE]` or `> [!INFO]` (blue) and `> [!WARNING]` (yellow in `ember`, orange in `folio`) become coloured boxes; inline code and links inside take the callout colour. With [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) installed, its alert boxes get the same colours, keep its icon and hide its title word. `onyx` uses blue, green and amber. `graphite` uses grey boxes for tips and notes and a muted amber for warnings, with its own colours for inline code and the icon. `quartz` uses filled blue, green and amber boxes with coloured icons. `zenith` adds a coloured bar on the left edge and its own link colours. Other presets show them as plain quotes.
+- **Links:** some presets set their own link colour; the others keep the VS Code link colour. `folio` underlines web and mail links; links within the document or to other files show the underline on hover only. `graphite` gives every link a dotted underline. `quartz` and `zenith` underline every link: `quartz` in soft grey, turning to the link colour on hover; `zenith` in the link colour, fading on hover.
+- **Tables:** GitHub style, with a full grid border and striped rows. `folio` follows the Claude Platform docs: a shaded header row, rounded corners and soft lines. `graphite` and `quartz` draw a line under each row only. `zenith` has a rounded outer edge, lines between rows, faint stripes and greyer cell text.
+- **Code blocks:** syntax colours always stay the VS Code ones. `ember`, `onyx`, `graphite`, `quartz` and `zenith` also give the box their own background, border and rounded corners.
 
 ## Development
 

@@ -51,6 +51,8 @@
             "folio",
             "onyx",
             "graphite",
+            "quartz",
+            "zenith",
             "default"
           ],
           "enumDescriptions": [
@@ -66,6 +68,8 @@
             "Document style: near-white or near-black headings, warm grey text, red inline code, blue links.",
             "White headings on near-black, amber bold, orange inline code, soft blue links, blue, green and amber callouts.",
             "Docs style: white or black headings, grey text, orange inline code without a box, dotted link underlines, grey callouts.",
+            "Docs style: grey text and headings, boxed grey inline code, soft link underlines, blue, green and amber callouts.",
+            "Docs style: off-white text on blue-black, grey inline code, solid link underlines, rounded striped tables, callouts with a coloured left bar.",
             "Built-in VS Code preview look (turns all colouring off)."
           ],
           "markdownDescription": "Colour preset for the Markdown preview. `default` restores the built-in VS Code look. High-contrast themes always keep the built-in look."
