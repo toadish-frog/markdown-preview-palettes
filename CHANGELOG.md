@@ -4,8 +4,10 @@ All notable changes to this extension. Versions follow Semantic Versioning (Majo
 
 ## Unreleased
 
-- New preset `quartz`, in a docs style: light grey text and headings on charcoal (white page in light themes), grey inline code in a bordered box, links with a soft grey underline that turns to the link colour on hover, tables with a line under each row, and blue, green and amber callouts with coloured icons.
-- New preset `zenith`, in a docs style: off-white text on blue-black (white page in light themes), square grey inline-code boxes, links with a solid underline that fade on hover, rounded tables with row lines, faint stripes and greyer cell text, and callouts with a coloured left bar, border and link colour.
+- **Breaking:** every palette is now two presets, `<name>-dark` and `<name>-light` (for example `ember-dark` and `ember-light`). Each shows as chosen in any VS Code theme, instead of following the VS Code theme. The old names (`teal`, `ember` and so on) no longer work and fall back to the new default, `teal-dark`: pick a preset again in Settings.
+- In a VS Code theme of the other mode, presets without their own background, text or link colours use the VS Code Dark Modern or Light Modern colours, and code blocks keep the VS Code editor background, so syntax colours stay readable. The contrast check now also covers these colours.
+- New preset `quartz`, in a docs style: light grey text and headings on charcoal (white page in `quartz-light`), grey inline code in a bordered box, links with a soft grey underline that turns to the link colour on hover, tables with a line under each row, and blue, green and amber callouts with coloured icons.
+- New preset `zenith`, in a docs style: off-white text on blue-black (white page in `zenith-light`), square grey inline-code boxes, links with a solid underline that fade on hover, rounded tables with row lines, faint stripes and greyer cell text, and callouts with a coloured left bar, border and link colour.
 - New preset options: `linkLine`, `codeBorder`, `codeRadius: 0`, `tableText`, `tableStripe`, `tableStripeAlpha`, and per-callout `link` and `bar` colours. Existing presets look the same as before.
 
 ## 0.4.0 (2026-11-12)

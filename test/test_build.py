@@ -5,6 +5,7 @@ import re
 import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -49,19 +50,63 @@ class Palettes(unittest.TestCase):
             build.check(dim, quiet=True)
 
 
+def own_rules(block):
+    """A preset block without the rules for the VS Code theme of the other mode, which always come last."""
+    return block.split("\nbody.vscode-")[0]
+
+
 class GeneratedCss(unittest.TestCase):
     def test_committed_css_is_up_to_date(self):
         expected = build.render_css(build.load_palettes())
         actual = build.CSS_OUT.read_text(encoding="utf-8")
         self.assertEqual(actual, expected, "media/preview.css is stale: run python3 scripts/build.py css")
 
-    def test_every_preset_has_dark_and_light_blocks(self):
-        css = build.render_css(build.load_palettes())
-        for name in build.load_palettes():
-            for theme in build.THEMES:
-                self.assertIn(
-                    f'body.vscode-{theme}:not(.vscode-high-contrast):has(.mpp-preset[data-preset="{name}"])', css
-                )
+    def test_every_palette_has_a_dark_and_a_light_preset(self):
+        presets = build.load_palettes()
+        css = build.render_css(presets)
+        self.assertEqual(len(build.preset_names(presets)), 2 * len(presets))
+        for name in presets:
+            for theme, other in (("dark", "light"), ("light", "dark")):
+                marker = f'.mpp-preset[data-preset="{name}-{theme}"]'
+                # Applies in dark and light VS Code themes, with extra rules for the theme of the other mode
+                self.assertIn(f"body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has({marker}) {{", css)
+                self.assertIn(f"body.vscode-{other}:not(.vscode-high-contrast):has({marker}) {{", css)
+                self.assertNotIn(f"body.vscode-{theme}:not(.vscode-high-contrast):has({marker})", css)
+            self.assertNotIn(f'data-preset="{name}"]', css)  # the old names, without -dark / -light, are gone
+
+    def test_other_theme_falls_back_to_modern_colours(self):
+        presets = build.load_palettes()
+        teal = build.preset_block("teal", "dark", presets["teal"]["dark"])
+        other = 'body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"])'
+        for expected in (
+            f"{other} {{\n  color-scheme: dark;\n  background-color: #1f1f1f;\n  color: #cccccc;\n"
+            "  --vscode-textLink-foreground: #4daafc;\n  --vscode-textLink-activeForeground: #4daafc;\n}",
+            f"{other} hr {{ border-color: color-mix(in srgb, currentColor 18%, transparent); }}",
+        ):
+            self.assertIn(expected, teal)
+        # A preset with its own background, text and links keeps them in the other theme
+        ember = build.preset_block("ember", "light", presets["ember"]["light"])
+        other = 'body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"])'
+        self.assertIn(f"{other} {{\n  color-scheme: light;\n}}", ember)
+
+    def test_other_theme_code_blocks_keep_the_editor_background(self):
+        # Syntax colours follow the VS Code theme, so the box does too; this rule must come after the preset's own box
+        block = build.preset_block("ember", "light", build.load_palettes()["ember"]["light"])
+        other = 'body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) pre {'
+        self.assertIn(f"{other}\n  --vscode-textCodeBlock-background: var(--vscode-editor-background);", block)
+        self.assertLess(block.index("  background-color: #ffffff;\n  border:"), block.index(other))
+
+    def test_fallback_text_and_link_are_contrast_checked(self):
+        presets = build.load_palettes()
+        with mock.patch.dict(build.DEFAULT_LINK, light="#eeeeee"), self.assertRaises(SystemExit):
+            build.check(presets, quiet=True)  # teal, mono and azure light keep the fallback link colour
+        with mock.patch.dict(build.DEFAULT_TEXT, dark="#333333"), self.assertRaises(SystemExit):
+            build.check(presets, quiet=True)
+
+    def test_preset_names_cannot_end_in_a_mode(self):
+        bad = build.load_palettes()
+        bad["mono-dark"] = bad["mono"]
+        self.assertIn("mono-dark: invalid preset name", build.validate(bad))
 
     def test_tables_have_grid_and_striped_rows(self):
         css = build.render_css(build.load_palettes())
@@ -90,7 +135,9 @@ class GeneratedCss(unittest.TestCase):
 
     def test_external_only_link_underline(self):
         c = dict(build.load_palettes()["mono"]["dark"], linkUnderline="external")
-        scope = 'body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono"])'
+        scope = (
+            'body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"])'
+        )
         block = build.preset_block("mono", "dark", c)
         # Web and mail links are underlined; any link is underlined on hover; other links are not otherwise
         self.assertIn(
@@ -188,11 +235,11 @@ class GeneratedCss(unittest.TestCase):
         ):
             self.assertIn(expected, block)
         plain = build.preset_block("mono", "dark", build.load_palettes()["mono"]["dark"])
-        for absent in ("mpp-alert", "border-bottom:", " pre {", "font-weight"):
-            self.assertNotIn(absent, plain)
+        for absent in ("mpp-alert", "border-bottom:", '"mono-dark"]) pre {', "font-weight"):
+            self.assertNotIn(absent, own_rules(plain))
         folio = build.preset_block("folio", "dark", build.load_palettes()["folio"]["dark"])
-        for absent in ("border-bottom:", " pre {", "  font-weight:"):  # no link weight or code box
-            self.assertNotIn(absent, folio)
+        for absent in ("border-bottom:", '"folio-dark"]) pre {', "  font-weight:"):  # no link weight or code box
+            self.assertNotIn(absent, own_rules(folio))
 
     def test_folio_callouts(self):
         block = build.preset_block("folio", "dark", build.load_palettes()["folio"]["dark"])
@@ -356,16 +403,22 @@ class PresetNamesStayInSync(unittest.TestCase):
     """The preset list lives in three files; they must agree."""
 
     def test_names_match(self):
-        palettes = set(build.load_palettes())
+        palettes = build.load_palettes()
+        presets = set(build.preset_names(palettes))
         pkg = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))
         setting = pkg["contributes"]["configuration"]["properties"]["markdownPreviewPalettes.preset"]
         js = (ROOT / "extension.js").read_text(encoding="utf-8")
-        js_names = set(re.findall(r"'([a-z]+)'", re.search(r"PRESETS = new Set\(\[(.*?)\]\)", js).group(1)))
+        js_palettes = re.findall(r"'([a-z]+)'", re.search(r"PALETTES = \[(.*?)\]", js).group(1))
 
-        self.assertEqual(set(setting["enum"]), palettes | {"default"})
-        self.assertEqual(js_names, palettes | {"default"})
+        self.assertEqual(set(setting["enum"]), presets | {"default"})
+        self.assertEqual(js_palettes, list(palettes))
         self.assertEqual(len(setting["enum"]), len(setting["enumDescriptions"]))
-        self.assertIn(setting["default"], palettes)
+        self.assertIn(setting["default"], presets)
+        self.assertEqual(re.search(r"FALLBACK = '([a-z-]+)'", js).group(1), setting["default"])
+        # Each description starts with its mode
+        for name, description in zip(setting["enum"], setting["enumDescriptions"]):
+            if name != "default":
+                self.assertTrue(description.startswith(f"{name.rsplit('-', 1)[1].title()}. "), name)
 
 
 if __name__ == "__main__":
