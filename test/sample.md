@@ -1,6 +1,6 @@
 # Heading 1: Sample Document
 
-Every element the presets colour, for checking each preset in the dark and light themes. Open the preview, then switch `markdownPreviewPalettes.preset` in Settings.
+Every element the presets colour, for checking each preset. Open the preview, then switch `markdownPreviewPalettes.preset` in Settings. Check each `-dark` and `-light` preset in a dark and a light VS Code theme: a preset must look the same in both, code blocks included.
 
 ## Heading 2: Text Styles
 
@@ -26,7 +26,7 @@ Links inside the project: a [link to a heading](#heading-2-quotes) and a [link t
 
 ## Heading 2: Callouts
 
-Presets with callout colours (`ember`, `folio`, `onyx`, `graphite`) turn these GitHub alerts into coloured boxes; the others show plain quotes.
+Presets with callout colours (`ember`, `folio`, `onyx`, `graphite`, `quartz`, `zenith`, each `-dark` and `-light`) turn these GitHub alerts into coloured boxes; the others show plain quotes.
 
 > [!TIP]
 > A tip with `inline code`, **bold** and a [link to a heading](#heading-2-quotes).

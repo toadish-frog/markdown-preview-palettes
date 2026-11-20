@@ -21,9 +21,80 @@ PALETTES = ROOT / "palettes" / "palettes.json"
 CSS_OUT = ROOT / "media" / "preview.css"
 DIST = ROOT / "dist"
 
+# Each palette in palettes.json has a dark and a light colour set; each set is its own preset, "<name>-dark" and
+# "<name>-light", shown in any VS Code theme
 THEMES = ("dark", "light")
-# Preview background assumed when a preset keeps the theme's own (VS Code Dark Modern / Light Modern)
+OTHER_THEME = {"dark": "light", "light": "dark"}
+# A preset looks the same in every VS Code theme. Where it leaves a colour to VS Code (page, text, links, code blocks),
+# a theme of the same mode shows the theme's own colour; a theme of the other mode shows the VS Code Dark Modern /
+# Light Modern colour below, as a theme of the preset's mode would. The contrast check assumes these colours.
 DEFAULT_BG = {"dark": "#1f1f1f", "light": "#ffffff"}
+DEFAULT_TEXT = {"dark": "#cccccc", "light": "#3b3b3b"}
+DEFAULT_LINK = {"dark": "#4daafc", "light": "#005fb8"}
+# The other VS Code theme colours the preview uses, as set in Dark Modern / Light Modern (VS Code 1.147.0)
+VSCODE_COLOURS = {
+    "dark": {
+        "editor-background": "#1f1f1f",
+        "editor-foreground": "#cccccc",
+        "textCodeBlock-background": "#2b2b2b",
+        "widget-border": "#313131",
+        "textBlockQuote-background": "#2b2b2b",
+        "textBlockQuote-border": "#616161",
+        "textPreformat-background": "#3c3c3c",
+        "textPreformat-foreground": "#d0d0d0",
+        "keybindingLabel-foreground": "#cccccc",
+        "editorGutter-modifiedBackground": "#0078d4",
+    },
+    "light": {
+        "editor-background": "#ffffff",
+        "editor-foreground": "#3b3b3b",
+        "textCodeBlock-background": "#f8f8f8",
+        "widget-border": "#e5e5e5",
+        "textBlockQuote-background": "#f8f8f8",
+        "textBlockQuote-border": "#e5e5e5",
+        "textPreformat-background": "#0000001f",
+        "textPreformat-foreground": "#3b3b3b",
+        "keybindingLabel-foreground": "#3b3b3b",
+        "editorGutter-modifiedBackground": "#005fb8",
+    },
+}
+# VS Code's own Markdown preview colours that depend on the theme (markdown-language-features media/markdown.css)
+LINE_BORDER = {"dark": "rgba(255, 255, 255, 0.18)", "light": "rgba(0, 0, 0, 0.18)"}
+TH_BORDER = {"dark": "rgba(255, 255, 255, 0.69)", "light": "rgba(0, 0, 0, 0.69)"}
+LINE_MARKER = {
+    "dark": ("rgba(255, 255, 255, 0.4)", "rgba(255, 255, 255, 0.60)"),
+    "light": ("rgba(0, 0, 0, 0.15)", "rgba(0, 0, 0, 0.40)"),
+}
+# Code-block syntax colours of VS Code's Markdown preview (media/highlight.css, VS Code 1.147.0), copied unchanged.
+# Dark themes use the dark set; light themes use the dark set with the light set on top.
+SYNTAX = {
+    "dark": (
+        (("keyword", "literal", "symbol", "name", "link"), "#569CD6"),
+        (("built_in", "type"), "#4EC9B0"),
+        (("number", "class"), "#B8D7A3"),
+        (("string", "meta-string"), "#D69D85"),
+        (("regexp", "template-tag"), "#9A5334"),
+        (("subst", "function", "title", "params", "formula"), "#DCDCDC"),
+        (("comment", "quote"), "#57A64A"),
+        (("doctag",), "#608B4E"),
+        (("meta", "meta-keyword", "tag"), "#9B9B9B"),
+        (("variable", "template-variable"), "#BD63C5"),
+        (("attr", "attribute", "builtin-name"), "#9CDCFE"),
+        (("section",), "gold"),
+        (("bullet", "selector-tag", "selector-id", "selector-class", "selector-attr", "selector-pseudo"), "#D7BA7D"),
+    ),
+    "light": (
+        (("function", "params"), "inherit"),
+        (("comment", "quote", "number", "class", "variable"), "#008000"),
+        (("keyword", "selector-tag", "name", "tag"), "#00f"),
+        (("built_in", "builtin-name"), "#007acc"),
+        (("string", "section", "attribute", "literal", "template-tag", "template-variable", "type"), "#a31515"),
+        (("subst", "selector-attr", "selector-pseudo", "meta", "meta-keyword"), "#2b91af"),
+        (("title", "doctag"), "#808080"),
+        (("attr",), "#f00"),
+        (("symbol", "bullet", "link"), "#00b0e8"),
+    ),
+}
 # Opacity of derived tints and borders
 ALPHA = {
     "dark": {"code": 0.12, "quote": 0.08, "h1Border": 0.35, "h2Border": 0.30},
@@ -113,6 +184,15 @@ TABLE_HEAD_BORDER = f"var(--mpp-table-head-border, var(--mpp-table-border, {TABL
 # ---------- Palette loading and validation ----------
 
 
+def preset_name(name, theme):
+    """Settings value of one colour set, for example "teal-dark"."""
+    return f"{name}-{theme}"
+
+
+def preset_names(presets):
+    return [preset_name(name, theme) for name in presets for theme in THEMES]
+
+
 def load_palettes(path=PALETTES):
     data = json.loads(Path(path).read_text(encoding="utf-8"))
     presets = {k: v for k, v in data.items() if not k.startswith("_")}
@@ -126,7 +206,7 @@ def validate(presets):
     """Return a list of problems; empty when every preset is complete and well-formed."""
     errors = []
     for name, preset in presets.items():
-        if not PRESET_NAME.match(name) or name == "default":
+        if not PRESET_NAME.match(name) or name == "default" or name.endswith(tuple(f"-{t}" for t in THEMES)):
             errors.append(f"{name}: invalid preset name")
         for theme in THEMES:
             colours = preset.get(theme)
@@ -236,10 +316,9 @@ def check(presets, quiet=False):
                 ("quote", c["quote"], quote_bg, MIN_TEXT),
                 ("quote2", c["quote2"], blend(c["quote2Bar"], a["quote"], quote_bg), MIN_TEXT),
             ]
-            if "text" in c:
-                pairs.append(("text", c["text"], base, MIN_TEXT))
-            if "link" in c:
-                pairs.append(("link", c["link"], base, MIN_TEXT))
+            # Text and links the preset leaves to VS Code: checked with the Dark / Light Modern colours it falls back to
+            pairs.append(("text", c.get("text", DEFAULT_TEXT[theme]), base, MIN_TEXT))
+            pairs.append(("link", c.get("link", DEFAULT_LINK[theme]), base, MIN_TEXT))
             # Table text sits on the table surface when the preset sets one
             table_bg = rgb(c["tableBg"]) if "tableBg" in c else base
             if "tableHead" in c:
@@ -264,7 +343,7 @@ def check(presets, quiet=False):
             ]
             status = "ok" if not bad else "FAIL " + ", ".join(f"{k} {r}:1 (needs {n})" for k, r, n in bad)
             if not quiet:
-                print(f"  {name:8} {theme:5} {status}")
+                print(f"  {preset_name(name, theme):15} {status}")
             failures += len(bad)
     if failures:
         sys.exit(f"Contrast check failed: {failures} colour(s) below the minimum.")
@@ -279,9 +358,14 @@ def code_alpha(c, theme):
     return c.get("codeTintAlpha", ALPHA[theme]["code"])
 
 
+def preset_marker(name, theme):
+    return f'.mpp-preset[data-preset="{preset_name(name, theme)}"]'
+
+
 def preset_block(name, theme, c):
+    """CSS for one colour set, applied in dark and light VS Code themes alike (never in high-contrast themes)."""
     a = ALPHA[theme]
-    scope = f'body.vscode-{theme}:not(.vscode-high-contrast):has(.mpp-preset[data-preset="{name}"])'
+    scope = f"body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has({preset_marker(name, theme)})"
     tint = c.get("codeTint", c["code"])
     lines = [f"{scope} {{"]
     if "background" in c:
@@ -382,7 +466,52 @@ def preset_block(name, theme, c):
             f"{scope} a code {{ color: var(--mpp-code); background-color: transparent; }}",
             f"{scope} :is(a, a:hover):has(code) {{ text-decoration-color: var(--mpp-code); }}",
         ]
+    lines += other_theme_rules(name, theme, c)
     return "\n".join(lines)
+
+
+def other_theme_rules(name, theme, c):
+    """A preset shown in a VS Code theme of the other mode, for example a light preset in a dark theme.
+
+    The preset looks exactly as in a theme of its own mode: its own colours are unchanged, and what it leaves to
+    VS Code (page, text, links, code-block box, code text and syntax colours, rules) takes the VS Code Dark / Light
+    Modern colour of the preset's mode. Nothing here applies in a theme of the preset's own mode.
+    """
+    other = OTHER_THEME[theme]
+    marker = preset_marker(name, theme)
+    scope = f"body.vscode-{other}:not(.vscode-high-contrast):has({marker})"
+    page = []
+    if "background" not in c:
+        page.append(f"  background-color: {DEFAULT_BG[theme]};")
+    if "text" not in c:
+        page.append(f"  color: {DEFAULT_TEXT[theme]};")
+    if "link" not in c:
+        page += [
+            f"  --vscode-textLink-foreground: {DEFAULT_LINK[theme]};",
+            f"  --vscode-textLink-activeForeground: {DEFAULT_LINK[theme]};",
+        ]
+    # VS Code theme colours the preview uses (code blocks, quotes, inline code, ...); the preset's own rules still win
+    page += [f"  --vscode-{key}: {value};" for key, value in VSCODE_COLOURS[theme].items()]
+    lines = [f"{scope} {{", *page, "}"]
+    # VS Code's theme-specific line colours. :where() keeps these as weak as VS Code's own rules,
+    # so the preset's heading and table lines still win, as in a theme of the preset's mode
+    weak = f"body.vscode-{other}:where(:not(.vscode-high-contrast):has({marker}))"
+    lines += [
+        f"{weak} :is(h1, h2, hr, td) {{ border-color: {LINE_BORDER[theme]}; }}",
+        f"{weak} th {{ border-color: {TH_BORDER[theme]}; }}",
+    ]
+    # Editor-selection line marker beside the preview text
+    selection = f"body.vscode-{other}.showEditorSelection:not(.vscode-high-contrast):has({marker})"
+    active, hover = LINE_MARKER[theme]
+    lines += [
+        f"{selection} .code-active-line:before {{ border-left: 3px solid {active}; }}",
+        f"{selection} .code-line:hover:before {{ border-left: 3px solid {hover}; }}",
+    ]
+    # Syntax colours of the preset's mode: a light preset adds VS Code's light set to the dark one already in place;
+    # a dark preset restores the dark set over VS Code's light one
+    for classes, colour in SYNTAX[theme]:
+        lines.append(f"{scope} :is({', '.join(f'.hljs-{c}' for c in classes)}) {{ color: {colour}; }}")
+    return lines
 
 
 def extra_rules(scope, c):
@@ -586,7 +715,7 @@ def render_css(presets):
         " * GENERATED by scripts/build.py from palettes/palettes.json. Do not edit by hand.\n"
         " * Preview only; Markdown files are never changed. High-contrast themes keep the VS Code defaults.\n"
         " */\n\n"
-        "/* ---------- Preset colours (one block per preset and theme) ---------- */\n\n"
+        "/* ---------- Preset colours (one block per preset, <name>-dark and <name>-light) ---------- */\n\n"
     )
     return header + "\n\n".join(blocks) + "\n" + rules
 
@@ -594,7 +723,7 @@ def render_css(presets):
 def build_css(presets):
     CSS_OUT.parent.mkdir(exist_ok=True)
     CSS_OUT.write_text(render_css(presets), encoding="utf-8")
-    print(f"Wrote {CSS_OUT.relative_to(ROOT)} ({len(presets)} presets).")
+    print(f"Wrote {CSS_OUT.relative_to(ROOT)} ({len(preset_names(presets))} presets).")
 
 
 # ---------- File lists (exact .gitignore / .vscodeignore rules, via git, without a repository) ----------

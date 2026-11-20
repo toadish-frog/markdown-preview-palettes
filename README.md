@@ -6,28 +6,32 @@
 Colour presets for the built-in VS Code Markdown preview. Headings, bold text, inline code, quotes and links each get their own colour, so long notes are easier to scan.
 
 - **Preview only:** Markdown files are never changed.
-- **Dark and light:** every preset has a version for each theme. High-contrast themes keep the built-in look.
+- **Dark and light:** every palette comes as two presets, `-dark` and `-light`. Each shows as chosen, in any VS Code theme. High-contrast themes keep the built-in look.
 - **Readable:** every colour meets the WCAG contrast minimum (4.5:1 for text, 3:1 for the two largest headings). The build fails otherwise.
 
 ## Presets
 
-| Preset | Headings | Bold | Inline code | Links | Background (dark theme) |
+| Presets | Headings | Bold | Inline code | Links | Background (dark / light) |
 | --- | --- | --- | --- | --- | --- |
-| `teal` (default) | Green-teal family | Amber | Muted orange | VS Code blue | Theme default |
-| `plum` | Plum and lavender | Yellow | Red | Light blue | Charcoal |
-| `crimson` | Red | White | Steel grey | Cyan | Near-black |
-| `golden` | Gold, amber, orange | White | Ivory | Teal | Near-black |
-| `mono` | Greyscale | Brightest white | Light grey | VS Code blue | Theme default |
-| `phosphor` | Terminal greens | Pale green | Lime | Cyan | Green-black |
-| `parchment` | Gold and brown | Cream | Orange | Light blue | Warm charcoal (beige paper in light themes) |
-| `azure` | Blue | White | Light blue | VS Code blue | Theme default |
-| `ember` | White and light grey | Off-white | Light grey | Off-white, orange underline | Near-black (off-white paper in light themes) |
-| `folio` | Near-white, one shade for every level | Near-white | Soft red | Light blue | Charcoal (off-white in light themes) |
-| `onyx` | White, then grey | Amber | Orange | Soft blue | Near-black (white in light themes) |
-| `graphite` | White, then light grey | White | Orange, no box | White, dotted underline | Near-black (white in light themes) |
-| `quartz` | Light grey, same as the text | Light grey | Grey, in a bordered box | Text colour, soft grey underline | Charcoal (white in light themes) |
-| `zenith` | Off-white | Off-white | Off-white, in a square grey box | Text colour, solid underline that fades on hover | Blue-black (white in light themes) |
+| `teal-dark` (default), `teal-light` | Green-teal family | Amber | Muted orange | VS Code blue | Theme default / theme default |
+| `plum-dark`, `plum-light` | Plum and lavender | Yellow | Red | Light blue | Charcoal / theme default |
+| `crimson-dark`, `crimson-light` | Red | White | Steel grey | Cyan | Near-black / theme default |
+| `golden-dark`, `golden-light` | Gold, amber, orange | White | Ivory | Teal | Near-black / cream |
+| `mono-dark`, `mono-light` | Greyscale | Brightest white | Light grey | VS Code blue | Theme default / theme default |
+| `phosphor-dark`, `phosphor-light` | Terminal greens | Pale green | Lime | Cyan | Green-black / pale green |
+| `parchment-dark`, `parchment-light` | Gold and brown | Cream | Orange | Light blue | Warm charcoal / beige paper |
+| `azure-dark`, `azure-light` | Blue | White | Light blue | VS Code blue | Theme default / theme default |
+| `ember-dark`, `ember-light` | White and light grey | Off-white | Light grey | Off-white, orange underline | Near-black / off-white paper |
+| `folio-dark`, `folio-light` | Near-white, one shade for every level | Near-white | Soft red | Light blue | Charcoal / off-white |
+| `onyx-dark`, `onyx-light` | White, then grey | Amber | Orange | Soft blue | Near-black / white |
+| `graphite-dark`, `graphite-light` | White, then light grey | White | Orange, no box | White, dotted underline | Near-black / white |
+| `quartz-dark`, `quartz-light` | Light grey, same as the text | Light grey | Grey, in a bordered box | Text colour, soft grey underline | Charcoal / white |
+| `zenith-dark`, `zenith-light` | Off-white | Off-white | Off-white, in a square grey box | Text colour, solid underline that fades on hover | Blue-black / white |
 | `default` | Built-in VS Code look (all colouring off) | | | | |
+
+- **Colour columns:** they describe the `-dark` preset. The `-light` preset uses darker versions of the same colours, made for a light page.
+- **Theme default:** in a VS Code theme of the same mode, the preset keeps the theme's background, text and link colours. In a theme of the other mode (for example `teal-light` in a dark theme), it uses the VS Code Light Modern or Dark Modern colours, so the preset looks the same in every theme.
+- **Palette names:** below, a name without `-dark` or `-light` (for example `graphite`) means both of its presets.
 
 `parchment` uses colours from the Apache 2.0 [brand-guidelines skill](https://github.com/anthropics/skills/tree/main/skills/brand-guidelines) (Light `#faf9f5`, Dark `#141413`, Mid Gray `#b0aea5`, Light Gray `#e8e6dc`, Orange `#d97757`, Blue `#6a9bcc`, Green `#788c5d`). In light themes, some are darkened slightly to meet the contrast minimum.
 
@@ -41,10 +45,10 @@ Colour presets for the built-in VS Code Markdown preview. Headings, bold text, i
 Or in `settings.json`:
 
 ```json
-"markdownPreviewPalettes.preset": "golden"
+"markdownPreviewPalettes.preset": "golden-light"
 ```
 
-The setting can also be set per workspace.
+The setting can also be set per workspace. Preset names without `-dark` or `-light` (`teal`, `golden` and so on, from earlier versions) no longer work and fall back to `teal-dark`.
 
 ## What Gets Coloured
 
@@ -55,7 +59,7 @@ The setting can also be set per workspace.
 - **Callouts:** in `ember`, `folio`, `onyx`, `graphite`, `quartz` and `zenith`, GitHub alerts `> [!TIP]` (green), `> [!NOTE]` or `> [!INFO]` (blue) and `> [!WARNING]` (yellow in `ember`, orange in `folio`) become coloured boxes; inline code and links inside take the callout colour. With [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) installed, its alert boxes get the same colours, keep its icon and hide its title word. `onyx` uses blue, green and amber. `graphite` uses grey boxes for tips and notes and a muted amber for warnings, with its own colours for inline code and the icon. `quartz` uses filled blue, green and amber boxes with coloured icons. `zenith` adds a coloured bar on the left edge and its own link colours. Other presets show them as plain quotes.
 - **Links:** some presets set their own link colour; the others keep the VS Code link colour. `folio` underlines web and mail links; links within the document or to other files show the underline on hover only. `graphite` gives every link a dotted underline. `quartz` and `zenith` underline every link: `quartz` in soft grey, turning to the link colour on hover; `zenith` in the link colour, fading on hover.
 - **Tables:** GitHub style, with a full grid border and striped rows. `folio` follows the Claude Platform docs: a shaded header row, rounded corners and soft lines. `graphite` and `quartz` draw a line under each row only. `zenith` has a rounded outer edge, lines between rows, faint stripes and greyer cell text.
-- **Code blocks:** syntax colours always stay the VS Code ones. `ember`, `onyx`, `graphite`, `quartz` and `zenith` also give the box their own background, border and rounded corners.
+- **Code blocks:** syntax colours are VS Code's own: its dark colours in `-dark` presets and its light colours in `-light` presets, in any VS Code theme. `ember`, `onyx`, `graphite`, `quartz` and `zenith` also give the box their own background, border and rounded corners.
 
 ## Development
 

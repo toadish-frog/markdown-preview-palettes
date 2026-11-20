@@ -6,8 +6,10 @@
 const vscode = require('vscode');
 
 const SECTION = 'markdownPreviewPalettes';
-const PRESETS = new Set(['teal', 'plum', 'crimson', 'golden', 'mono', 'phosphor', 'parchment', 'azure', 'ember', 'folio', 'onyx', 'graphite', 'quartz', 'zenith', 'default']);
-const FALLBACK = 'teal';
+// Every palette has a dark and a light preset, for example teal-dark and teal-light, shown in any VS Code theme
+const PALETTES = ['teal', 'plum', 'crimson', 'golden', 'mono', 'phosphor', 'parchment', 'azure', 'ember', 'folio', 'onyx', 'graphite', 'quartz', 'zenith'];
+const PRESETS = new Set([...PALETTES.flatMap((name) => [`${name}-dark`, `${name}-light`]), 'default']);
+const FALLBACK = 'teal-dark';
 
 function currentPreset() {
   const value = vscode.workspace.getConfiguration(SECTION).get('preset', FALLBACK);

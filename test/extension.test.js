@@ -83,13 +83,22 @@ const md = api.extendMarkdownIt(fakeMarkdownIt());
 
 // ---------- Tests ----------
 test('adds the preset marker for the configured preset', () => {
-  configValue = 'crimson';
-  assert.strictEqual(md.render(md.parse()), '<span class="mpp-preset" data-preset="crimson" hidden></span>');
+  for (const preset of ['crimson-dark', 'crimson-light', 'zenith-light']) {
+    configValue = preset;
+    assert.strictEqual(md.render(md.parse()), `<span class="mpp-preset" data-preset="${preset}" hidden></span>`);
+  }
 });
 
-test('uses teal when nothing is configured', () => {
+test('uses teal-dark when nothing is configured', () => {
   configValue = undefined;
-  assert.match(md.render(md.parse()), /data-preset="teal"/);
+  assert.match(md.render(md.parse()), /data-preset="teal-dark"/);
+});
+
+test('old preset names without -dark or -light fall back to teal-dark', () => {
+  for (const old of ['teal', 'ember', 'zenith', 'ember-dim']) {
+    configValue = old;
+    assert.match(md.render(md.parse()), /data-preset="teal-dark"/);
+  }
 });
 
 test('"default" renders no marker, so no colours apply', () => {
@@ -97,19 +106,19 @@ test('"default" renders no marker, so no colours apply', () => {
   assert.strictEqual(md.render(md.parse()), '');
 });
 
-test('unknown or unsafe values fall back to teal and never reach the HTML', () => {
+test('unknown or unsafe values fall back to teal-dark and never reach the HTML', () => {
   configValue = '"><script>alert(1)</script>';
   const html = md.render(md.parse());
-  assert.match(html, /data-preset="teal"/);
+  assert.match(html, /data-preset="teal-dark"/);
   assert.doesNotMatch(html, /script/);
 });
 
 test('marker is rendered fresh, so a setting change applies to cached tokens', () => {
   const tokens = md.parse();
-  configValue = 'golden';
-  assert.match(md.render(tokens), /data-preset="golden"/);
-  configValue = 'mono';
-  assert.match(md.render(tokens), /data-preset="mono"/);
+  configValue = 'golden-dark';
+  assert.match(md.render(tokens), /data-preset="golden-dark"/);
+  configValue = 'golden-light';
+  assert.match(md.render(tokens), /data-preset="golden-light"/);
 });
 
 test('inline-only parses get no marker', () => {
