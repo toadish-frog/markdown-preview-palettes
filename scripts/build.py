@@ -25,12 +25,76 @@ DIST = ROOT / "dist"
 # "<name>-light", shown in any VS Code theme
 THEMES = ("dark", "light")
 OTHER_THEME = {"dark": "light", "light": "dark"}
-# VS Code Dark Modern / Light Modern colours. A preset without its own background, text or link colour keeps the
-# VS Code theme's colour in a theme of the same mode, and uses these in a theme of the other mode.
-# The contrast check assumes these colours in both cases.
+# A preset looks the same in every VS Code theme. Where it leaves a colour to VS Code (page, text, links, code blocks),
+# a theme of the same mode shows the theme's own colour; a theme of the other mode shows the VS Code Dark Modern /
+# Light Modern colour below, as a theme of the preset's mode would. The contrast check assumes these colours.
 DEFAULT_BG = {"dark": "#1f1f1f", "light": "#ffffff"}
 DEFAULT_TEXT = {"dark": "#cccccc", "light": "#3b3b3b"}
 DEFAULT_LINK = {"dark": "#4daafc", "light": "#005fb8"}
+# The other VS Code theme colours the preview uses, as set in Dark Modern / Light Modern (VS Code 1.147.0)
+VSCODE_COLOURS = {
+    "dark": {
+        "editor-background": "#1f1f1f",
+        "editor-foreground": "#cccccc",
+        "textCodeBlock-background": "#2b2b2b",
+        "widget-border": "#313131",
+        "textBlockQuote-background": "#2b2b2b",
+        "textBlockQuote-border": "#616161",
+        "textPreformat-background": "#3c3c3c",
+        "textPreformat-foreground": "#d0d0d0",
+        "keybindingLabel-foreground": "#cccccc",
+        "editorGutter-modifiedBackground": "#0078d4",
+    },
+    "light": {
+        "editor-background": "#ffffff",
+        "editor-foreground": "#3b3b3b",
+        "textCodeBlock-background": "#f8f8f8",
+        "widget-border": "#e5e5e5",
+        "textBlockQuote-background": "#f8f8f8",
+        "textBlockQuote-border": "#e5e5e5",
+        "textPreformat-background": "#0000001f",
+        "textPreformat-foreground": "#3b3b3b",
+        "keybindingLabel-foreground": "#3b3b3b",
+        "editorGutter-modifiedBackground": "#005fb8",
+    },
+}
+# VS Code's own Markdown preview colours that depend on the theme (markdown-language-features media/markdown.css)
+LINE_BORDER = {"dark": "rgba(255, 255, 255, 0.18)", "light": "rgba(0, 0, 0, 0.18)"}
+TH_BORDER = {"dark": "rgba(255, 255, 255, 0.69)", "light": "rgba(0, 0, 0, 0.69)"}
+LINE_MARKER = {
+    "dark": ("rgba(255, 255, 255, 0.4)", "rgba(255, 255, 255, 0.60)"),
+    "light": ("rgba(0, 0, 0, 0.15)", "rgba(0, 0, 0, 0.40)"),
+}
+# Code-block syntax colours of VS Code's Markdown preview (media/highlight.css, VS Code 1.147.0), copied unchanged.
+# Dark themes use the dark set; light themes use the dark set with the light set on top.
+SYNTAX = {
+    "dark": (
+        (("keyword", "literal", "symbol", "name", "link"), "#569CD6"),
+        (("built_in", "type"), "#4EC9B0"),
+        (("number", "class"), "#B8D7A3"),
+        (("string", "meta-string"), "#D69D85"),
+        (("regexp", "template-tag"), "#9A5334"),
+        (("subst", "function", "title", "params", "formula"), "#DCDCDC"),
+        (("comment", "quote"), "#57A64A"),
+        (("doctag",), "#608B4E"),
+        (("meta", "meta-keyword", "tag"), "#9B9B9B"),
+        (("variable", "template-variable"), "#BD63C5"),
+        (("attr", "attribute", "builtin-name"), "#9CDCFE"),
+        (("section",), "gold"),
+        (("bullet", "selector-tag", "selector-id", "selector-class", "selector-attr", "selector-pseudo"), "#D7BA7D"),
+    ),
+    "light": (
+        (("function", "params"), "inherit"),
+        (("comment", "quote", "number", "class", "variable"), "#008000"),
+        (("keyword", "selector-tag", "name", "tag"), "#00f"),
+        (("built_in", "builtin-name"), "#007acc"),
+        (("string", "section", "attribute", "literal", "template-tag", "template-variable", "type"), "#a31515"),
+        (("subst", "selector-attr", "selector-pseudo", "meta", "meta-keyword"), "#2b91af"),
+        (("title", "doctag"), "#808080"),
+        (("attr",), "#f00"),
+        (("symbol", "bullet", "link"), "#00b0e8"),
+    ),
+}
 # Opacity of derived tints and borders
 ALPHA = {
     "dark": {"code": 0.12, "quote": 0.08, "h1Border": 0.35, "h2Border": 0.30},
@@ -409,12 +473,14 @@ def preset_block(name, theme, c):
 def other_theme_rules(name, theme, c):
     """A preset shown in a VS Code theme of the other mode, for example a light preset in a dark theme.
 
-    Colours the preset leaves to VS Code fall back to Dark / Light Modern, so the page keeps its own mode.
-    Code blocks take the VS Code editor background: their syntax colours always follow the VS Code theme.
-    These rules come after the preset's own rules and win over them (same specificity).
+    The preset looks exactly as in a theme of its own mode: its own colours are unchanged, and what it leaves to
+    VS Code (page, text, links, code-block box, code text and syntax colours, rules) takes the VS Code Dark / Light
+    Modern colour of the preset's mode. Nothing here applies in a theme of the preset's own mode.
     """
-    scope = f"body.vscode-{OTHER_THEME[theme]}:not(.vscode-high-contrast):has({preset_marker(name, theme)})"
-    page = [f"  color-scheme: {theme};"]
+    other = OTHER_THEME[theme]
+    marker = preset_marker(name, theme)
+    scope = f"body.vscode-{other}:not(.vscode-high-contrast):has({marker})"
+    page = []
     if "background" not in c:
         page.append(f"  background-color: {DEFAULT_BG[theme]};")
     if "text" not in c:
@@ -424,16 +490,28 @@ def other_theme_rules(name, theme, c):
             f"  --vscode-textLink-foreground: {DEFAULT_LINK[theme]};",
             f"  --vscode-textLink-activeForeground: {DEFAULT_LINK[theme]};",
         ]
-    return [
-        f"{scope} {{",
-        *page,
-        "}",
-        f"{scope} hr {{ border-color: color-mix(in srgb, currentColor 18%, transparent); }}",
-        f"{scope} pre {{",
-        "  --vscode-textCodeBlock-background: var(--vscode-editor-background);",
-        "  background-color: var(--vscode-editor-background);",
-        "}",
+    # VS Code theme colours the preview uses (code blocks, quotes, inline code, ...); the preset's own rules still win
+    page += [f"  --vscode-{key}: {value};" for key, value in VSCODE_COLOURS[theme].items()]
+    lines = [f"{scope} {{", *page, "}"]
+    # VS Code's theme-specific line colours. :where() keeps these as weak as VS Code's own rules,
+    # so the preset's heading and table lines still win, as in a theme of the preset's mode
+    weak = f"body.vscode-{other}:where(:not(.vscode-high-contrast):has({marker}))"
+    lines += [
+        f"{weak} :is(h1, h2, hr, td) {{ border-color: {LINE_BORDER[theme]}; }}",
+        f"{weak} th {{ border-color: {TH_BORDER[theme]}; }}",
     ]
+    # Editor-selection line marker beside the preview text
+    selection = f"body.vscode-{other}.showEditorSelection:not(.vscode-high-contrast):has({marker})"
+    active, hover = LINE_MARKER[theme]
+    lines += [
+        f"{selection} .code-active-line:before {{ border-left: 3px solid {active}; }}",
+        f"{selection} .code-line:hover:before {{ border-left: 3px solid {hover}; }}",
+    ]
+    # Syntax colours of the preset's mode: a light preset adds VS Code's light set to the dark one already in place;
+    # a dark preset restores the dark set over VS Code's light one
+    for classes, colour in SYNTAX[theme]:
+        lines.append(f"{scope} :is({', '.join(f'.hljs-{c}' for c in classes)}) {{ color: {colour}; }}")
+    return lines
 
 
 def extra_rules(scope, c):

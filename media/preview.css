@@ -26,17 +26,38 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(240, 101, 149, 0.08);
 }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) {
-  color-scheme: dark;
   background-color: #1f1f1f;
   color: #cccccc;
   --vscode-textLink-foreground: #4daafc;
   --vscode-textLink-activeForeground: #4daafc;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-editor-foreground: #cccccc;
+  --vscode-textCodeBlock-background: #2b2b2b;
+  --vscode-widget-border: #313131;
+  --vscode-textBlockQuote-background: #2b2b2b;
+  --vscode-textBlockQuote-border: #616161;
+  --vscode-textPreformat-background: #3c3c3c;
+  --vscode-textPreformat-foreground: #d0d0d0;
+  --vscode-keybindingLabel-foreground: #cccccc;
+  --vscode-editorGutter-modifiedBackground: #0078d4;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"])) :is(h1, h2, hr, td) { border-color: rgba(255, 255, 255, 0.18); }
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"])) th { border-color: rgba(255, 255, 255, 0.69); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) :is(.hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name, .hljs-link) { color: #569CD6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) :is(.hljs-built_in, .hljs-type) { color: #4EC9B0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) :is(.hljs-number, .hljs-class) { color: #B8D7A3; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) :is(.hljs-string, .hljs-meta-string) { color: #D69D85; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) :is(.hljs-regexp, .hljs-template-tag) { color: #9A5334; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) :is(.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula) { color: #DCDCDC; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) :is(.hljs-comment, .hljs-quote) { color: #57A64A; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) :is(.hljs-doctag) { color: #608B4E; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) :is(.hljs-meta, .hljs-meta-keyword, .hljs-tag) { color: #9B9B9B; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) :is(.hljs-variable, .hljs-template-variable) { color: #BD63C5; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) :is(.hljs-attr, .hljs-attribute, .hljs-builtin-name) { color: #9CDCFE; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) :is(.hljs-section) { color: gold; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]) :is(.hljs-bullet, .hljs-selector-tag, .hljs-selector-id, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo) { color: #D7BA7D; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) {
   --mpp-h1: #2b8a3e;
@@ -58,17 +79,34 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(240, 101, 149, 0.06);
 }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) {
-  color-scheme: light;
   background-color: #ffffff;
   color: #3b3b3b;
   --vscode-textLink-foreground: #005fb8;
   --vscode-textLink-activeForeground: #005fb8;
+  --vscode-editor-background: #ffffff;
+  --vscode-editor-foreground: #3b3b3b;
+  --vscode-textCodeBlock-background: #f8f8f8;
+  --vscode-widget-border: #e5e5e5;
+  --vscode-textBlockQuote-background: #f8f8f8;
+  --vscode-textBlockQuote-border: #e5e5e5;
+  --vscode-textPreformat-background: #0000001f;
+  --vscode-textPreformat-foreground: #3b3b3b;
+  --vscode-keybindingLabel-foreground: #3b3b3b;
+  --vscode-editorGutter-modifiedBackground: #005fb8;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"])) :is(h1, h2, hr, td) { border-color: rgba(0, 0, 0, 0.18); }
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"])) th { border-color: rgba(0, 0, 0, 0.69); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) :is(.hljs-function, .hljs-params) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) :is(.hljs-comment, .hljs-quote, .hljs-number, .hljs-class, .hljs-variable) { color: #008000; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) :is(.hljs-built_in, .hljs-builtin-name) { color: #007acc; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) :is(.hljs-string, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type) { color: #a31515; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) :is(.hljs-subst, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-meta, .hljs-meta-keyword) { color: #2b91af; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) :is(.hljs-title, .hljs-doctag) { color: #808080; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) :is(.hljs-attr) { color: #f00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-light"]) :is(.hljs-symbol, .hljs-bullet, .hljs-link) { color: #00b0e8; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) {
   background-color: #1a1d21;
@@ -93,14 +131,35 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(155, 79, 176, 0.08);
 }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) {
-  color-scheme: dark;
   color: #cccccc;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-editor-foreground: #cccccc;
+  --vscode-textCodeBlock-background: #2b2b2b;
+  --vscode-widget-border: #313131;
+  --vscode-textBlockQuote-background: #2b2b2b;
+  --vscode-textBlockQuote-border: #616161;
+  --vscode-textPreformat-background: #3c3c3c;
+  --vscode-textPreformat-foreground: #d0d0d0;
+  --vscode-keybindingLabel-foreground: #cccccc;
+  --vscode-editorGutter-modifiedBackground: #0078d4;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"])) :is(h1, h2, hr, td) { border-color: rgba(255, 255, 255, 0.18); }
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"])) th { border-color: rgba(255, 255, 255, 0.69); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) :is(.hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name, .hljs-link) { color: #569CD6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) :is(.hljs-built_in, .hljs-type) { color: #4EC9B0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) :is(.hljs-number, .hljs-class) { color: #B8D7A3; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) :is(.hljs-string, .hljs-meta-string) { color: #D69D85; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) :is(.hljs-regexp, .hljs-template-tag) { color: #9A5334; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) :is(.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula) { color: #DCDCDC; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) :is(.hljs-comment, .hljs-quote) { color: #57A64A; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) :is(.hljs-doctag) { color: #608B4E; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) :is(.hljs-meta, .hljs-meta-keyword, .hljs-tag) { color: #9B9B9B; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) :is(.hljs-variable, .hljs-template-variable) { color: #BD63C5; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) :is(.hljs-attr, .hljs-attribute, .hljs-builtin-name) { color: #9CDCFE; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) :is(.hljs-section) { color: gold; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-dark"]) :is(.hljs-bullet, .hljs-selector-tag, .hljs-selector-id, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo) { color: #D7BA7D; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) {
   --vscode-textLink-foreground: #1264a3;
@@ -124,15 +183,32 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(155, 79, 176, 0.06);
 }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) {
-  color-scheme: light;
   background-color: #ffffff;
   color: #3b3b3b;
+  --vscode-editor-background: #ffffff;
+  --vscode-editor-foreground: #3b3b3b;
+  --vscode-textCodeBlock-background: #f8f8f8;
+  --vscode-widget-border: #e5e5e5;
+  --vscode-textBlockQuote-background: #f8f8f8;
+  --vscode-textBlockQuote-border: #e5e5e5;
+  --vscode-textPreformat-background: #0000001f;
+  --vscode-textPreformat-foreground: #3b3b3b;
+  --vscode-keybindingLabel-foreground: #3b3b3b;
+  --vscode-editorGutter-modifiedBackground: #005fb8;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"])) :is(h1, h2, hr, td) { border-color: rgba(0, 0, 0, 0.18); }
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"])) th { border-color: rgba(0, 0, 0, 0.69); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) :is(.hljs-function, .hljs-params) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) :is(.hljs-comment, .hljs-quote, .hljs-number, .hljs-class, .hljs-variable) { color: #008000; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) :is(.hljs-built_in, .hljs-builtin-name) { color: #007acc; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) :is(.hljs-string, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type) { color: #a31515; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) :is(.hljs-subst, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-meta, .hljs-meta-keyword) { color: #2b91af; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) :is(.hljs-title, .hljs-doctag) { color: #808080; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) :is(.hljs-attr) { color: #f00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="plum-light"]) :is(.hljs-symbol, .hljs-bullet, .hljs-link) { color: #00b0e8; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) {
   background-color: #0a0a0c;
@@ -157,14 +233,35 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(92, 95, 102, 0.08);
 }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) {
-  color-scheme: dark;
   color: #cccccc;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-editor-foreground: #cccccc;
+  --vscode-textCodeBlock-background: #2b2b2b;
+  --vscode-widget-border: #313131;
+  --vscode-textBlockQuote-background: #2b2b2b;
+  --vscode-textBlockQuote-border: #616161;
+  --vscode-textPreformat-background: #3c3c3c;
+  --vscode-textPreformat-foreground: #d0d0d0;
+  --vscode-keybindingLabel-foreground: #cccccc;
+  --vscode-editorGutter-modifiedBackground: #0078d4;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"])) :is(h1, h2, hr, td) { border-color: rgba(255, 255, 255, 0.18); }
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"])) th { border-color: rgba(255, 255, 255, 0.69); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) :is(.hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name, .hljs-link) { color: #569CD6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) :is(.hljs-built_in, .hljs-type) { color: #4EC9B0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) :is(.hljs-number, .hljs-class) { color: #B8D7A3; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) :is(.hljs-string, .hljs-meta-string) { color: #D69D85; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) :is(.hljs-regexp, .hljs-template-tag) { color: #9A5334; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) :is(.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula) { color: #DCDCDC; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) :is(.hljs-comment, .hljs-quote) { color: #57A64A; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) :is(.hljs-doctag) { color: #608B4E; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) :is(.hljs-meta, .hljs-meta-keyword, .hljs-tag) { color: #9B9B9B; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) :is(.hljs-variable, .hljs-template-variable) { color: #BD63C5; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) :is(.hljs-attr, .hljs-attribute, .hljs-builtin-name) { color: #9CDCFE; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) :is(.hljs-section) { color: gold; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-dark"]) :is(.hljs-bullet, .hljs-selector-tag, .hljs-selector-id, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo) { color: #D7BA7D; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) {
   --vscode-textLink-foreground: #007c89;
@@ -188,15 +285,32 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(142, 142, 148, 0.06);
 }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) {
-  color-scheme: light;
   background-color: #ffffff;
   color: #3b3b3b;
+  --vscode-editor-background: #ffffff;
+  --vscode-editor-foreground: #3b3b3b;
+  --vscode-textCodeBlock-background: #f8f8f8;
+  --vscode-widget-border: #e5e5e5;
+  --vscode-textBlockQuote-background: #f8f8f8;
+  --vscode-textBlockQuote-border: #e5e5e5;
+  --vscode-textPreformat-background: #0000001f;
+  --vscode-textPreformat-foreground: #3b3b3b;
+  --vscode-keybindingLabel-foreground: #3b3b3b;
+  --vscode-editorGutter-modifiedBackground: #005fb8;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"])) :is(h1, h2, hr, td) { border-color: rgba(0, 0, 0, 0.18); }
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"])) th { border-color: rgba(0, 0, 0, 0.69); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) :is(.hljs-function, .hljs-params) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) :is(.hljs-comment, .hljs-quote, .hljs-number, .hljs-class, .hljs-variable) { color: #008000; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) :is(.hljs-built_in, .hljs-builtin-name) { color: #007acc; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) :is(.hljs-string, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type) { color: #a31515; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) :is(.hljs-subst, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-meta, .hljs-meta-keyword) { color: #2b91af; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) :is(.hljs-title, .hljs-doctag) { color: #808080; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) :is(.hljs-attr) { color: #f00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="crimson-light"]) :is(.hljs-symbol, .hljs-bullet, .hljs-link) { color: #00b0e8; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) {
   background-color: #0b0b0b;
@@ -221,14 +335,35 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(110, 90, 58, 0.08);
 }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) {
-  color-scheme: dark;
   color: #cccccc;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-editor-foreground: #cccccc;
+  --vscode-textCodeBlock-background: #2b2b2b;
+  --vscode-widget-border: #313131;
+  --vscode-textBlockQuote-background: #2b2b2b;
+  --vscode-textBlockQuote-border: #616161;
+  --vscode-textPreformat-background: #3c3c3c;
+  --vscode-textPreformat-foreground: #d0d0d0;
+  --vscode-keybindingLabel-foreground: #cccccc;
+  --vscode-editorGutter-modifiedBackground: #0078d4;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"])) :is(h1, h2, hr, td) { border-color: rgba(255, 255, 255, 0.18); }
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"])) th { border-color: rgba(255, 255, 255, 0.69); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) :is(.hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name, .hljs-link) { color: #569CD6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) :is(.hljs-built_in, .hljs-type) { color: #4EC9B0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) :is(.hljs-number, .hljs-class) { color: #B8D7A3; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) :is(.hljs-string, .hljs-meta-string) { color: #D69D85; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) :is(.hljs-regexp, .hljs-template-tag) { color: #9A5334; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) :is(.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula) { color: #DCDCDC; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) :is(.hljs-comment, .hljs-quote) { color: #57A64A; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) :is(.hljs-doctag) { color: #608B4E; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) :is(.hljs-meta, .hljs-meta-keyword, .hljs-tag) { color: #9B9B9B; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) :is(.hljs-variable, .hljs-template-variable) { color: #BD63C5; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) :is(.hljs-attr, .hljs-attribute, .hljs-builtin-name) { color: #9CDCFE; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) :is(.hljs-section) { color: gold; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-dark"]) :is(.hljs-bullet, .hljs-selector-tag, .hljs-selector-id, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo) { color: #D7BA7D; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) {
   background-color: #fdf8ec;
@@ -253,14 +388,31 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(140, 122, 91, 0.06);
 }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) {
-  color-scheme: light;
   color: #3b3b3b;
+  --vscode-editor-background: #ffffff;
+  --vscode-editor-foreground: #3b3b3b;
+  --vscode-textCodeBlock-background: #f8f8f8;
+  --vscode-widget-border: #e5e5e5;
+  --vscode-textBlockQuote-background: #f8f8f8;
+  --vscode-textBlockQuote-border: #e5e5e5;
+  --vscode-textPreformat-background: #0000001f;
+  --vscode-textPreformat-foreground: #3b3b3b;
+  --vscode-keybindingLabel-foreground: #3b3b3b;
+  --vscode-editorGutter-modifiedBackground: #005fb8;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"])) :is(h1, h2, hr, td) { border-color: rgba(0, 0, 0, 0.18); }
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"])) th { border-color: rgba(0, 0, 0, 0.69); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) :is(.hljs-function, .hljs-params) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) :is(.hljs-comment, .hljs-quote, .hljs-number, .hljs-class, .hljs-variable) { color: #008000; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) :is(.hljs-built_in, .hljs-builtin-name) { color: #007acc; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) :is(.hljs-string, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type) { color: #a31515; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) :is(.hljs-subst, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-meta, .hljs-meta-keyword) { color: #2b91af; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) :is(.hljs-title, .hljs-doctag) { color: #808080; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) :is(.hljs-attr) { color: #f00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="golden-light"]) :is(.hljs-symbol, .hljs-bullet, .hljs-link) { color: #00b0e8; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) {
   --mpp-h1: #f8f9fa;
@@ -282,17 +434,38 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(73, 80, 87, 0.08);
 }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) {
-  color-scheme: dark;
   background-color: #1f1f1f;
   color: #cccccc;
   --vscode-textLink-foreground: #4daafc;
   --vscode-textLink-activeForeground: #4daafc;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-editor-foreground: #cccccc;
+  --vscode-textCodeBlock-background: #2b2b2b;
+  --vscode-widget-border: #313131;
+  --vscode-textBlockQuote-background: #2b2b2b;
+  --vscode-textBlockQuote-border: #616161;
+  --vscode-textPreformat-background: #3c3c3c;
+  --vscode-textPreformat-foreground: #d0d0d0;
+  --vscode-keybindingLabel-foreground: #cccccc;
+  --vscode-editorGutter-modifiedBackground: #0078d4;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"])) :is(h1, h2, hr, td) { border-color: rgba(255, 255, 255, 0.18); }
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"])) th { border-color: rgba(255, 255, 255, 0.69); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) :is(.hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name, .hljs-link) { color: #569CD6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) :is(.hljs-built_in, .hljs-type) { color: #4EC9B0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) :is(.hljs-number, .hljs-class) { color: #B8D7A3; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) :is(.hljs-string, .hljs-meta-string) { color: #D69D85; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) :is(.hljs-regexp, .hljs-template-tag) { color: #9A5334; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) :is(.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula) { color: #DCDCDC; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) :is(.hljs-comment, .hljs-quote) { color: #57A64A; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) :is(.hljs-doctag) { color: #608B4E; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) :is(.hljs-meta, .hljs-meta-keyword, .hljs-tag) { color: #9B9B9B; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) :is(.hljs-variable, .hljs-template-variable) { color: #BD63C5; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) :is(.hljs-attr, .hljs-attribute, .hljs-builtin-name) { color: #9CDCFE; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) :is(.hljs-section) { color: gold; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-dark"]) :is(.hljs-bullet, .hljs-selector-tag, .hljs-selector-id, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo) { color: #D7BA7D; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) {
   --mpp-h1: #111418;
@@ -314,17 +487,34 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(206, 212, 218, 0.06);
 }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) {
-  color-scheme: light;
   background-color: #ffffff;
   color: #3b3b3b;
   --vscode-textLink-foreground: #005fb8;
   --vscode-textLink-activeForeground: #005fb8;
+  --vscode-editor-background: #ffffff;
+  --vscode-editor-foreground: #3b3b3b;
+  --vscode-textCodeBlock-background: #f8f8f8;
+  --vscode-widget-border: #e5e5e5;
+  --vscode-textBlockQuote-background: #f8f8f8;
+  --vscode-textBlockQuote-border: #e5e5e5;
+  --vscode-textPreformat-background: #0000001f;
+  --vscode-textPreformat-foreground: #3b3b3b;
+  --vscode-keybindingLabel-foreground: #3b3b3b;
+  --vscode-editorGutter-modifiedBackground: #005fb8;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"])) :is(h1, h2, hr, td) { border-color: rgba(0, 0, 0, 0.18); }
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"])) th { border-color: rgba(0, 0, 0, 0.69); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) :is(.hljs-function, .hljs-params) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) :is(.hljs-comment, .hljs-quote, .hljs-number, .hljs-class, .hljs-variable) { color: #008000; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) :is(.hljs-built_in, .hljs-builtin-name) { color: #007acc; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) :is(.hljs-string, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type) { color: #a31515; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) :is(.hljs-subst, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-meta, .hljs-meta-keyword) { color: #2b91af; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) :is(.hljs-title, .hljs-doctag) { color: #808080; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) :is(.hljs-attr) { color: #f00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="mono-light"]) :is(.hljs-symbol, .hljs-bullet, .hljs-link) { color: #00b0e8; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) {
   background-color: #0d110e;
@@ -349,14 +539,35 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(61, 92, 71, 0.08);
 }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) {
-  color-scheme: dark;
   color: #cccccc;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-editor-foreground: #cccccc;
+  --vscode-textCodeBlock-background: #2b2b2b;
+  --vscode-widget-border: #313131;
+  --vscode-textBlockQuote-background: #2b2b2b;
+  --vscode-textBlockQuote-border: #616161;
+  --vscode-textPreformat-background: #3c3c3c;
+  --vscode-textPreformat-foreground: #d0d0d0;
+  --vscode-keybindingLabel-foreground: #cccccc;
+  --vscode-editorGutter-modifiedBackground: #0078d4;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"])) :is(h1, h2, hr, td) { border-color: rgba(255, 255, 255, 0.18); }
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"])) th { border-color: rgba(255, 255, 255, 0.69); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) :is(.hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name, .hljs-link) { color: #569CD6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) :is(.hljs-built_in, .hljs-type) { color: #4EC9B0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) :is(.hljs-number, .hljs-class) { color: #B8D7A3; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) :is(.hljs-string, .hljs-meta-string) { color: #D69D85; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) :is(.hljs-regexp, .hljs-template-tag) { color: #9A5334; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) :is(.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula) { color: #DCDCDC; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) :is(.hljs-comment, .hljs-quote) { color: #57A64A; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) :is(.hljs-doctag) { color: #608B4E; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) :is(.hljs-meta, .hljs-meta-keyword, .hljs-tag) { color: #9B9B9B; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) :is(.hljs-variable, .hljs-template-variable) { color: #BD63C5; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) :is(.hljs-attr, .hljs-attribute, .hljs-builtin-name) { color: #9CDCFE; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) :is(.hljs-section) { color: gold; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-dark"]) :is(.hljs-bullet, .hljs-selector-tag, .hljs-selector-id, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo) { color: #D7BA7D; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) {
   background-color: #f3f8f4;
@@ -381,14 +592,31 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(143, 181, 156, 0.06);
 }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) {
-  color-scheme: light;
   color: #3b3b3b;
+  --vscode-editor-background: #ffffff;
+  --vscode-editor-foreground: #3b3b3b;
+  --vscode-textCodeBlock-background: #f8f8f8;
+  --vscode-widget-border: #e5e5e5;
+  --vscode-textBlockQuote-background: #f8f8f8;
+  --vscode-textBlockQuote-border: #e5e5e5;
+  --vscode-textPreformat-background: #0000001f;
+  --vscode-textPreformat-foreground: #3b3b3b;
+  --vscode-keybindingLabel-foreground: #3b3b3b;
+  --vscode-editorGutter-modifiedBackground: #005fb8;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"])) :is(h1, h2, hr, td) { border-color: rgba(0, 0, 0, 0.18); }
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"])) th { border-color: rgba(0, 0, 0, 0.69); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) :is(.hljs-function, .hljs-params) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) :is(.hljs-comment, .hljs-quote, .hljs-number, .hljs-class, .hljs-variable) { color: #008000; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) :is(.hljs-built_in, .hljs-builtin-name) { color: #007acc; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) :is(.hljs-string, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type) { color: #a31515; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) :is(.hljs-subst, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-meta, .hljs-meta-keyword) { color: #2b91af; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) :is(.hljs-title, .hljs-doctag) { color: #808080; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) :is(.hljs-attr) { color: #f00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="phosphor-light"]) :is(.hljs-symbol, .hljs-bullet, .hljs-link) { color: #00b0e8; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) {
   background-color: #1c1a16;
@@ -413,14 +641,35 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(107, 90, 62, 0.08);
 }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) {
-  color-scheme: dark;
   color: #cccccc;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-editor-foreground: #cccccc;
+  --vscode-textCodeBlock-background: #2b2b2b;
+  --vscode-widget-border: #313131;
+  --vscode-textBlockQuote-background: #2b2b2b;
+  --vscode-textBlockQuote-border: #616161;
+  --vscode-textPreformat-background: #3c3c3c;
+  --vscode-textPreformat-foreground: #d0d0d0;
+  --vscode-keybindingLabel-foreground: #cccccc;
+  --vscode-editorGutter-modifiedBackground: #0078d4;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"])) :is(h1, h2, hr, td) { border-color: rgba(255, 255, 255, 0.18); }
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"])) th { border-color: rgba(255, 255, 255, 0.69); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) :is(.hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name, .hljs-link) { color: #569CD6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) :is(.hljs-built_in, .hljs-type) { color: #4EC9B0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) :is(.hljs-number, .hljs-class) { color: #B8D7A3; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) :is(.hljs-string, .hljs-meta-string) { color: #D69D85; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) :is(.hljs-regexp, .hljs-template-tag) { color: #9A5334; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) :is(.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula) { color: #DCDCDC; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) :is(.hljs-comment, .hljs-quote) { color: #57A64A; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) :is(.hljs-doctag) { color: #608B4E; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) :is(.hljs-meta, .hljs-meta-keyword, .hljs-tag) { color: #9B9B9B; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) :is(.hljs-variable, .hljs-template-variable) { color: #BD63C5; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) :is(.hljs-attr, .hljs-attribute, .hljs-builtin-name) { color: #9CDCFE; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) :is(.hljs-section) { color: gold; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-dark"]) :is(.hljs-bullet, .hljs-selector-tag, .hljs-selector-id, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo) { color: #D7BA7D; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) {
   background-color: #faf9f5;
@@ -445,14 +694,31 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(160, 138, 104, 0.06);
 }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) {
-  color-scheme: light;
   color: #3b3b3b;
+  --vscode-editor-background: #ffffff;
+  --vscode-editor-foreground: #3b3b3b;
+  --vscode-textCodeBlock-background: #f8f8f8;
+  --vscode-widget-border: #e5e5e5;
+  --vscode-textBlockQuote-background: #f8f8f8;
+  --vscode-textBlockQuote-border: #e5e5e5;
+  --vscode-textPreformat-background: #0000001f;
+  --vscode-textPreformat-foreground: #3b3b3b;
+  --vscode-keybindingLabel-foreground: #3b3b3b;
+  --vscode-editorGutter-modifiedBackground: #005fb8;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"])) :is(h1, h2, hr, td) { border-color: rgba(0, 0, 0, 0.18); }
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"])) th { border-color: rgba(0, 0, 0, 0.69); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) :is(.hljs-function, .hljs-params) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) :is(.hljs-comment, .hljs-quote, .hljs-number, .hljs-class, .hljs-variable) { color: #008000; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) :is(.hljs-built_in, .hljs-builtin-name) { color: #007acc; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) :is(.hljs-string, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type) { color: #a31515; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) :is(.hljs-subst, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-meta, .hljs-meta-keyword) { color: #2b91af; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) :is(.hljs-title, .hljs-doctag) { color: #808080; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) :is(.hljs-attr) { color: #f00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="parchment-light"]) :is(.hljs-symbol, .hljs-bullet, .hljs-link) { color: #00b0e8; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) {
   --mpp-h1: #79b8ff;
@@ -474,17 +740,38 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(91, 107, 124, 0.08);
 }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) {
-  color-scheme: dark;
   background-color: #1f1f1f;
   color: #cccccc;
   --vscode-textLink-foreground: #4daafc;
   --vscode-textLink-activeForeground: #4daafc;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-editor-foreground: #cccccc;
+  --vscode-textCodeBlock-background: #2b2b2b;
+  --vscode-widget-border: #313131;
+  --vscode-textBlockQuote-background: #2b2b2b;
+  --vscode-textBlockQuote-border: #616161;
+  --vscode-textPreformat-background: #3c3c3c;
+  --vscode-textPreformat-foreground: #d0d0d0;
+  --vscode-keybindingLabel-foreground: #cccccc;
+  --vscode-editorGutter-modifiedBackground: #0078d4;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"])) :is(h1, h2, hr, td) { border-color: rgba(255, 255, 255, 0.18); }
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"])) th { border-color: rgba(255, 255, 255, 0.69); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) :is(.hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name, .hljs-link) { color: #569CD6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) :is(.hljs-built_in, .hljs-type) { color: #4EC9B0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) :is(.hljs-number, .hljs-class) { color: #B8D7A3; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) :is(.hljs-string, .hljs-meta-string) { color: #D69D85; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) :is(.hljs-regexp, .hljs-template-tag) { color: #9A5334; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) :is(.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula) { color: #DCDCDC; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) :is(.hljs-comment, .hljs-quote) { color: #57A64A; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) :is(.hljs-doctag) { color: #608B4E; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) :is(.hljs-meta, .hljs-meta-keyword, .hljs-tag) { color: #9B9B9B; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) :is(.hljs-variable, .hljs-template-variable) { color: #BD63C5; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) :is(.hljs-attr, .hljs-attribute, .hljs-builtin-name) { color: #9CDCFE; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) :is(.hljs-section) { color: gold; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-dark"]) :is(.hljs-bullet, .hljs-selector-tag, .hljs-selector-id, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo) { color: #D7BA7D; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) {
   --mpp-h1: #0550ae;
@@ -506,17 +793,34 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   --mpp-quote2-bg: rgba(175, 184, 193, 0.06);
 }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) {
-  color-scheme: light;
   background-color: #ffffff;
   color: #3b3b3b;
   --vscode-textLink-foreground: #005fb8;
   --vscode-textLink-activeForeground: #005fb8;
+  --vscode-editor-background: #ffffff;
+  --vscode-editor-foreground: #3b3b3b;
+  --vscode-textCodeBlock-background: #f8f8f8;
+  --vscode-widget-border: #e5e5e5;
+  --vscode-textBlockQuote-background: #f8f8f8;
+  --vscode-textBlockQuote-border: #e5e5e5;
+  --vscode-textPreformat-background: #0000001f;
+  --vscode-textPreformat-foreground: #3b3b3b;
+  --vscode-keybindingLabel-foreground: #3b3b3b;
+  --vscode-editorGutter-modifiedBackground: #005fb8;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"])) :is(h1, h2, hr, td) { border-color: rgba(0, 0, 0, 0.18); }
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"])) th { border-color: rgba(0, 0, 0, 0.69); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) :is(.hljs-function, .hljs-params) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) :is(.hljs-comment, .hljs-quote, .hljs-number, .hljs-class, .hljs-variable) { color: #008000; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) :is(.hljs-built_in, .hljs-builtin-name) { color: #007acc; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) :is(.hljs-string, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type) { color: #a31515; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) :is(.hljs-subst, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-meta, .hljs-meta-keyword) { color: #2b91af; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) :is(.hljs-title, .hljs-doctag) { color: #808080; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) :is(.hljs-attr) { color: #f00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="azure-light"]) :is(.hljs-symbol, .hljs-bullet, .hljs-link) { color: #00b0e8; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) {
   background-color: #09090b;
@@ -580,13 +884,34 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title svg { width: 18px; height: 18px; margin: 0; }
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title + * { margin-top: 0; }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) {
-  color-scheme: dark;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-editor-foreground: #cccccc;
+  --vscode-textCodeBlock-background: #2b2b2b;
+  --vscode-widget-border: #313131;
+  --vscode-textBlockQuote-background: #2b2b2b;
+  --vscode-textBlockQuote-border: #616161;
+  --vscode-textPreformat-background: #3c3c3c;
+  --vscode-textPreformat-foreground: #d0d0d0;
+  --vscode-keybindingLabel-foreground: #cccccc;
+  --vscode-editorGutter-modifiedBackground: #0078d4;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"])) :is(h1, h2, hr, td) { border-color: rgba(255, 255, 255, 0.18); }
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"])) th { border-color: rgba(255, 255, 255, 0.69); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) :is(.hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name, .hljs-link) { color: #569CD6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) :is(.hljs-built_in, .hljs-type) { color: #4EC9B0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) :is(.hljs-number, .hljs-class) { color: #B8D7A3; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) :is(.hljs-string, .hljs-meta-string) { color: #D69D85; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) :is(.hljs-regexp, .hljs-template-tag) { color: #9A5334; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) :is(.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula) { color: #DCDCDC; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) :is(.hljs-comment, .hljs-quote) { color: #57A64A; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) :is(.hljs-doctag) { color: #608B4E; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) :is(.hljs-meta, .hljs-meta-keyword, .hljs-tag) { color: #9B9B9B; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) :is(.hljs-variable, .hljs-template-variable) { color: #BD63C5; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) :is(.hljs-attr, .hljs-attribute, .hljs-builtin-name) { color: #9CDCFE; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) :is(.hljs-section) { color: gold; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-dark"]) :is(.hljs-bullet, .hljs-selector-tag, .hljs-selector-id, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo) { color: #D7BA7D; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) {
   background-color: #fdfdf7;
@@ -650,13 +975,30 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title svg { width: 18px; height: 18px; margin: 0; }
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title + * { margin-top: 0; }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) {
-  color-scheme: light;
+  --vscode-editor-background: #ffffff;
+  --vscode-editor-foreground: #3b3b3b;
+  --vscode-textCodeBlock-background: #f8f8f8;
+  --vscode-widget-border: #e5e5e5;
+  --vscode-textBlockQuote-background: #f8f8f8;
+  --vscode-textBlockQuote-border: #e5e5e5;
+  --vscode-textPreformat-background: #0000001f;
+  --vscode-textPreformat-foreground: #3b3b3b;
+  --vscode-keybindingLabel-foreground: #3b3b3b;
+  --vscode-editorGutter-modifiedBackground: #005fb8;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"])) :is(h1, h2, hr, td) { border-color: rgba(0, 0, 0, 0.18); }
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"])) th { border-color: rgba(0, 0, 0, 0.69); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) :is(.hljs-function, .hljs-params) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) :is(.hljs-comment, .hljs-quote, .hljs-number, .hljs-class, .hljs-variable) { color: #008000; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) :is(.hljs-built_in, .hljs-builtin-name) { color: #007acc; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) :is(.hljs-string, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type) { color: #a31515; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) :is(.hljs-subst, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-meta, .hljs-meta-keyword) { color: #2b91af; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) :is(.hljs-title, .hljs-doctag) { color: #808080; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) :is(.hljs-attr) { color: #f00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) :is(.hljs-symbol, .hljs-bullet, .hljs-link) { color: #00b0e8; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) {
   background-color: #151515;
@@ -725,13 +1067,34 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   text-underline-offset: 3px;
 }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) {
-  color-scheme: dark;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-editor-foreground: #cccccc;
+  --vscode-textCodeBlock-background: #2b2b2b;
+  --vscode-widget-border: #313131;
+  --vscode-textBlockQuote-background: #2b2b2b;
+  --vscode-textBlockQuote-border: #616161;
+  --vscode-textPreformat-background: #3c3c3c;
+  --vscode-textPreformat-foreground: #d0d0d0;
+  --vscode-keybindingLabel-foreground: #cccccc;
+  --vscode-editorGutter-modifiedBackground: #0078d4;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"])) :is(h1, h2, hr, td) { border-color: rgba(255, 255, 255, 0.18); }
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"])) th { border-color: rgba(255, 255, 255, 0.69); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) :is(.hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name, .hljs-link) { color: #569CD6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) :is(.hljs-built_in, .hljs-type) { color: #4EC9B0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) :is(.hljs-number, .hljs-class) { color: #B8D7A3; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) :is(.hljs-string, .hljs-meta-string) { color: #D69D85; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) :is(.hljs-regexp, .hljs-template-tag) { color: #9A5334; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) :is(.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula) { color: #DCDCDC; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) :is(.hljs-comment, .hljs-quote) { color: #57A64A; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) :is(.hljs-doctag) { color: #608B4E; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) :is(.hljs-meta, .hljs-meta-keyword, .hljs-tag) { color: #9B9B9B; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) :is(.hljs-variable, .hljs-template-variable) { color: #BD63C5; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) :is(.hljs-attr, .hljs-attribute, .hljs-builtin-name) { color: #9CDCFE; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) :is(.hljs-section) { color: gold; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-dark"]) :is(.hljs-bullet, .hljs-selector-tag, .hljs-selector-id, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo) { color: #D7BA7D; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) {
   background-color: #fcfcfb;
@@ -800,13 +1163,30 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   text-underline-offset: 3px;
 }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) {
-  color-scheme: light;
+  --vscode-editor-background: #ffffff;
+  --vscode-editor-foreground: #3b3b3b;
+  --vscode-textCodeBlock-background: #f8f8f8;
+  --vscode-widget-border: #e5e5e5;
+  --vscode-textBlockQuote-background: #f8f8f8;
+  --vscode-textBlockQuote-border: #e5e5e5;
+  --vscode-textPreformat-background: #0000001f;
+  --vscode-textPreformat-foreground: #3b3b3b;
+  --vscode-keybindingLabel-foreground: #3b3b3b;
+  --vscode-editorGutter-modifiedBackground: #005fb8;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"])) :is(h1, h2, hr, td) { border-color: rgba(0, 0, 0, 0.18); }
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"])) th { border-color: rgba(0, 0, 0, 0.69); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) :is(.hljs-function, .hljs-params) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) :is(.hljs-comment, .hljs-quote, .hljs-number, .hljs-class, .hljs-variable) { color: #008000; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) :is(.hljs-built_in, .hljs-builtin-name) { color: #007acc; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) :is(.hljs-string, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type) { color: #a31515; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) :is(.hljs-subst, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-meta, .hljs-meta-keyword) { color: #2b91af; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) :is(.hljs-title, .hljs-doctag) { color: #808080; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) :is(.hljs-attr) { color: #f00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="folio-light"]) :is(.hljs-symbol, .hljs-bullet, .hljs-link) { color: #00b0e8; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) {
   background-color: #0a0a0a;
@@ -859,13 +1239,34 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title svg { width: 18px; height: 18px; margin: 0; }
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title + * { margin-top: 0; }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) {
-  color-scheme: dark;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-editor-foreground: #cccccc;
+  --vscode-textCodeBlock-background: #2b2b2b;
+  --vscode-widget-border: #313131;
+  --vscode-textBlockQuote-background: #2b2b2b;
+  --vscode-textBlockQuote-border: #616161;
+  --vscode-textPreformat-background: #3c3c3c;
+  --vscode-textPreformat-foreground: #d0d0d0;
+  --vscode-keybindingLabel-foreground: #cccccc;
+  --vscode-editorGutter-modifiedBackground: #0078d4;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"])) :is(h1, h2, hr, td) { border-color: rgba(255, 255, 255, 0.18); }
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"])) th { border-color: rgba(255, 255, 255, 0.69); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) :is(.hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name, .hljs-link) { color: #569CD6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) :is(.hljs-built_in, .hljs-type) { color: #4EC9B0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) :is(.hljs-number, .hljs-class) { color: #B8D7A3; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) :is(.hljs-string, .hljs-meta-string) { color: #D69D85; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) :is(.hljs-regexp, .hljs-template-tag) { color: #9A5334; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) :is(.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula) { color: #DCDCDC; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) :is(.hljs-comment, .hljs-quote) { color: #57A64A; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) :is(.hljs-doctag) { color: #608B4E; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) :is(.hljs-meta, .hljs-meta-keyword, .hljs-tag) { color: #9B9B9B; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) :is(.hljs-variable, .hljs-template-variable) { color: #BD63C5; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) :is(.hljs-attr, .hljs-attribute, .hljs-builtin-name) { color: #9CDCFE; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) :is(.hljs-section) { color: gold; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-dark"]) :is(.hljs-bullet, .hljs-selector-tag, .hljs-selector-id, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo) { color: #D7BA7D; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) {
   background-color: #ffffff;
@@ -918,13 +1319,30 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title svg { width: 18px; height: 18px; margin: 0; }
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) .markdown-alert:is(.markdown-alert-note, .markdown-alert-tip, .markdown-alert-warning) > .markdown-alert-title + * { margin-top: 0; }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) {
-  color-scheme: light;
+  --vscode-editor-background: #ffffff;
+  --vscode-editor-foreground: #3b3b3b;
+  --vscode-textCodeBlock-background: #f8f8f8;
+  --vscode-widget-border: #e5e5e5;
+  --vscode-textBlockQuote-background: #f8f8f8;
+  --vscode-textBlockQuote-border: #e5e5e5;
+  --vscode-textPreformat-background: #0000001f;
+  --vscode-textPreformat-foreground: #3b3b3b;
+  --vscode-keybindingLabel-foreground: #3b3b3b;
+  --vscode-editorGutter-modifiedBackground: #005fb8;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"])) :is(h1, h2, hr, td) { border-color: rgba(0, 0, 0, 0.18); }
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"])) th { border-color: rgba(0, 0, 0, 0.69); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) :is(.hljs-function, .hljs-params) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) :is(.hljs-comment, .hljs-quote, .hljs-number, .hljs-class, .hljs-variable) { color: #008000; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) :is(.hljs-built_in, .hljs-builtin-name) { color: #007acc; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) :is(.hljs-string, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type) { color: #a31515; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) :is(.hljs-subst, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-meta, .hljs-meta-keyword) { color: #2b91af; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) :is(.hljs-title, .hljs-doctag) { color: #808080; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) :is(.hljs-attr) { color: #f00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="onyx-light"]) :is(.hljs-symbol, .hljs-bullet, .hljs-link) { color: #00b0e8; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) {
   background-color: #0a0a0a;
@@ -999,13 +1417,34 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) a code { color: var(--mpp-code); background-color: transparent; }
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) :is(a, a:hover):has(code) { text-decoration-color: var(--mpp-code); }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) {
-  color-scheme: dark;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-editor-foreground: #cccccc;
+  --vscode-textCodeBlock-background: #2b2b2b;
+  --vscode-widget-border: #313131;
+  --vscode-textBlockQuote-background: #2b2b2b;
+  --vscode-textBlockQuote-border: #616161;
+  --vscode-textPreformat-background: #3c3c3c;
+  --vscode-textPreformat-foreground: #d0d0d0;
+  --vscode-keybindingLabel-foreground: #cccccc;
+  --vscode-editorGutter-modifiedBackground: #0078d4;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"])) :is(h1, h2, hr, td) { border-color: rgba(255, 255, 255, 0.18); }
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"])) th { border-color: rgba(255, 255, 255, 0.69); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) :is(.hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name, .hljs-link) { color: #569CD6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) :is(.hljs-built_in, .hljs-type) { color: #4EC9B0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) :is(.hljs-number, .hljs-class) { color: #B8D7A3; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) :is(.hljs-string, .hljs-meta-string) { color: #D69D85; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) :is(.hljs-regexp, .hljs-template-tag) { color: #9A5334; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) :is(.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula) { color: #DCDCDC; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) :is(.hljs-comment, .hljs-quote) { color: #57A64A; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) :is(.hljs-doctag) { color: #608B4E; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) :is(.hljs-meta, .hljs-meta-keyword, .hljs-tag) { color: #9B9B9B; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) :is(.hljs-variable, .hljs-template-variable) { color: #BD63C5; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) :is(.hljs-attr, .hljs-attribute, .hljs-builtin-name) { color: #9CDCFE; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) :is(.hljs-section) { color: gold; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-dark"]) :is(.hljs-bullet, .hljs-selector-tag, .hljs-selector-id, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo) { color: #D7BA7D; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) {
   background-color: #ffffff;
@@ -1080,13 +1519,30 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) a code { color: var(--mpp-code); background-color: transparent; }
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) :is(a, a:hover):has(code) { text-decoration-color: var(--mpp-code); }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) {
-  color-scheme: light;
+  --vscode-editor-background: #ffffff;
+  --vscode-editor-foreground: #3b3b3b;
+  --vscode-textCodeBlock-background: #f8f8f8;
+  --vscode-widget-border: #e5e5e5;
+  --vscode-textBlockQuote-background: #f8f8f8;
+  --vscode-textBlockQuote-border: #e5e5e5;
+  --vscode-textPreformat-background: #0000001f;
+  --vscode-textPreformat-foreground: #3b3b3b;
+  --vscode-keybindingLabel-foreground: #3b3b3b;
+  --vscode-editorGutter-modifiedBackground: #005fb8;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"])) :is(h1, h2, hr, td) { border-color: rgba(0, 0, 0, 0.18); }
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"])) th { border-color: rgba(0, 0, 0, 0.69); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) :is(.hljs-function, .hljs-params) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) :is(.hljs-comment, .hljs-quote, .hljs-number, .hljs-class, .hljs-variable) { color: #008000; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) :is(.hljs-built_in, .hljs-builtin-name) { color: #007acc; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) :is(.hljs-string, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type) { color: #a31515; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) :is(.hljs-subst, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-meta, .hljs-meta-keyword) { color: #2b91af; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) :is(.hljs-title, .hljs-doctag) { color: #808080; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) :is(.hljs-attr) { color: #f00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="graphite-light"]) :is(.hljs-symbol, .hljs-bullet, .hljs-link) { color: #00b0e8; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) {
   background-color: #191919;
@@ -1163,13 +1619,34 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   text-underline-offset: 3px;
 }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) {
-  color-scheme: dark;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-editor-foreground: #cccccc;
+  --vscode-textCodeBlock-background: #2b2b2b;
+  --vscode-widget-border: #313131;
+  --vscode-textBlockQuote-background: #2b2b2b;
+  --vscode-textBlockQuote-border: #616161;
+  --vscode-textPreformat-background: #3c3c3c;
+  --vscode-textPreformat-foreground: #d0d0d0;
+  --vscode-keybindingLabel-foreground: #cccccc;
+  --vscode-editorGutter-modifiedBackground: #0078d4;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"])) :is(h1, h2, hr, td) { border-color: rgba(255, 255, 255, 0.18); }
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"])) th { border-color: rgba(255, 255, 255, 0.69); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) :is(.hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name, .hljs-link) { color: #569CD6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) :is(.hljs-built_in, .hljs-type) { color: #4EC9B0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) :is(.hljs-number, .hljs-class) { color: #B8D7A3; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) :is(.hljs-string, .hljs-meta-string) { color: #D69D85; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) :is(.hljs-regexp, .hljs-template-tag) { color: #9A5334; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) :is(.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula) { color: #DCDCDC; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) :is(.hljs-comment, .hljs-quote) { color: #57A64A; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) :is(.hljs-doctag) { color: #608B4E; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) :is(.hljs-meta, .hljs-meta-keyword, .hljs-tag) { color: #9B9B9B; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) :is(.hljs-variable, .hljs-template-variable) { color: #BD63C5; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) :is(.hljs-attr, .hljs-attribute, .hljs-builtin-name) { color: #9CDCFE; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) :is(.hljs-section) { color: gold; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-dark"]) :is(.hljs-bullet, .hljs-selector-tag, .hljs-selector-id, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo) { color: #D7BA7D; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) {
   background-color: #ffffff;
@@ -1246,13 +1723,30 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   text-underline-offset: 3px;
 }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) {
-  color-scheme: light;
+  --vscode-editor-background: #ffffff;
+  --vscode-editor-foreground: #3b3b3b;
+  --vscode-textCodeBlock-background: #f8f8f8;
+  --vscode-widget-border: #e5e5e5;
+  --vscode-textBlockQuote-background: #f8f8f8;
+  --vscode-textBlockQuote-border: #e5e5e5;
+  --vscode-textPreformat-background: #0000001f;
+  --vscode-textPreformat-foreground: #3b3b3b;
+  --vscode-keybindingLabel-foreground: #3b3b3b;
+  --vscode-editorGutter-modifiedBackground: #005fb8;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"])) :is(h1, h2, hr, td) { border-color: rgba(0, 0, 0, 0.18); }
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"])) th { border-color: rgba(0, 0, 0, 0.69); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) :is(.hljs-function, .hljs-params) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) :is(.hljs-comment, .hljs-quote, .hljs-number, .hljs-class, .hljs-variable) { color: #008000; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) :is(.hljs-built_in, .hljs-builtin-name) { color: #007acc; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) :is(.hljs-string, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type) { color: #a31515; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) :is(.hljs-subst, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-meta, .hljs-meta-keyword) { color: #2b91af; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) :is(.hljs-title, .hljs-doctag) { color: #808080; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) :is(.hljs-attr) { color: #f00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="quartz-light"]) :is(.hljs-symbol, .hljs-bullet, .hljs-link) { color: #00b0e8; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) {
   background-color: #121317;
@@ -1350,13 +1844,34 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   text-underline-offset: 3px;
 }
 body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) {
-  color-scheme: dark;
+  --vscode-editor-background: #1f1f1f;
+  --vscode-editor-foreground: #cccccc;
+  --vscode-textCodeBlock-background: #2b2b2b;
+  --vscode-widget-border: #313131;
+  --vscode-textBlockQuote-background: #2b2b2b;
+  --vscode-textBlockQuote-border: #616161;
+  --vscode-textPreformat-background: #3c3c3c;
+  --vscode-textPreformat-foreground: #d0d0d0;
+  --vscode-keybindingLabel-foreground: #cccccc;
+  --vscode-editorGutter-modifiedBackground: #0078d4;
 }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"])) :is(h1, h2, hr, td) { border-color: rgba(255, 255, 255, 0.18); }
+body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"])) th { border-color: rgba(255, 255, 255, 0.69); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+body.vscode-light.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) :is(.hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name, .hljs-link) { color: #569CD6; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) :is(.hljs-built_in, .hljs-type) { color: #4EC9B0; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) :is(.hljs-number, .hljs-class) { color: #B8D7A3; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) :is(.hljs-string, .hljs-meta-string) { color: #D69D85; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) :is(.hljs-regexp, .hljs-template-tag) { color: #9A5334; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) :is(.hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula) { color: #DCDCDC; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) :is(.hljs-comment, .hljs-quote) { color: #57A64A; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) :is(.hljs-doctag) { color: #608B4E; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) :is(.hljs-meta, .hljs-meta-keyword, .hljs-tag) { color: #9B9B9B; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) :is(.hljs-variable, .hljs-template-variable) { color: #BD63C5; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) :is(.hljs-attr, .hljs-attribute, .hljs-builtin-name) { color: #9CDCFE; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) :is(.hljs-section) { color: gold; }
+body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-dark"]) :is(.hljs-bullet, .hljs-selector-tag, .hljs-selector-id, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo) { color: #D7BA7D; }
 
 body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) {
   background-color: #ffffff;
@@ -1454,13 +1969,30 @@ body:is(.vscode-dark, .vscode-light):not(.vscode-high-contrast):has(.mpp-preset[
   text-underline-offset: 3px;
 }
 body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) {
-  color-scheme: light;
+  --vscode-editor-background: #ffffff;
+  --vscode-editor-foreground: #3b3b3b;
+  --vscode-textCodeBlock-background: #f8f8f8;
+  --vscode-widget-border: #e5e5e5;
+  --vscode-textBlockQuote-background: #f8f8f8;
+  --vscode-textBlockQuote-border: #e5e5e5;
+  --vscode-textPreformat-background: #0000001f;
+  --vscode-textPreformat-foreground: #3b3b3b;
+  --vscode-keybindingLabel-foreground: #3b3b3b;
+  --vscode-editorGutter-modifiedBackground: #005fb8;
 }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) hr { border-color: color-mix(in srgb, currentColor 18%, transparent); }
-body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) pre {
-  --vscode-textCodeBlock-background: var(--vscode-editor-background);
-  background-color: var(--vscode-editor-background);
-}
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"])) :is(h1, h2, hr, td) { border-color: rgba(0, 0, 0, 0.18); }
+body.vscode-dark:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"])) th { border-color: rgba(0, 0, 0, 0.69); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); }
+body.vscode-dark.showEditorSelection:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) :is(.hljs-function, .hljs-params) { color: inherit; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) :is(.hljs-comment, .hljs-quote, .hljs-number, .hljs-class, .hljs-variable) { color: #008000; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) :is(.hljs-built_in, .hljs-builtin-name) { color: #007acc; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) :is(.hljs-string, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type) { color: #a31515; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) :is(.hljs-subst, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-meta, .hljs-meta-keyword) { color: #2b91af; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) :is(.hljs-title, .hljs-doctag) { color: #808080; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) :is(.hljs-attr) { color: #f00; }
+body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="zenith-light"]) :is(.hljs-symbol, .hljs-bullet, .hljs-link) { color: #00b0e8; }
 
 /* ---------- Rules (shared by every preset) ---------- */
 

@@ -1,6 +1,6 @@
 # Heading 1: Sample Document
 
-Every element the presets colour, for checking each preset. Open the preview, then switch `markdownPreviewPalettes.preset` in Settings. Check each `-dark` and `-light` preset in a dark and a light VS Code theme: in a theme of the other mode, the page keeps the preset's mode and code blocks keep the VS Code editor background.
+Every element the presets colour, for checking each preset. Open the preview, then switch `markdownPreviewPalettes.preset` in Settings. Check each `-dark` and `-light` preset in a dark and a light VS Code theme: a preset must look the same in both, code blocks included.
 
 ## Heading 2: Text Styles
 

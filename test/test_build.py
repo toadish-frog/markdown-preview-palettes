@@ -78,23 +78,41 @@ class GeneratedCss(unittest.TestCase):
         presets = build.load_palettes()
         teal = build.preset_block("teal", "dark", presets["teal"]["dark"])
         other = 'body.vscode-light:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"])'
-        for expected in (
-            f"{other} {{\n  color-scheme: dark;\n  background-color: #1f1f1f;\n  color: #cccccc;\n"
-            "  --vscode-textLink-foreground: #4daafc;\n  --vscode-textLink-activeForeground: #4daafc;\n}",
-            f"{other} hr {{ border-color: color-mix(in srgb, currentColor 18%, transparent); }}",
-        ):
-            self.assertIn(expected, teal)
-        # A preset with its own background, text and links keeps them in the other theme
+        self.assertIn(
+            f"{other} {{\n  background-color: #1f1f1f;\n  color: #cccccc;\n"
+            "  --vscode-textLink-foreground: #4daafc;\n  --vscode-textLink-activeForeground: #4daafc;\n"
+            "  --vscode-editor-background: #1f1f1f;\n  --vscode-editor-foreground: #cccccc;\n"
+            "  --vscode-textCodeBlock-background: #2b2b2b;\n",
+            teal,
+        )
+        weak = 'body.vscode-light:where(:not(.vscode-high-contrast):has(.mpp-preset[data-preset="teal-dark"]))'
+        self.assertIn(f"{weak} :is(h1, h2, hr, td) {{ border-color: rgba(255, 255, 255, 0.18); }}", teal)
+        self.assertIn(f"{weak} th {{ border-color: rgba(255, 255, 255, 0.69); }}", teal)
+        # A preset with its own background, text and links keeps them: only VS Code's own colours are set
         ember = build.preset_block("ember", "light", presets["ember"]["light"])
         other = 'body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"])'
-        self.assertIn(f"{other} {{\n  color-scheme: light;\n}}", ember)
+        self.assertIn(f"{other} {{\n  --vscode-editor-background: #ffffff;\n", ember)
+        self.assertNotIn("color-scheme", ember)
 
-    def test_other_theme_code_blocks_keep_the_editor_background(self):
-        # Syntax colours follow the VS Code theme, so the box does too; this rule must come after the preset's own box
-        block = build.preset_block("ember", "light", build.load_palettes()["ember"]["light"])
-        other = 'body.vscode-dark:not(.vscode-high-contrast):has(.mpp-preset[data-preset="ember-light"]) pre {'
-        self.assertIn(f"{other}\n  --vscode-textCodeBlock-background: var(--vscode-editor-background);", block)
-        self.assertLess(block.index("  background-color: #ffffff;\n  border:"), block.index(other))
+    def test_other_theme_never_changes_the_preset_own_rules(self):
+        # The other-theme rules come last and never touch the preset's own code-block box or its colours
+        for name, sets in build.load_palettes().items():
+            for theme in build.THEMES:
+                block = build.preset_block(name, theme, sets[theme])
+                added = block[len(own_rules(block)) :]
+                self.assertTrue(added.startswith("\nbody.vscode-" + build.OTHER_THEME[theme]))
+                self.assertNotIn(" pre {", added)
+                self.assertNotIn("--mpp-", added)
+
+    def test_other_theme_code_blocks_use_the_preset_mode_syntax_colours(self):
+        presets = build.load_palettes()
+        light = build.preset_block("ember", "light", presets["ember"]["light"])
+        dark = build.preset_block("ember", "dark", presets["ember"]["dark"])
+        self.assertIn(
+            '"ember-light"]) :is(.hljs-keyword, .hljs-selector-tag, .hljs-name, .hljs-tag) { color: #00f; }', light
+        )
+        self.assertIn('"ember-dark"]) :is(.hljs-section) { color: gold; }', dark)
+        self.assertNotIn("hljs-", own_rules(light) + own_rules(dark))
 
     def test_fallback_text_and_link_are_contrast_checked(self):
         presets = build.load_palettes()
@@ -205,7 +223,13 @@ class GeneratedCss(unittest.TestCase):
 
     def test_code_block_syntax_colours_are_never_changed(self):
         css = build.render_css(build.load_palettes())
-        self.assertNotIn("hljs-", css)  # no syntax-token selectors
+        # Syntax colours are VS Code's own: set only for a preset in a theme of the other mode, to that mode's colours
+        vscode = {(c, colour) for theme in build.THEMES for classes, colour in build.SYNTAX[theme] for c in classes}
+        for selector, body in re.findall(r"^([^{}\n]*hljs-[^{}\n]*)\{([^}]*)\}", css, re.M):
+            self.assertRegex(selector, r"^body\.vscode-(dark|light):not")
+            colour = re.fullmatch(r" color: (\S+); ", body).group(1)
+            for c in re.findall(r"\.hljs-([a-z_-]+)", selector):
+                self.assertIn((c, colour), vscode)
         # Only a preset's code-block box may be styled, and never its text colour
         for rule in re.findall(r"^([^{}\n]*\bpre\b[^{}\n]*)\{([^}]*)\}", css, re.M):
             selector, body = rule
