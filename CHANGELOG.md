@@ -2,7 +2,7 @@
 
 All notable changes to this extension. Versions follow Semantic Versioning (Major.Minor.Patch).
 
-## Unreleased
+## 0.5.0 (2026-11-24)
 
 - **Breaking:** every palette is now two presets, `<name>-dark` and `<name>-light` (for example `ember-dark` and `ember-light`). Each shows as chosen in any VS Code theme, instead of following the VS Code theme. The old names (`teal`, `ember` and so on) no longer work and fall back to the new default, `teal-dark`: pick a preset again in Settings.
 - A preset looks the same in every VS Code theme, code blocks and syntax colours included, and keeps all its colours from before. Where a preset leaves a colour to VS Code (page, text, links, code blocks), a VS Code theme of the other mode shows the VS Code Dark Modern or Light Modern colour of the preset's mode. The contrast check now also covers these colours.
